@@ -34,7 +34,7 @@ public class login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         db.koneksi();
-        resizeImage(364, 403, jLabel1, "C:\\Users\\rangg\\Downloads\\uas\\src\\img\\Logo Login.png");
+        resizeImage(364, 403, jLabel1, "D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\Logo Login.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
