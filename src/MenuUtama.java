@@ -25,7 +25,7 @@ public class MenuUtama extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //db.koneksi();
-        if(role == "U") {
+        if(role.equals("U")) {
             secAdmin.setVisible(false);
         }
         db.koneksi();
@@ -91,13 +91,12 @@ public class MenuUtama extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 249, 252));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(78, 115, 223));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\Toko Ku (5).png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\Toko Ku (5).png")); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, 280, 130));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 80));
@@ -106,7 +105,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel3.setForeground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setBackground(new java.awt.Color(133, 135, 150));
-        jLabel2.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(133, 135, 150));
         jLabel2.setText("Toko Kelontong “Putra”");
 
@@ -149,19 +148,16 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\icons8-dashboard-24.png")); // NOI18N
         jLabel3.setText("Menu Utama");
         secAdmin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\icons8-open-box-25.png")); // NOI18N
         jLabel5.setText("Data Barang");
         secAdmin.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\icons8-supplier-25.png")); // NOI18N
         jLabel6.setText("Data Supplier");
         secAdmin.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
@@ -170,19 +166,16 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\icons8-cashier-25.png")); // NOI18N
         jLabel7.setText("Kasir");
         secUser.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\icons8-transaction-25.png")); // NOI18N
         jLabel19.setText("Data Transaksi");
-        secUser.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 160, 30));
+        secUser.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, 30));
 
         jLabel13.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\rangg\\Downloads\\uas\\src\\img\\icons8-logout-25.png")); // NOI18N
         jLabel13.setText("Keluar");
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -220,12 +213,11 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(secAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addComponent(secUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,29 +270,14 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 294, 33));
 
         jPanel19.setBackground(new java.awt.Color(78, 115, 223));
-        jPanel19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        jPanel19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(78, 115, 223), 1, true));
         jPanel19.setName(""); // NOI18N
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Tabel Barang");
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel16)
-                .addContainerGap(83, Short.MAX_VALUE))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jLabel16)
-                .addGap(15, 15, 15))
-        );
+        jPanel19.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 16, -1, 20));
 
         jPanel1.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 240, 50));
 
