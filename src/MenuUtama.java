@@ -450,6 +450,11 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
         jPanel25.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel25.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel25MouseClicked(evt);
+            }
+        });
 
         jLabel20.setBackground(new java.awt.Color(78, 115, 223));
         jLabel20.setForeground(new java.awt.Color(78, 115, 223));
@@ -536,6 +541,24 @@ public class MenuUtama extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jPanel21MouseClicked
+
+    private void jPanel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel25MouseClicked
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        model.addColumn("Nomor Transaksi");
+        model.addColumn("Tanggal Transaksi");
+        model.addColumn("Harga Total");
+        try {
+            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+            }
+            tblData.setModel(model);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jPanel25MouseClicked
 
     /**
      * @param args the command line arguments
