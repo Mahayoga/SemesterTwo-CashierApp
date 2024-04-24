@@ -29,6 +29,9 @@ public class MenuUtama extends javax.swing.JFrame {
             secAdmin.setVisible(false);
         }
         db.koneksi();
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        tblData.setModel(model);
     }
     
     public void setTableBarang() {
@@ -86,6 +89,8 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jPanel25 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        pnNoData = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
 
@@ -126,7 +131,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1230, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1250, 80));
 
         jPanel4.setBackground(new java.awt.Color(78, 115, 223));
 
@@ -238,7 +243,6 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 740));
 
         jPanel22.setBackground(new java.awt.Color(78, 115, 223));
-        jPanel22.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel22.setName(""); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -249,10 +253,10 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addComponent(jLabel18)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(76, 76, 76))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +266,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, -1, -1));
+        jPanel1.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 240, -1));
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -291,7 +295,6 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel1.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 670, 1240, 80));
 
         jPanel29.setBackground(new java.awt.Color(78, 115, 223));
-        jPanel29.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel29.setName(""); // NOI18N
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -302,20 +305,20 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addComponent(jLabel23)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(74, 74, 74))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel23)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
-        jPanel1.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, -1, -1));
+        jPanel1.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 150, 240, -1));
 
         jPanel30.setBackground(new java.awt.Color(255, 255, 255));
         jPanel30.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -332,16 +335,21 @@ public class MenuUtama extends javax.swing.JFrame {
             .addGap(0, 108, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 240, 110));
+        jPanel1.add(jPanel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 180, 240, 110));
 
         jLabel15.setBackground(new java.awt.Color(133, 135, 150));
-        jLabel15.setFont(new java.awt.Font("Lucida Bright", 1, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Lucida Bright", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(133, 135, 150));
         jLabel15.setText("Dashboard");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 294, 33));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 140, 33));
 
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
         jPanel28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel28MouseClicked(evt);
+            }
+        });
 
         jLabel22.setBackground(new java.awt.Color(78, 115, 223));
         jLabel22.setForeground(new java.awt.Color(78, 115, 223));
@@ -364,10 +372,9 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 280, 240, 40));
+        jPanel1.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 280, 240, 40));
 
         jPanel19.setBackground(new java.awt.Color(78, 115, 223));
-        jPanel19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel19.setName(""); // NOI18N
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -376,7 +383,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel16.setText("Tabel Barang");
         jPanel19.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 16, -1, 20));
 
-        jPanel1.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 240, 50));
+        jPanel1.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 240, 50));
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
         jPanel24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -393,7 +400,7 @@ public class MenuUtama extends javax.swing.JFrame {
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 240, 100));
+        jPanel1.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 240, 100));
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -410,7 +417,7 @@ public class MenuUtama extends javax.swing.JFrame {
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 240, 100));
+        jPanel1.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 240, 100));
 
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -446,7 +453,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 240, 40));
+        jPanel1.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 240, 40));
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
         jPanel25.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -477,7 +484,29 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 240, 40));
+        jPanel1.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 240, 40));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Tidak ada data yang akan ditampilkan");
+
+        javax.swing.GroupLayout pnNoDataLayout = new javax.swing.GroupLayout(pnNoData);
+        pnNoData.setLayout(pnNoDataLayout);
+        pnNoDataLayout.setHorizontalGroup(
+            pnNoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnNoDataLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel4)
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        pnNoDataLayout.setVerticalGroup(
+            pnNoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnNoDataLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel4)
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pnNoData, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, 390, -1));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -498,9 +527,7 @@ public class MenuUtama extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,6 +567,7 @@ public class MenuUtama extends javax.swing.JFrame {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        pnNoData.setVisible(false);
     }//GEN-LAST:event_jPanel21MouseClicked
 
     private void jPanel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel25MouseClicked
@@ -558,7 +586,26 @@ public class MenuUtama extends javax.swing.JFrame {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        pnNoData.setVisible(false);
     }//GEN-LAST:event_jPanel25MouseClicked
+
+    private void jPanel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel28MouseClicked
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        model.addColumn("Nomor Transaksi");
+        model.addColumn("Tanggal Transaksi");
+        model.addColumn("Harga Total");
+        try {
+            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+            }
+            tblData.setModel(model);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jPanel28MouseClicked
 
     /**
      * @param args the command line arguments
@@ -610,6 +657,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -630,6 +678,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnNoData;
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
     private javax.swing.JTable tblData;
