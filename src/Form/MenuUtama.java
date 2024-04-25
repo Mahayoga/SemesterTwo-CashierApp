@@ -48,6 +48,7 @@ public class MenuUtama extends javax.swing.JFrame {
         resizeImage(30, 30, iconDataSupplier, imgPath + "supplier.png");
         resizeImage(30, 30, iconKasir, imgPath + "kasir.png");
         resizeImage(30, 30, iconDataTransaksi, imgPath + "transaction.png");
+        resizeImage(30, 30, iconLogOut, imgPath + "logout.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
@@ -98,11 +99,12 @@ public class MenuUtama extends javax.swing.JFrame {
         secUser = new javax.swing.JPanel();
         lbKasir = new javax.swing.JLabel();
         lbDataTransaksi = new javax.swing.JLabel();
-        iconDataTransaksi = new javax.swing.JLabel();
         iconKasir = new javax.swing.JLabel();
+        iconDataTransaksi = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         lbLogin = new javax.swing.JLabel();
+        iconLogOut = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
@@ -213,10 +215,10 @@ public class MenuUtama extends javax.swing.JFrame {
         lbDataTransaksi.setForeground(new java.awt.Color(255, 255, 255));
         lbDataTransaksi.setText("Data Transaksi");
         secUser.add(lbDataTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 100, 30));
-        secUser.add(iconDataTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
         secUser.add(iconKasir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        secUser.add(iconDataTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Keluar");
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -256,8 +258,11 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(secUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(secAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(iconLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -269,8 +274,10 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addComponent(secUser, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iconLogOut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
@@ -683,6 +690,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel iconDataSupplier;
     private javax.swing.JLabel iconDataTransaksi;
     private javax.swing.JLabel iconKasir;
+    private javax.swing.JLabel iconLogOut;
     private javax.swing.JLabel iconMenuUtama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
