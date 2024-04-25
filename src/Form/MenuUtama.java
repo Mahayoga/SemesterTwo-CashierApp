@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 public class MenuUtama extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     koneksi db = new koneksi();
+    String imgPath = "D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\";
 
     /**
      * Creates new form MenuUtama
@@ -42,7 +43,7 @@ public class MenuUtama extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(0);
         tblData.setModel(model);
-        resizeImage(7, 16, iconMenuUtama, "img/dashboard.png");
+        resizeImage(30, 30, iconMenuUtama, imgPath + "dashboard.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
@@ -192,8 +193,6 @@ public class MenuUtama extends javax.swing.JFrame {
         lbDataSupplier.setForeground(new java.awt.Color(255, 255, 255));
         lbDataSupplier.setText("Data Supplier");
         secAdmin.add(lbDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
-
-        iconMenuUtama.setText("d");
         secAdmin.add(iconMenuUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
 
         iconDataBarang.setText("d");
