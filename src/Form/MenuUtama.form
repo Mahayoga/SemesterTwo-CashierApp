@@ -258,9 +258,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JLabel" name="iconDataBarang">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="d"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="70" width="30" height="30"/>
@@ -268,9 +265,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JLabel" name="iconDataSupplier">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="d"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="120" width="30" height="30"/>
@@ -323,9 +317,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JLabel" name="iconDataTransaksi">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="d"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="60" width="30" height="30"/>
@@ -333,9 +324,6 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JLabel" name="iconKasir">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="d"/>
-                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="10" width="30" height="30"/>

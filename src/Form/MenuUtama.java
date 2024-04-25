@@ -44,6 +44,10 @@ public class MenuUtama extends javax.swing.JFrame {
         model.setColumnCount(0);
         tblData.setModel(model);
         resizeImage(30, 30, iconMenuUtama, imgPath + "dashboard.png");
+        resizeImage(30, 30, iconDataBarang, imgPath + "items.png");
+        resizeImage(30, 30, iconDataSupplier, imgPath + "supplier.png");
+        resizeImage(30, 30, iconKasir, imgPath + "kasir.png");
+        resizeImage(30, 30, iconDataTransaksi, imgPath + "transaction.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
@@ -194,11 +198,7 @@ public class MenuUtama extends javax.swing.JFrame {
         lbDataSupplier.setText("Data Supplier");
         secAdmin.add(lbDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
         secAdmin.add(iconMenuUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
-
-        iconDataBarang.setText("d");
         secAdmin.add(iconDataBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 30, 30));
-
-        iconDataSupplier.setText("d");
         secAdmin.add(iconDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 30, 30));
 
         secUser.setBackground(new java.awt.Color(78, 115, 223));
@@ -213,11 +213,7 @@ public class MenuUtama extends javax.swing.JFrame {
         lbDataTransaksi.setForeground(new java.awt.Color(255, 255, 255));
         lbDataTransaksi.setText("Data Transaksi");
         secUser.add(lbDataTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 100, 30));
-
-        iconDataTransaksi.setText("d");
         secUser.add(iconDataTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
-
-        iconKasir.setText("d");
         secUser.add(iconKasir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
