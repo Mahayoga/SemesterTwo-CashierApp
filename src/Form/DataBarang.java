@@ -47,6 +47,7 @@ public class DataBarang extends javax.swing.JFrame {
         resizeImage(30, 30, iconLogOut, imgPath + "logout.png");
         resizeImage(60, 50, iconKategori, imgPath + "category.png");
         resizeImage(80, 70, iconKadaluarsa, imgPath + "item.jpg");
+        resizeImage(70, 70, iconStok, imgPath + "stok.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
@@ -99,6 +100,7 @@ public class DataBarang extends javax.swing.JFrame {
         jPanel29 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
+        iconStok = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
@@ -361,11 +363,17 @@ public class DataBarang extends javax.swing.JFrame {
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(iconStok, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(iconStok, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 180, 240, 110));
@@ -623,6 +631,7 @@ public class DataBarang extends javax.swing.JFrame {
     private javax.swing.JLabel iconKategori;
     private javax.swing.JLabel iconLogOut;
     private javax.swing.JLabel iconMenuUtama;
+    private javax.swing.JLabel iconStok;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
