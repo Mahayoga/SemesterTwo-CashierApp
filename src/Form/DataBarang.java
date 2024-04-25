@@ -22,15 +22,14 @@ import javax.swing.JLabel;
  *
  * @author rangg
  */
-public class MenuUtama extends javax.swing.JFrame {
-    DefaultTableModel model = new DefaultTableModel();
+public class DataBarang extends javax.swing.JFrame {
     koneksi db = new koneksi();
     String imgPath = "D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\";
 
     /**
      * Creates new form MenuUtama
      */
-    public MenuUtama(String role) {
+    public DataBarang(String role) {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -40,15 +39,14 @@ public class MenuUtama extends javax.swing.JFrame {
             lbLogin.setText("Masuk Sebagai Karyawan");
         }
         db.koneksi();
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        tblData.setModel(model);
         resizeImage(30, 30, iconMenuUtama, imgPath + "dashboard.png");
         resizeImage(30, 30, iconDataBarang, imgPath + "items.png");
         resizeImage(30, 30, iconDataSupplier, imgPath + "supplier.png");
         resizeImage(30, 30, iconKasir, imgPath + "kasir.png");
         resizeImage(30, 30, iconDataTransaksi, imgPath + "transaction.png");
         resizeImage(30, 30, iconLogOut, imgPath + "logout.png");
+        resizeImage(60, 50, iconKategori, imgPath + "category.png");
+        resizeImage(80, 70, iconKadaluarsa, imgPath + "item.jpg");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
@@ -61,17 +59,6 @@ public class MenuUtama extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
-    public void setTableBarang() {
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        tblData.setModel(model);
-        
-        model.addColumn(new Object[]{"Kode Barang", "Nama Barang", "Stok", "Harga"});
-        ResultSet rs = db.ambilData("");
-    }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,15 +105,13 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel19 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
+        iconKadaluarsa = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
+        iconKategori = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jPanel25 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        pnNoData = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblData = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -295,16 +280,16 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Tabel Transaksi");
+        jLabel18.setText("Barang Kadaluarsa");
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addComponent(jLabel18)
-                .addGap(76, 76, 76))
+                .addGap(65, 65, 65))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,23 +332,23 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Tabel Keuangan");
+        jLabel23.setText("Stok Barang");
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+                .addContainerGap(92, Short.MAX_VALUE)
                 .addComponent(jLabel23)
-                .addGap(74, 74, 74))
+                .addGap(80, 80, 80))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addComponent(jLabel23)
-                .addGap(15, 15, 15))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 150, 240, -1));
@@ -388,8 +373,8 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel15.setBackground(new java.awt.Color(133, 135, 150));
         jLabel15.setFont(new java.awt.Font("Lucida Bright", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(133, 135, 150));
-        jLabel15.setText("Dashboard");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 140, 33));
+        jLabel15.setText("Menu Data Barang");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 230, 33));
 
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
         jPanel28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -401,16 +386,16 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel22.setBackground(new java.awt.Color(78, 115, 223));
         jLabel22.setForeground(new java.awt.Color(78, 115, 223));
-        jLabel22.setText("Cek Tabel Keuangan");
+        jLabel22.setText("Cek Stok Barang");
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addComponent(jLabel22)
-                .addGap(63, 63, 63))
+                .addGap(69, 69, 69))
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,7 +413,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Tabel Barang");
+        jLabel16.setText("Kategori Barang");
         jPanel19.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 16, -1, 20));
 
         jPanel1.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 240, 50));
@@ -441,11 +426,17 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addComponent(iconKadaluarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(iconKadaluarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 240, 100));
@@ -458,11 +449,17 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(iconKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(iconKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         jPanel1.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 240, 100));
@@ -477,7 +474,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel17.setBackground(new java.awt.Color(78, 115, 223));
         jLabel17.setForeground(new java.awt.Color(78, 115, 223));
-        jLabel17.setText("Cek Tabel Barang");
+        jLabel17.setText("Cek Kategori Barang");
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel17MouseClicked(evt);
@@ -488,10 +485,10 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,16 +510,16 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jLabel20.setBackground(new java.awt.Color(78, 115, 223));
         jLabel20.setForeground(new java.awt.Color(78, 115, 223));
-        jLabel20.setText("Cek Tabel Transaksi");
+        jLabel20.setText("Cek Barang Kadaluarsa");
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addComponent(jLabel20)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(57, 57, 57))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,43 +530,6 @@ public class MenuUtama extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 240, 40));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("Tidak ada data yang akan ditampilkan");
-
-        javax.swing.GroupLayout pnNoDataLayout = new javax.swing.GroupLayout(pnNoData);
-        pnNoData.setLayout(pnNoDataLayout);
-        pnNoDataLayout.setHorizontalGroup(
-            pnNoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnNoDataLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel4)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-        pnNoDataLayout.setVerticalGroup(
-            pnNoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnNoDataLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel4)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(pnNoData, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, 390, -1));
-
-        tblData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblData);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 357, 1130, 290));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -600,59 +560,17 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void jPanel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel21MouseClicked
         // TODO add your handling code here:
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        model.addColumn("Kode Barang");
-        model.addColumn("Nama Barang");
-        model.addColumn("Stok Tersedia");
-        model.addColumn("Harga Barang");
-        try {
-            ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), rs.getString("harga_barang")});
-            }
-            tblData.setModel(model);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        pnNoData.setVisible(false);
+        
     }//GEN-LAST:event_jPanel21MouseClicked
 
     private void jPanel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel25MouseClicked
         // TODO add your handling code here:
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        model.addColumn("Nomor Transaksi");
-        model.addColumn("Tanggal Transaksi");
-        model.addColumn("Harga Total");
-        try {
-            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
-            }
-            tblData.setModel(model);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        pnNoData.setVisible(false);
+        
     }//GEN-LAST:event_jPanel25MouseClicked
 
     private void jPanel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel28MouseClicked
         // TODO add your handling code here:
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        model.addColumn("Nomor Transaksi");
-        model.addColumn("Tanggal Transaksi");
-        model.addColumn("Harga Total");
-        try {
-            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
-            }
-            tblData.setModel(model);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        
     }//GEN-LAST:event_jPanel28MouseClicked
 
     private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
@@ -677,20 +595,21 @@ public class MenuUtama extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuUtama("").setVisible(true);
+                new DataBarang("").setVisible(true);
             }
         });
     }
@@ -699,7 +618,9 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataSupplier;
     private javax.swing.JLabel iconDataTransaksi;
+    private javax.swing.JLabel iconKadaluarsa;
     private javax.swing.JLabel iconKasir;
+    private javax.swing.JLabel iconKategori;
     private javax.swing.JLabel iconLogOut;
     private javax.swing.JLabel iconMenuUtama;
     private javax.swing.JLabel jLabel1;
@@ -713,7 +634,6 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -730,16 +650,13 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
     private javax.swing.JLabel lbDataTransaksi;
     private javax.swing.JLabel lbKasir;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
-    private javax.swing.JPanel pnNoData;
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
-    private javax.swing.JTable tblData;
     // End of variables declaration//GEN-END:variables
 }
