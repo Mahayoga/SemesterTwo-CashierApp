@@ -1,3 +1,5 @@
+package Login;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -7,6 +9,7 @@
  *
  * @author user
  */
+import Form.MenuUtama;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -46,7 +49,6 @@ public class login extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
     }
 
     /**
