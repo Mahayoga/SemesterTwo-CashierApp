@@ -37,12 +37,13 @@ public class login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         db.koneksi();
-        resizeImage(364, 403, jLabel1, "D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\Logo Login.png");
+        resizeImage(364, 403, jLabel1, "Logo Login.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
         try {
-            BufferedImage bi = ImageIO.read(new File(path));
+            File file = new File("src/img/" + path);
+            BufferedImage bi = ImageIO.read(file);
             Image i = bi.getScaledInstance(width, height, Image.SCALE_DEFAULT);
             ImageIcon ii = new ImageIcon(i);
             label.setIcon(ii);
