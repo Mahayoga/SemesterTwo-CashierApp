@@ -25,7 +25,6 @@ import javax.swing.JLabel;
 public class MenuUtama extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     koneksi db = new koneksi();
-    String imgPath = "D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\";
 
     /**
      * Creates new form MenuUtama
@@ -43,17 +42,18 @@ public class MenuUtama extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(0);
         tblData.setModel(model);
-        resizeImage(30, 30, iconMenuUtama, imgPath + "dashboard.png");
-        resizeImage(30, 30, iconDataBarang, imgPath + "items.png");
-        resizeImage(30, 30, iconDataSupplier, imgPath + "supplier.png");
-        resizeImage(30, 30, iconKasir, imgPath + "kasir.png");
-        resizeImage(30, 30, iconDataTransaksi, imgPath + "transaction.png");
-        resizeImage(30, 30, iconLogOut, imgPath + "logout.png");
+        resizeImage(30, 30, iconMenuUtama, "dashboard.png");
+        resizeImage(30, 30, iconDataBarang, "items.png");
+        resizeImage(30, 30, iconDataSupplier, "supplier.png");
+        resizeImage(30, 30, iconKasir, "kasir.png");
+        resizeImage(30, 30, iconDataTransaksi, "transaction.png");
+        resizeImage(30, 30, iconLogOut, "logout.png");
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
         try {
-            BufferedImage bi = ImageIO.read(new File(path));
+            File file = new File("src/img/" + path);
+            BufferedImage bi = ImageIO.read(file);
             Image i = bi.getScaledInstance(width, height, Image.SCALE_DEFAULT);
             ImageIcon ii = new ImageIcon(i);
             label.setIcon(ii);
