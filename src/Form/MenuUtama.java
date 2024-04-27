@@ -42,6 +42,7 @@ public class MenuUtama extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(0);
         tblData.setModel(model);
+        tblData.setRowHeight(40);
         resizeImage(30, 30, iconMenuUtama, "dashboard.png");
         resizeImage(30, 30, iconDataBarang, "items.png");
         resizeImage(30, 30, iconDataSupplier, "supplier.png");
@@ -567,6 +568,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblData.getTableHeader().setResizingAllowed(false);
+        tblData.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblData);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 357, 1130, 290));
