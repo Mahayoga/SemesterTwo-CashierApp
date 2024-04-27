@@ -155,7 +155,7 @@ public class MenuUtama extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(853, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +165,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1250, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1190, 80));
 
         jPanel4.setBackground(new java.awt.Color(78, 115, 223));
 
@@ -641,13 +641,13 @@ public class MenuUtama extends javax.swing.JFrame {
         // TODO add your handling code here:
         model.setRowCount(0);
         model.setColumnCount(0);
-        model.addColumn("Nomor Transaksi");
-        model.addColumn("Tanggal Transaksi");
-        model.addColumn("Harga Total");
+        model.addColumn("Tanggal");
+        model.addColumn("Total barang yang terjual");
+        model.addColumn("Total pendapatan");
         try {
-            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
+            ResultSet rs = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.kode_barang GROUP BY dt.tanggal;");            
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+                model.addRow(new Object[]{rs.getString("tanggal"), rs.getString("jumlah_barang"), rs.getString("total_harga")});
             }
             tblData.setModel(model);
         } catch(Exception e) {
