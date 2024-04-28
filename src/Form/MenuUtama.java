@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 public class MenuUtama extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     koneksi db = new koneksi();
+    String role = "";
 
     /**
      * Creates new form MenuUtama
@@ -35,6 +36,7 @@ public class MenuUtama extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //db.koneksi();
+        this.role = role;
         if(role.equals("U")) {
             secAdmin.setVisible(false);
             lbLogin.setText("Masuk Sebagai Karyawan");
@@ -572,7 +574,8 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
         // TODO add your handling code here:
-        
+        new DataBarang(role).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lbDataBarangMouseClicked
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
