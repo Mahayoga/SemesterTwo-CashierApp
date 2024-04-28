@@ -93,7 +93,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="294" max="-2" attributes="0"/>
-                      <EmptySpace pref="853" max="32767" attributes="0"/>
+                      <EmptySpace pref="741" max="32767" attributes="0"/>
+                      <Component id="customTimeLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -101,8 +103,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="customTimeLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -120,6 +125,13 @@
                   <Color blue="96" green="87" red="85" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Toko Kelontong &#x201c;Putra&#x201d;"/>
+              </Properties>
+            </Component>
+            <Component class="CustomComponent.CustomTimeLabel" name="customTimeLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
