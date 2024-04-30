@@ -54,6 +54,43 @@ public class MenuUtama extends javax.swing.JFrame {
         resizeImage(30, 30, iconDataTransaksi, "transaction.png");
         resizeImage(30, 30, iconLogOut, "logout.png");
         resizeImage(33, 33, iconTime, "time.png");
+        countTotal();
+    }
+    
+    public void countTotal() {
+        ResultSet rs1 = db.ambilData("SELECT COUNT(kode_barang) AS 'hehe' FROM stok_barang ORDER BY kode_barang DESC;");
+        ResultSet rs2 = db.ambilData("SELECT COUNT(tanggal) AS 'hehe' FROM detail_transaksi GROUP BY tanggal DESC");
+        ResultSet rs3 = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.kode_barang GROUP BY dt.tanggal DESC");
+        try {
+            rs1.next();
+            rs2.next();
+            rs3.next();
+            if(Integer.parseInt(rs1.getString("hehe")) < 9) {
+                lbCountDataBarang.setText("00" + rs1.getString("hehe"));
+            } else if(Integer.parseInt(rs1.getString("hehe")) < 99) {
+                lbCountDataBarang.setText("0" + rs1.getString("hehe"));
+            } else if(Integer.parseInt(rs1.getString("hehe")) < 999) {
+                lbCountDataBarang.setText(rs1.getString("hehe"));
+            }
+            
+            if(Integer.parseInt(rs2.getString("hehe")) < 9) {
+                lbCountDataTransaksi.setText("00" + rs2.getString("hehe"));
+            } else if(Integer.parseInt(rs2.getString("hehe")) < 99) {
+                lbCountDataTransaksi.setText("0" + rs2.getString("hehe"));
+            } else if(Integer.parseInt(rs2.getString("hehe")) < 999) {
+                lbCountDataTransaksi.setText(rs2.getString("hehe"));
+            }
+            
+            if(Integer.parseInt(rs3.getString("kode_barang")) < 9) {
+                lbCountDataKeuangan.setText("00" + rs3.getString("kode_barang"));
+            } else if(Integer.parseInt(rs3.getString("kode_barang")) < 99) {
+                lbCountDataKeuangan.setText("0" + rs3.getString("kode_barang"));
+            } else if(Integer.parseInt(rs3.getString("kode_barang")) < 999) {
+                lbCountDataKeuangan.setText(rs3.getString("kode_barang"));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
@@ -123,14 +160,21 @@ public class MenuUtama extends javax.swing.JFrame {
         customPanel1 = new CustomComponent.CustomPanel();
         jLabel19 = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
+        lbCountDataBarang = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         customPanel2 = new CustomComponent.CustomPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel26 = new javax.swing.JPanel();
+        lbCountDataTransaksi = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         customPanel3 = new CustomComponent.CustomPanel();
         jLabel24 = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
+        lbCountDataKeuangan = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,10 +216,11 @@ public class MenuUtama extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iconTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -389,15 +434,31 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel24.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbCountDataBarang.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lbCountDataBarang.setText("009");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Total Barang");
+
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbCountDataBarang)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCountDataBarang)
+                    .addComponent(jLabel8))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -450,15 +511,31 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel26.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel26.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbCountDataTransaksi.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lbCountDataTransaksi.setText("009");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setText("Total Transaksi");
+
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbCountDataTransaksi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCountDataTransaksi)
+                    .addComponent(jLabel10))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -511,15 +588,38 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel27.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel27.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbCountDataKeuangan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lbCountDataKeuangan.setText("009");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel16.setText("Total Barang");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setText("Terjual");
+
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbCountDataKeuangan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel12))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel12))
+                    .addComponent(lbCountDataKeuangan))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -703,9 +803,12 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel iconMenuUtama;
     private javax.swing.JLabel iconTime;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -714,6 +817,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -725,6 +829,9 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbCountDataBarang;
+    private javax.swing.JLabel lbCountDataKeuangan;
+    private javax.swing.JLabel lbCountDataTransaksi;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
     private javax.swing.JLabel lbDataTransaksi;
