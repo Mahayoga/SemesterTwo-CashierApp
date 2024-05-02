@@ -55,6 +55,19 @@ public class MenuUtama extends javax.swing.JFrame {
         resizeImage(30, 30, iconLogOut, "logout.png");
         resizeImage(33, 33, iconTime, "time.png");
         countTotal();
+        iconToko();
+    }
+    
+    public void iconToko() {
+        try {
+            File file = new File("src/img/Toko Ku (5).png");
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            jLabel1.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void countTotal() {
@@ -97,7 +110,7 @@ public class MenuUtama extends javax.swing.JFrame {
         try {
             File file = new File("src/img/" + path);
             BufferedImage bi = ImageIO.read(file);
-            Image i = bi.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(i);
             label.setIcon(ii);
         } catch (Exception ex) {

@@ -49,13 +49,26 @@ public class KategoriBarang extends javax.swing.JFrame {
         resizeImage(80, 70, iconKadaluarsa, "item.jpg");
         resizeImage(70, 70, iconStok, "stok.png");
         resizeImage(33, 33, iconTime, "time.png");
+        iconToko();
+    }
+    
+    public void iconToko() {
+        try {
+            File file = new File("src/img/Toko Ku (5).png");
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            jLabel1.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void resizeImage(int width, int height, JLabel label, String path) {        
         try {
             File file = new File("src/img/" + path);
             BufferedImage bi = ImageIO.read(file);
-            Image i = bi.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(i);
             label.setIcon(ii);
         } catch (Exception ex) {
