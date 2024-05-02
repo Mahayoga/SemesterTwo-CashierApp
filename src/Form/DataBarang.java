@@ -135,8 +135,6 @@ public class DataBarang extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(78, 115, 223));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\Toko Ku (5).png")); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, 280, 130));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 80));
@@ -367,6 +365,11 @@ public class DataBarang extends javax.swing.JFrame {
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cek Barang dengan Kategori");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel1Layout = new javax.swing.GroupLayout(customPanel1);
         customPanel1.setLayout(customPanel1Layout);
@@ -554,6 +557,12 @@ public class DataBarang extends javax.swing.JFrame {
         new MenuUtama(role).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbMenuUtamaMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        new KategoriBarang(role).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments

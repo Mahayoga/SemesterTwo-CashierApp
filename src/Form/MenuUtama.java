@@ -35,6 +35,7 @@ public class MenuUtama extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        System.out.println(this.getWidth() + " " + this.getHeight());
         //db.koneksi();
         this.role = role;
         if(role.equals("U")) {
@@ -196,8 +197,6 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(78, 115, 223));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\Toko Ku (5).png")); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, 280, 130));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 80));
@@ -630,6 +629,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addComponent(jLabel16)
+                        .addGap(0, 0, 0)
                         .addComponent(jLabel12))
                     .addComponent(lbCountDataKeuangan))
                 .addContainerGap(22, Short.MAX_VALUE))

@@ -150,8 +150,6 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(78, 115, 223));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\5. Yoga\\GitHub\\Java Cashier App (Semester 2)\\src\\img\\Toko Ku (5).png")); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, 280, 130));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 80));
@@ -382,6 +380,11 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cek Barang Ini");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel1Layout = new javax.swing.GroupLayout(customPanel1);
         customPanel1.setLayout(customPanel1Layout);
@@ -442,6 +445,11 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cek Barang Ini");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel2Layout = new javax.swing.GroupLayout(customPanel2);
         customPanel2.setLayout(customPanel2Layout);
@@ -503,6 +511,11 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cek Barang Ini");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel3Layout = new javax.swing.GroupLayout(customPanel3);
         customPanel3.setLayout(customPanel3Layout);
@@ -564,6 +577,11 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Cek Barang Ini");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel4Layout = new javax.swing.GroupLayout(customPanel4);
         customPanel4.setLayout(customPanel4Layout);
@@ -625,6 +643,11 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Cek Barang Ini");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel5Layout = new javax.swing.GroupLayout(customPanel5);
         customPanel5.setLayout(customPanel5Layout);
@@ -686,6 +709,11 @@ public class KategoriBarang extends javax.swing.JFrame {
 
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Cek Barang Ini");
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout customPanel6Layout = new javax.swing.GroupLayout(customPanel6);
         customPanel6.setLayout(customPanel6Layout);
@@ -751,6 +779,42 @@ public class KategoriBarang extends javax.swing.JFrame {
         new MenuUtama(role).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbMenuUtamaMouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        // TODO add your handling code here:
+        new TabelDataBarang(role, "Makanan").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        new TabelDataBarang(role, "Minuman").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        new TabelDataBarang(role, "Kebutuhan Pokok").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+        new TabelDataBarang(role, "ATK").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+        new TabelDataBarang(role, "Obat").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        new TabelDataBarang(role, "Aksesoris").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments

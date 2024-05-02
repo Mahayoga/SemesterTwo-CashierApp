@@ -5,7 +5,6 @@
 package Form;
 
 import Login.login;
-import koneksi.koneksi;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,23 +12,18 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.sql.*;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rangg
+ * @author Pingki sukmawati
  */
-public class TabelDataBarang extends javax.swing.JFrame {
-    String role = "";
-    koneksi db = new koneksi();
-    DefaultTableModel model = new DefaultTableModel();
-
+public class DataTransaksi extends javax.swing.JFrame {
+    String role;
     /**
-     * Creates new form KategoriObat
+     * Creates new form DataTransaksi
      */
-    public TabelDataBarang(String role, String kategori) {
+    public DataTransaksi(String role) {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -41,29 +35,6 @@ public class TabelDataBarang extends javax.swing.JFrame {
         resizeImage(30, 30, iconDataTransaksi, "transaction.png");
         resizeImage(30, 30, iconLogOut, "logout.png");
         iconToko();
-        showColumn();
-        showData(kategori);
-        lbTitle.setText("Kategori " + kategori.substring(0, 1).toUpperCase() + kategori.substring(1));
-    }
-    
-    public void showData(String kategori) {
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang s INNER JOIN kategori k ON s.kategori_barang = k.id_kategori WHERE nama_kategori = '" + kategori + "'");
-        try {
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia")});
-            }
-            tblData.setModel(model);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void showColumn() {
-        model.addColumn("Kode Barang");
-        model.addColumn("Nama Barang");
-        model.addColumn("Kategori Barang");
-        model.addColumn("Stok Tersedia");
-        tblData.setModel(model);
     }
     
     public void iconToko() {
@@ -73,6 +44,18 @@ public class TabelDataBarang extends javax.swing.JFrame {
             Image i = bi.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(i);
             jLabel1.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void resizeImage(int width, int height, JLabel label, String path) {        
+        try {
+            File file = new File("src/img/" + path);
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            label.setIcon(ii);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -117,6 +100,8 @@ public class TabelDataBarang extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
+        customButton1 = new CustomComponent.CustomButton();
+        customButton3 = new CustomComponent.CustomButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -314,7 +299,7 @@ public class TabelDataBarang extends javax.swing.JFrame {
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
-        lbTitle.setText("...................................................");
+        lbTitle.setText("Data Transaksi");
         jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 370, 33));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -344,6 +329,19 @@ public class TabelDataBarang extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 1060, 350));
 
+        customButton1.setText("Cari");
+        customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
+        customButton1.setFontSize(14);
+        customButton1.setTextBold(0);
+        customButton1.setTheText("Cari");
+        jPanel1.add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 160, 60, 30));
+
+        customButton3.setText("customButton2");
+        customButton3.setBackgroundColor(new java.awt.Color(102, 255, 51));
+        customButton3.setTextBold(0);
+        customButton3.setTheText("Cetak");
+        jPanel1.add(customButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 580, 100, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,17 +356,6 @@ public class TabelDataBarang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void resizeImage(int width, int height, JLabel label, String path) {        
-        try {
-            File file = new File("src/img/" + path);
-            BufferedImage bi = ImageIO.read(file);
-            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            ImageIcon ii = new ImageIcon(i);
-            label.setIcon(ii);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
         // TODO add your handling code here:
         new DataBarang(role).setVisible(true);
@@ -386,10 +373,6 @@ public class TabelDataBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
-
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         // TODO add your handling code here:
         boolean edit = tblData.isEditing();
@@ -398,7 +381,7 @@ public class TabelDataBarang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblDataMouseClicked
 
-    /** 
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -415,28 +398,28 @@ public class TabelDataBarang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TabelDataBarang("A", "Makanan").setVisible(true);
+                new DataTransaksi("").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CustomComponent.CustomButton customButton1;
+    private CustomComponent.CustomButton customButton3;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataSupplier;

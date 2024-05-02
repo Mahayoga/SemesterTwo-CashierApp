@@ -5,7 +5,6 @@
 package Form;
 
 import Login.login;
-import koneksi.koneksi;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,23 +12,18 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.sql.*;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rangg
+ * @author User
  */
-public class TabelDataBarang extends javax.swing.JFrame {
-    String role = "";
-    koneksi db = new koneksi();
-    DefaultTableModel model = new DefaultTableModel();
-
+public class DataSupplier extends javax.swing.JFrame {
+    String role;
     /**
-     * Creates new form KategoriObat
+     * Creates new form DataSupplier
      */
-    public TabelDataBarang(String role, String kategori) {
+    public DataSupplier(String role) {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -41,29 +35,6 @@ public class TabelDataBarang extends javax.swing.JFrame {
         resizeImage(30, 30, iconDataTransaksi, "transaction.png");
         resizeImage(30, 30, iconLogOut, "logout.png");
         iconToko();
-        showColumn();
-        showData(kategori);
-        lbTitle.setText("Kategori " + kategori.substring(0, 1).toUpperCase() + kategori.substring(1));
-    }
-    
-    public void showData(String kategori) {
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang s INNER JOIN kategori k ON s.kategori_barang = k.id_kategori WHERE nama_kategori = '" + kategori + "'");
-        try {
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia")});
-            }
-            tblData.setModel(model);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void showColumn() {
-        model.addColumn("Kode Barang");
-        model.addColumn("Nama Barang");
-        model.addColumn("Kategori Barang");
-        model.addColumn("Stok Tersedia");
-        tblData.setModel(model);
     }
     
     public void iconToko() {
@@ -73,6 +44,18 @@ public class TabelDataBarang extends javax.swing.JFrame {
             Image i = bi.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(i);
             jLabel1.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void resizeImage(int width, int height, JLabel label, String path) {        
+        try {
+            File file = new File("src/img/" + path);
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            label.setIcon(ii);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -117,6 +100,12 @@ public class TabelDataBarang extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
+        customButton1 = new CustomComponent.CustomButton();
+        customButton2 = new CustomComponent.CustomButton();
+        customButton3 = new CustomComponent.CustomButton();
+        customButton4 = new CustomComponent.CustomButton();
+        customButton5 = new CustomComponent.CustomButton();
+        customButton6 = new CustomComponent.CustomButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,7 +135,7 @@ public class TabelDataBarang extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 725, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 735, Short.MAX_VALUE)
                 .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
@@ -157,10 +146,10 @@ public class TabelDataBarang extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1190, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1200, 80));
 
         jPanel4.setBackground(new java.awt.Color(78, 115, 223));
 
@@ -235,17 +224,17 @@ public class TabelDataBarang extends javax.swing.JFrame {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(lbLogin)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -263,7 +252,7 @@ public class TabelDataBarang extends javax.swing.JFrame {
                         .addComponent(iconLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,16 +263,16 @@ public class TabelDataBarang extends javax.swing.JFrame {
                 .addComponent(secUser, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iconLogOut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(43, 43, 43))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 740));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 70, 190, 740));
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -314,7 +303,7 @@ public class TabelDataBarang extends javax.swing.JFrame {
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
-        lbTitle.setText("...................................................");
+        lbTitle.setText("Data Supplier");
         jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 370, 33));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -344,11 +333,62 @@ public class TabelDataBarang extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 1060, 350));
 
+        customButton1.setText("CARI");
+        customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
+        customButton1.setFontSize(14);
+        customButton1.setTheText("Cari");
+        customButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 160, 70, 30));
+
+        customButton2.setText("customButton2");
+        jPanel1.add(customButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 440, -1, -1));
+
+        customButton3.setText("customButton3");
+        jPanel1.add(customButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 440, -1, -1));
+
+        customButton4.setText("customButton4");
+        customButton4.setBackgroundColor(new java.awt.Color(0, 51, 255));
+        customButton4.setFontSize(14);
+        customButton4.setTextBold(1);
+        customButton4.setTextColor(java.awt.Color.white);
+        customButton4.setTheText("Edit");
+        customButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 570, 90, 40));
+
+        customButton5.setText("customButton4");
+        customButton5.setBackgroundColor(new java.awt.Color(102, 255, 51));
+        customButton5.setFontSize(14);
+        customButton5.setTextBold(1);
+        customButton5.setTextColor(java.awt.Color.white);
+        customButton5.setTheText("Tambah");
+        customButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 570, 90, 40));
+
+        customButton6.setText("customButton6");
+        customButton6.setBackgroundColor(new java.awt.Color(255, 102, 102));
+        customButton6.setFontSize(14);
+        customButton6.setTextBold(1);
+        customButton6.setTextColor(java.awt.Color.white);
+        customButton6.setTheText("Hapus");
+        jPanel1.add(customButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 570, 90, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1382, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,17 +398,6 @@ public class TabelDataBarang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void resizeImage(int width, int height, JLabel label, String path) {        
-        try {
-            File file = new File("src/img/" + path);
-            BufferedImage bi = ImageIO.read(file);
-            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            ImageIcon ii = new ImageIcon(i);
-            label.setIcon(ii);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
         // TODO add your handling code here:
         new DataBarang(role).setVisible(true);
@@ -386,10 +415,6 @@ public class TabelDataBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
-
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         // TODO add your handling code here:
         boolean edit = tblData.isEditing();
@@ -398,7 +423,19 @@ public class TabelDataBarang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblDataMouseClicked
 
-    /** 
+    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customButton1ActionPerformed
+
+    private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customButton5ActionPerformed
+
+    private void customButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customButton4ActionPerformed
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -415,28 +452,32 @@ public class TabelDataBarang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TabelDataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TabelDataBarang("A", "Makanan").setVisible(true);
+                new DataSupplier("").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CustomComponent.CustomButton customButton1;
+    private CustomComponent.CustomButton customButton2;
+    private CustomComponent.CustomButton customButton3;
+    private CustomComponent.CustomButton customButton4;
+    private CustomComponent.CustomButton customButton5;
+    private CustomComponent.CustomButton customButton6;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataSupplier;
