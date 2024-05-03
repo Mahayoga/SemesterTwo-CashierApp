@@ -20,7 +20,7 @@ import java.sql.Statement;
  * @author Asus
  */
 public class koneksi {
-    Connection con;
+    public Connection con;
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/db_tokoputranew";
     private final String user = "root";

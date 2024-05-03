@@ -31,11 +31,103 @@ public class CustomButton extends JButton {
     private int boldSize = 0;
     private Color textColor =  new Color(0, 0, 0);
     private Color bgColor =  new Color(255, 255, 255);
+    private Color mouseEntered;
+    private Color mousePressed;
+    private Color mouseExited;
+    private int i = 0;
     
     public CustomButton() {
         this.setText("");
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setPreferredSize(new Dimension(200, 80));
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                setBackgroundColor(mouseEntered);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                setBackgroundColor(mouseExited);
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                setBackgroundColor(mousePressed);
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent evt) {
+                setBackgroundColor(mouseEntered);
+            }
+        });
+        System.out.println("Matanee");
+    }
+    
+    private Color makeFinalColorEvent(Color originalColor, int i) {
+        if(i >= 2) {
+            return null;
+        }
+        String color = String.valueOf(bgColor);
+        String r1 = color.split("java.awt.Color")[1];
+        String red = r1.split("=")[1].split(",")[0];
+        String green = r1.split(",")[1].split("=")[1];
+        String blue = r1.split("b=")[1].split("]")[0];
+
+        int Red = Integer.parseInt(red);
+        int Green = Integer.parseInt(green);
+        int Blue = Integer.parseInt(blue);
+        
+        // Mouse Entered
+        if((Red + 20) > 255) {
+            Red -= 10;
+        } else {
+            Red += 20;
+        }
+        if((Green + 20) > 255) {
+            Green -= 10;
+        } else {
+            Green += 20;
+        }
+        if((Blue + 20) > 255) {
+            Blue -= 10;
+        } else {
+            Blue += 20;
+        }
+        setMouseEnteredColor(new Color(Red, Green, Blue));
+        setMouseExitedColor(bgColor);
+        
+        //Mouse Pressed
+        if(Red < 20) {
+            Red = 0;
+        } else {
+            Red -= 20;
+        }
+        if(Green < 20) {
+            Green = 0;
+        } else {
+            Green -= 20;
+        }
+        if(Blue < 20) {
+            Blue = 0;
+        } else {
+            Blue -= 20;
+        }
+        
+        setMousePressedColor(new Color(Red, Green, Blue));
+        return null;
+    }
+    
+    private void setMouseExitedColor(Color newColor) {
+        this.mouseExited = newColor;
+    }
+    
+    private void setMousePressedColor(Color newColor) {
+        this.mousePressed = newColor;
+    }
+    
+    private void setMouseEnteredColor(Color newColor) {
+        this.mouseEntered = newColor;
     }
     
     public void setBorderRadius(int borderRadius) {
@@ -67,7 +159,9 @@ public class CustomButton extends JButton {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(bgColor);        
+        g2.setColor(bgColor);
+        i++;
+        makeFinalColorEvent(g2.getColor(), i);
         g2.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), borderRadius, borderRadius);
         g2.setColor(textColor);
         

@@ -697,12 +697,6 @@ public class MenuUtama extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
-    private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
-        // TODO add your handling code here:
-        new DataBarang(role).setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lbDataBarangMouseClicked
-
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         // TODO add your handling code here:
         boolean edit = tblData.isEditing();
@@ -767,6 +761,12 @@ public class MenuUtama extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
+        // TODO add your handling code here:
+        new DataBarang(role).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbDataBarangMouseClicked
 
     /**
      * @param args the command line arguments
