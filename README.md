@@ -2,27 +2,27 @@
 
 ## <a name="bagian-form"></a>Bagian Form Yang Sudah / Belum Jadi
 1. Login <a name="login"></a>
-- `Login` (Selesai)
+    - `Login` (Selesai)
 2. Form <a name="form"></a>
-- `Menu Utama` (Belum) (Sidebar)
-- `Data Barang` (Belum) (Sidebar)
-- `Data Kadaluarsa` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
-- `Data Kategori Barang` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
-- `Data Supplier` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
-- `Kasir` (Belum) (Semua)
-- `Data Transaksi` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah, Detail, Cetak, Cek Keuangan)
-- `Data Keuangan` (Belum) (Semua)
-- `Menu Kategori Barang` (Belum) (Sidebar, Cari)
+    - `Menu Utama` (Belum) (Sidebar)
+    - `Data Barang` (Belum) (Sidebar)
+    - `Data Kadaluarsa` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
+    - `Data Kategori Barang` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
+    - `Data Supplier` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
+    - `Kasir` (Belum) (Semua)
+    - `Data Transaksi` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah, Detail, Cetak, Cek Keuangan)
+    - `Data Keuangan` (Belum) (Semua)
+    - `Menu Kategori Barang` (Belum) (Sidebar, Cari)
 3. Form Edit <a name="form-edit"></a>
-- `Edit Data Barang` (Belum) (Sidebar, CRUD)
-- `Edit Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
-- `Edit Data Supplier` (Belum) (Form, Sidebar, CRUD)
+    - `Edit Data Barang` (Belum) (Sidebar, CRUD)
+    - `Edit Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
+    - `Edit Data Supplier` (Belum) (Form, Sidebar, CRUD)
 4. Form Tambah <a name="form-tambah"></a>
-- `Tambah Data Barang` (Belum) (Form, Sidebar, CRUD)
-- `Tambah Data Supplier` (Belum) (Form, Sidebar, CRUD)
-- `Tambah Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
+    - `Tambah Data Barang` (Belum) (Form, Sidebar, CRUD)
+    - `Tambah Data Supplier` (Belum) (Form, Sidebar, CRUD)
+    - `Tambah Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
 5. Struk <a name="struk"></a>
-`Struk.jrxml` (Belum) (Desain, Tampilan Data)
+    - `Struk.jrxml` (Belum) (Desain, Tampilan Data)
 
 ## Daftar Isi
 <details>
