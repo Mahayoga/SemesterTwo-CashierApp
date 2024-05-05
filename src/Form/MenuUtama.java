@@ -716,7 +716,7 @@ public class MenuUtama extends javax.swing.JFrame {
         try {
             ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), rs.getString("harga_barang")});
+                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), rs.getString("harga_jual")});
             }
             tblData.setModel(model);
         } catch(Exception e) {

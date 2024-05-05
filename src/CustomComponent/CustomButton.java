@@ -61,7 +61,6 @@ public class CustomButton extends JButton {
                 setBackgroundColor(mouseEntered);
             }
         });
-        System.out.println("Matanee");
     }
     
     private Color makeFinalColorEvent(Color originalColor, int i) {
@@ -159,7 +158,11 @@ public class CustomButton extends JButton {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(bgColor);
+        if(!this.isEnabled()) {
+            g2.setColor(new Color(204, 204, 204));
+        } else {
+            g2.setColor(bgColor);
+        }
         i++;
         makeFinalColorEvent(g2.getColor(), i);
         g2.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), borderRadius, borderRadius);

@@ -13,12 +13,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import koneksi.koneksi;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Pingki sukmawati
  */
 public class DataTransaksi extends javax.swing.JFrame {
+    koneksi db = new koneksi();
+    DefaultTableModel model = new DefaultTableModel();
     String role;
     /**
      * Creates new form DataTransaksi
@@ -35,6 +43,29 @@ public class DataTransaksi extends javax.swing.JFrame {
         resizeImage(30, 30, iconDataTransaksi, "transaction.png");
         resizeImage(30, 30, iconLogOut, "logout.png");
         iconToko();
+        setColumn();
+        setRow();
+        btnDetail.setEnabled(false);
+    }
+    
+    public void setRow() {
+        model.setRowCount(0);
+        try {
+            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+            }
+            tblData.setModel(model);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void setColumn() {
+        model.setColumnCount(0);
+        model.addColumn("Nomor Transaksi");
+        model.addColumn("Tanggal Transaksi");
+        model.addColumn("Harga Total");
     }
     
     public void iconToko() {
@@ -97,11 +128,12 @@ public class DataTransaksi extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         lbTitle = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfCari = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
         customButton1 = new CustomComponent.CustomButton();
-        customButton3 = new CustomComponent.CustomButton();
+        btnDetail = new CustomComponent.CustomButton();
+        customButton4 = new CustomComponent.CustomButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -302,12 +334,17 @@ public class DataTransaksi extends javax.swing.JFrame {
         lbTitle.setText("Data Transaksi");
         jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 370, 33));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfCariActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 160, 190, 30));
+        tfCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCariKeyReleased(evt);
+            }
+        });
+        jPanel1.add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 160, 190, 30));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,20 +364,31 @@ public class DataTransaksi extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblData);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 1060, 350));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 1060, 350));
 
         customButton1.setText("Cari");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
         customButton1.setFontSize(14);
         customButton1.setTextBold(0);
         customButton1.setTheText("Cari");
+        customButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 160, 60, 30));
 
-        customButton3.setText("customButton2");
-        customButton3.setBackgroundColor(new java.awt.Color(102, 255, 51));
-        customButton3.setTextBold(0);
-        customButton3.setTheText("Cetak");
-        jPanel1.add(customButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 580, 100, 40));
+        btnDetail.setText("customButton2");
+        btnDetail.setBackgroundColor(new java.awt.Color(51, 204, 255));
+        btnDetail.setTextBold(0);
+        btnDetail.setTheText("Detail");
+        jPanel1.add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 100, 40));
+
+        customButton4.setText("customButton2");
+        customButton4.setBackgroundColor(new java.awt.Color(102, 255, 51));
+        customButton4.setTextBold(0);
+        customButton4.setTheText("Cetak");
+        jPanel1.add(customButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 580, 100, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -369,17 +417,44 @@ public class DataTransaksi extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCariActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfCariActionPerformed
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         // TODO add your handling code here:
         boolean edit = tblData.isEditing();
         if(!edit) {
             JOptionPane.showMessageDialog(this, "Tidak bisa mengedit data ini!", "Error", JOptionPane.ERROR_MESSAGE);
+            jPanel1.requestFocus();
+        }
+        if(tblData.getSelectedRow() > -1) {
+            btnDetail.setEnabled(true);
+        } else {
+            btnDetail.setEnabled(false);
         }
     }//GEN-LAST:event_tblDataMouseClicked
+
+    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
+        // TODO add your handling code here:
+        ResultSet rs = db.ambilData("SELECT * FROM transaksi WHERE tanggal_transaksi LIKE '%" + tfCari.getText() + "%'");
+        try {
+            model.setRowCount(0);
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+            }
+            tblData.setModel(model);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_customButton1ActionPerformed
+
+    private void tfCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCariKeyReleased
+        // TODO add your handling code here:
+        if(tfCari.getText().equals("")) {
+            setRow();
+        }
+    }//GEN-LAST:event_tfCariKeyReleased
 
     /**
      * @param args the command line arguments
@@ -418,8 +493,9 @@ public class DataTransaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CustomComponent.CustomButton btnDetail;
     private CustomComponent.CustomButton customButton1;
-    private CustomComponent.CustomButton customButton3;
+    private CustomComponent.CustomButton customButton4;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataSupplier;
@@ -439,7 +515,6 @@ public class DataTransaksi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
     private javax.swing.JLabel lbDataTransaksi;
@@ -450,5 +525,6 @@ public class DataTransaksi extends javax.swing.JFrame {
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
     private CustomComponent.CustomTable tblData;
+    private javax.swing.JTextField tfCari;
     // End of variables declaration//GEN-END:variables
 }

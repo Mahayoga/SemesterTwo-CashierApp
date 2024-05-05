@@ -44,7 +44,7 @@ public class login extends javax.swing.JFrame {
         try {
             File file = new File("src/img/" + path);
             BufferedImage bi = ImageIO.read(file);
-            Image i = bi.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(i);
             label.setIcon(ii);
         } catch (Exception ex) {
