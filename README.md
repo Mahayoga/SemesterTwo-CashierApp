@@ -41,7 +41,7 @@ Cara nampilin ke tabel itu kodenya itu sama seperti ambil data, tapi bedanya pad
 <img src="https://github.com/Mahayoga/My-Screenshot/blob/main/image.png">
 
 2. Kita sesuaikan dulu tabel nya, seperti kolom apa aja yang mau dibuat, misal seperti gambar di bawah ini.
-<img src="https://github.com/Mahayoga/My-Screenshot/blob/main/heii.png">
+<img src="https://github.com/Mahayoga/My-Screenshot/blob/main/heii.PNG">
 
 2. Kita lanjut buat kode ambil data seperti kode pada bagian "Cara ambil data dari Database (MySQL) ke Netbeans (Java)"
 
