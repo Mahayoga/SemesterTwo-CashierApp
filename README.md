@@ -21,7 +21,16 @@
 - `Tambah Data Barang` (Belum) (Form, Sidebar, CRUD)
 - `Tambah Data Supplier` (Belum) (Form, Sidebar, CRUD)
 - `Tambah Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
+5. Struk
+`Struk.jrxml` (Belum) (Desain, Tampilan Data)
 
+## Daftar Isi
+<details>
+    <summary>Buka untuk melihat daftar isi</summary>
+    [Koneksi](#cara-menampilkan-data-dari-netbeans-java-ke-dalam-database-mysql)
+</details>
+
+## 
 
 ## Sebelum mulai
 Kita harus buat objek class `koneksi` terlebih dahulu
