@@ -1,5 +1,28 @@
 # SemesterTwo-CashierApp
 
+## Bagian Form Yang Sudah / Belum Jadi
+1. Login
+- `Login` (Selesai)
+2. Form
+- `Menu Utama` (Belum) (Sidebar)
+- `Data Barang` (Belum) (Sidebar)
+- `Data Kadaluarsa` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
+- `Data Kategori Barang` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
+- `Data Supplier` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah)
+- `Kasir` (Belum) (Semua)
+- `Data Transaksi` (Belum) (Sidebar, Tabel, Cari, Hapus, Edit, Tambah, Detail, Cetak, Cek Keuangan)
+- `Data Keuangan` (Belum) (Semua)
+- `Menu Kategori Barang` (Belum) (Sidebar, Cari)
+3. Form Edit
+- `Edit Data Barang` (Belum) (Sidebar, CRUD)
+- `Edit Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
+- `Edit Data Supplier` (Belum) (Form, Sidebar, CRUD)
+4. Form Tambah
+- `Tambah Data Barang` (Belum) (Form, Sidebar, CRUD)
+- `Tambah Data Supplier` (Belum) (Form, Sidebar, CRUD)
+- `Tambah Data Kadaluarsa` (Belum) (Form, Sidebar, CRUD)
+
+
 ## Sebelum mulai
 Kita harus buat objek class `koneksi` terlebih dahulu
 Kalo di projek kita itu caranya gini:
