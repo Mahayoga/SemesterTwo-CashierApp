@@ -1,6 +1,6 @@
 # SemesterTwo-CashierApp
 
-## Bagian Form Yang Sudah / Belum Jadi
+## <a name="hehe"></a>Bagian Form Yang Sudah / Belum Jadi
 1. Login
 - `Login` (Selesai)
 2. Form
@@ -27,12 +27,11 @@
 ## Daftar Isi
 <details>
     <summary>Buka untuk melihat daftar isi</summary>
-    [Koneksi](#testing)
+    [Koneksi](#hehe)
+
 </details>
 
-## 
-
-## <a name="testing"></a>Sebelum mulai
+## <a name="hehe"></a>Sebelum mulai
 Kita harus buat objek class `koneksi` terlebih dahulu
 Kalo di projek kita itu caranya gini:
 > ```koneksi db = new koneksi();```
