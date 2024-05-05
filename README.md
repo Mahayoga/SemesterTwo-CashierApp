@@ -37,5 +37,11 @@ Kalo udah bisa ke next point
 
 Cara nampilin ke tabel itu kodenya itu sama seperti ambil data, tapi bedanya pada poin ke `6` di bagian "Cara ambil data dari Database (MySQL) ke Netbeans (Java)", bedanya nggak pake `System.out.println();`. Jadi kita itu bikin model buat tabel dulu. Kita mulai di poin satu yaa...
 
-1. Membuat model
+1. Membuat model database
 <img src="https://github.com/Mahayoga/My-Screenshot/blob/main/image.png">
+
+2. Kita sesuaikan dulu tabel nya, seperti kolom apa aja yang mau dibuat, misal seperti gambar di bawah ini.
+<img src="https://github.com/Mahayoga/My-Screenshot/blob/main/heii.png">
+
+2. Kita lanjut buat kode ambil data seperti kode pada bagian "Cara ambil data dari Database (MySQL) ke Netbeans (Java)"
+
