@@ -27,12 +27,12 @@
 ## Daftar Isi
 <details>
     <summary>Buka untuk melihat daftar isi</summary>
-    [Koneksi](#cara-menampilkan-data-dari-netbeans-java-ke-dalam-database-mysql)
+    [Koneksi](#testing)
 </details>
 
 ## 
 
-## Sebelum mulai
+## <a name="testing"></a>Sebelum mulai
 Kita harus buat objek class `koneksi` terlebih dahulu
 Kalo di projek kita itu caranya gini:
 > ```koneksi db = new koneksi();```
