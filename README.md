@@ -10,12 +10,12 @@ Kalo ada error berarti di import dulu, bisa dari klik error nya trus pencet impo
 
 Kalo udah bisa ke next point
 
-## Cara ambil data dari database ke Netbeans (Java)
+## Cara ambil data dari Database (MySQL) ke Netbeans (Java)
 1. Kalo mau ambil data, pertama harus import dulu:
 >```import java.sql.ResultSet;```
 
 2. Kalo udah next kita buat objek `ResultSet`
->```ResultSet rs = db.ambilData("")```
+>```ResultSet rs = db.ambilData("");```
 
 3. Kalo udah kita tentukan dulu mau ambil data dari database lewat query `SQL`. Semisal mau ambil data dari tabel `Barang`, kodenya seperti ini kan?:
 >```SELECT * FROM barang```
@@ -25,10 +25,17 @@ Kalo udah bisa ke next point
 
 5. Nahhh sipp, kalo udah kita bikin statement `while` buat ambil datanya:
 >```while(rs.next()) {```
-``` ```
-```}```
+>``` ```
+>```}```
 
 6. Okey kalo udah kita tampilkan outputnya ke console. Semisal kita mau nampilin kolom nama barang di dalam database. Maka kita pake method `rs.getString("nama_barang")`
 >```System.out.println(rs.getString("nama_barang"))```
 
 7. Selamat~ udah jadi bisa ngambil data lewat database...
+
+## Cara menampilkan data dari Netbeans (Java) ke dalam Database (MySQL)
+
+Cara nampilin ke tabel itu kodenya itu sama seperti ambil data, tapi bedanya pada poin ke `6` di bagian "Cara ambil data dari Database (MySQL) ke Netbeans (Java)", bedanya nggak pake `System.out.println();`. Jadi kita itu bikin model buat tabel dulu. Kita mulai di poin satu yaa...
+
+1. Membuat model
+<img src="https://github.com/Mahayoga/My-Screenshot/blob/main/image.png">
