@@ -170,20 +170,27 @@ Yang berfungsi sebagai custom komponen dalam java agar bisa dimodifikasi lebih j
 
 1. Class `CustomButton` <a name="custom-btn"></a>
   Di dalam class ini, nantinya akan berfungsi sebagai tombol yang bisa di modifikasi lebih dalam. Dalam kasus projek ini, saya memodifikasi tombol seperti warna, background, font, border, rounded border, dan lainnya.
-  Saya tidak akan membahas lebih jauh tentang kode ini (Soalnya udah malem jam 2 pagi >_<. Mungkin nanti lah ya). Tapi, saya tetep ngasih referensi nya (klik aja):
-   - <a name="color"></a>[`Color`](https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html)
-   - <a name="dimension"></a>[`Dimension`](https://docs.oracle.com/javase/8/docs/api/java/awt/Dimension.html)
-   - <a name="font"></a>[`Font`](https://docs.oracle.com/javase/8/docs/api/java/awt/Font.html)
-   - <a name="font-metrics"></a>[`FontMetrics`](https://docs.oracle.com/javase/8/docs/api/java/awt/FontMetrics.html)
-   - <a name="graphics"></a>[`Graphics`](https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html)
-   - <a name="graphics2d"></a>[`Graphics2D`](https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html)
-   - <a name="rendering-hints"></a>[`RenderingHints`](https://docs.oracle.com/javase/8/docs/api/java/awt/RenderingHints.html)
+  Nih buat referensi nya (klik aja):
+    - <a name="color"></a>[`Color`](https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html).
+      - Fungsi `Color` disini adalah untuk membuat warna menggunakan API yang sudah disediakan oleh Java.
+   - <a name="dimension"></a>[`Dimension`](https://docs.oracle.com/javase/8/docs/api/java/awt/Dimension.html).
+     - Fungsi `Dimension` disini adalah untuk membuat ukuran baru dari sebuah komponen dengan dibutuhkan dua [*argument*]() yaitu *width* dan *height*.
+   - <a name="font"></a>[`Font`](https://docs.oracle.com/javase/8/docs/api/java/awt/Font.html).
+     - Fungsi `Font` disini adalah untuk mens-pesifikasikan font kedalam sebuah tulisan di dalam komponen seperti ukuran font, tipe font, atau juga bold.
+   - <a name="font-metrics"></a>[`FontMetrics`](https://docs.oracle.com/javase/8/docs/api/java/awt/FontMetrics.html).
+     - Fungsi `FontMetrics` fungsi utama saya menggunakan API ini adalah untuk mendapatkan lebar dan tinggi dari sebuah font.
+   - <a name="graphics"></a>[`Graphics`](https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html).
+     - Fungsi `Graphics` disini adalah untuk menggambar sesuatu seperti warna, bentuk dan lain lain di dalam sebuah komponen.
+   - <a name="graphics2d"></a>[`Graphics2D`](https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html).
+     - Fungsi `Graphics2D` adalah untuk menggambar sesuatu di dalam sebuah komponen seperti [`Graphics`](#graphics), bedanya disini bisa ditambah seperti [`anti-aliasing`](#rendering-hints) yang bisa kalian lihat di dalam dokumentasi [`RenderingHints`](#rendering-hints).
+   - <a name="rendering-hints"></a>[`RenderingHints`](https://docs.oracle.com/javase/8/docs/api/java/awt/RenderingHints.html).
+     - Fungsi `RenderingHints` disini adalah untuk mengambil attribut untuk me-render sebuah komponen dengan [`Graphics`](#graphics) atau [`Graphics2D`](#graphics2d).
    - <a name="mouse-adapter"></a>[`MouseAdapter`](https://docs.oracle.com/javase/8/docs/api/java/awt/event/MouseAdapter.html)
    - <a name="mouse-event"></a>[`MouseEvent`](https://docs.oracle.com/javase/8/docs/api/java/awt/event/MouseEvent.html)
    - <a name="jbutton"></a>[`JButton`](https://docs.oracle.com/javase/8/docs/api/javax/swing/JButton.html)
    - <a name="empty-border"></a>[`EmptyBorder`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/javax/swing/border/EmptyBorder.html)
 
-   Masalah penjelasan mungkin nanti aja yakk.
+
 
 2. <a name="custom-panel"></a>Class `CustomPanel`
   Di dalam class ini, nantinya akan berfungsi sebagai panel yang bisa di modifikasi lebih dalam. Dalam kasus projek ini, saya memodifikasi panel seperti warna, background, font, border, rounded border, dan lainnya.
