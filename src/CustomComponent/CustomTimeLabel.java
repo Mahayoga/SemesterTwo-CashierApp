@@ -4,6 +4,7 @@
  */
 package CustomComponent;
 
+import java.awt.Color;
 import java.awt.Robot;
 import java.time.LocalTime;
 import javax.swing.JLabel;

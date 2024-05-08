@@ -99,14 +99,7 @@ public class TabelBarang extends javax.swing.JFrame {
         iconLogOut = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        lbTitle = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblData = new CustomComponent.CustomTable();
-        customButton1 = new CustomComponent.CustomButton();
-        customButton6 = new CustomComponent.CustomButton();
-        customButton5 = new CustomComponent.CustomButton();
-        customButton4 = new CustomComponent.CustomButton();
+        pnDataBarang1 = new Panel.pnDataBarang();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -300,78 +293,7 @@ public class TabelBarang extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 670, 1240, 90));
-
-        lbTitle.setBackground(new java.awt.Color(133, 135, 150));
-        lbTitle.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
-        lbTitle.setForeground(new java.awt.Color(133, 135, 150));
-        lbTitle.setText("Data Barang");
-        jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 370, 33));
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 160, 190, 30));
-
-        tblData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDataMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblData);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 1060, 350));
-
-        customButton1.setText("customButton1");
-        customButton1.setBackgroundColor(new java.awt.Color(133, 135, 150));
-        customButton1.setTheText("CARI");
-        jPanel1.add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 160, 60, 30));
-
-        customButton6.setText("customButton6");
-        customButton6.setBackgroundColor(new java.awt.Color(255, 102, 102));
-        customButton6.setFontSize(14);
-        customButton6.setTextBold(1);
-        customButton6.setTextColor(java.awt.Color.white);
-        customButton6.setTheText("Hapus");
-        jPanel1.add(customButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 570, 90, 40));
-
-        customButton5.setText("customButton4");
-        customButton5.setBackgroundColor(new java.awt.Color(102, 255, 51));
-        customButton5.setFontSize(14);
-        customButton5.setTextBold(1);
-        customButton5.setTextColor(java.awt.Color.white);
-        customButton5.setTheText("Tambah");
-        customButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(customButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 570, 90, 40));
-
-        customButton4.setText("customButton4");
-        customButton4.setBackgroundColor(new java.awt.Color(0, 51, 255));
-        customButton4.setFontSize(14);
-        customButton4.setTextBold(1);
-        customButton4.setTextColor(java.awt.Color.white);
-        customButton4.setTheText("Edit");
-        customButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(customButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 570, 90, 40));
+        jPanel1.add(pnDataBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -399,26 +321,6 @@ public class TabelBarang extends javax.swing.JFrame {
         log.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
-        // TODO add your handling code here:
-        boolean edit = tblData.isEditing();
-        if(!edit) {
-            JOptionPane.showMessageDialog(this, "Tidak bisa mengedit data ini!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_tblDataMouseClicked
-
-    private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customButton5ActionPerformed
-
-    private void customButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,10 +359,6 @@ public class TabelBarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private CustomComponent.CustomButton customButton1;
-    private CustomComponent.CustomButton customButton4;
-    private CustomComponent.CustomButton customButton5;
-    private CustomComponent.CustomButton customButton6;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataSupplier;
@@ -479,17 +377,14 @@ public class TabelBarang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
     private javax.swing.JLabel lbDataTransaksi;
     private javax.swing.JLabel lbKasir;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
-    private javax.swing.JLabel lbTitle;
+    private Panel.pnDataBarang pnDataBarang1;
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
-    private CustomComponent.CustomTable tblData;
     // End of variables declaration//GEN-END:variables
 }
