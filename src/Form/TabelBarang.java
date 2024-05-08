@@ -99,7 +99,7 @@ public class TabelBarang extends javax.swing.JFrame {
         iconLogOut = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        pnDataBarang1 = new Panel.pnDataBarang();
+        pnDataBarang1 = new FormPanel.pnDataBarang();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -383,7 +383,7 @@ public class TabelBarang extends javax.swing.JFrame {
     private javax.swing.JLabel lbKasir;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
-    private Panel.pnDataBarang pnDataBarang1;
+    private FormPanel.pnDataBarang pnDataBarang1;
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
     // End of variables declaration//GEN-END:variables

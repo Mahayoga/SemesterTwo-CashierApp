@@ -2,21 +2,58 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Panel;
+package FormPanel;
 
+import Login.login;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import koneksi.koneksi;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Mahayoga
  */
-public class pnDataBarang extends javax.swing.JPanel {
+public class pnDataTransaksi extends javax.swing.JPanel {
+    koneksi db = new koneksi();
+    DefaultTableModel model = new DefaultTableModel();
+    String role;
 
     /**
-     * Creates new form pnDataBarang
+     * Creates new form pnDataTransaksi
      */
-    public pnDataBarang() {
+    public pnDataTransaksi() {
         initComponents();
+    }
+    
+    public void setRow() {
+        model.setRowCount(0);
+        try {
+            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+            }
+            tblData.setModel(model);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void setColumn() {
+        model.setColumnCount(0);
+        model.addColumn("Nomor Transaksi");
+        model.addColumn("Tanggal Transaksi");
+        model.addColumn("Harga Total");
     }
 
     /**
@@ -28,22 +65,16 @@ public class pnDataBarang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbTitle = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
+        lbTitle = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        customButton6 = new CustomComponent.CustomButton();
-        customButton4 = new CustomComponent.CustomButton();
-        customButton5 = new CustomComponent.CustomButton();
         customButton1 = new CustomComponent.CustomButton();
+        customButton6 = new CustomComponent.CustomButton();
+        customButton5 = new CustomComponent.CustomButton();
+        btnDetail = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbTitle.setBackground(new java.awt.Color(133, 135, 150));
-        lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
-        lbTitle.setForeground(new java.awt.Color(133, 135, 150));
-        lbTitle.setText("Data Barang");
-        add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 370, 33));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,46 +96,18 @@ public class pnDataBarang extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 1060, 350));
 
+        lbTitle.setBackground(new java.awt.Color(133, 135, 150));
+        lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(133, 135, 150));
+        lbTitle.setText("Data Transaksi");
+        add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 370, 33));
+
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 190, 30));
-
-        customButton6.setText("customButton6");
-        customButton6.setBackgroundColor(new java.awt.Color(255, 102, 102));
-        customButton6.setFontSize(14);
-        customButton6.setTextBold(1);
-        customButton6.setTextColor(java.awt.Color.white);
-        customButton6.setTheText("Hapus");
-        add(customButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 90, 40));
-
-        customButton4.setText("customButton4");
-        customButton4.setBackgroundColor(new java.awt.Color(0, 51, 255));
-        customButton4.setFontSize(14);
-        customButton4.setTextBold(1);
-        customButton4.setTextColor(java.awt.Color.white);
-        customButton4.setTheText("Edit");
-        customButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton4ActionPerformed(evt);
-            }
-        });
-        add(customButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 90, 40));
-
-        customButton5.setText("customButton4");
-        customButton5.setBackgroundColor(new java.awt.Color(102, 255, 51));
-        customButton5.setFontSize(14);
-        customButton5.setTextBold(1);
-        customButton5.setTextColor(java.awt.Color.white);
-        customButton5.setTheText("Tambah");
-        customButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton5ActionPerformed(evt);
-            }
-        });
-        add(customButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 90, 40));
 
         customButton1.setText("CARI");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
@@ -116,6 +119,45 @@ public class pnDataBarang extends javax.swing.JPanel {
             }
         });
         add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 80, 70, 30));
+
+        customButton6.setText("customButton6");
+        customButton6.setBackgroundColor(new java.awt.Color(255, 102, 102));
+        customButton6.setFontSize(14);
+        customButton6.setTextBold(1);
+        customButton6.setTextColor(java.awt.Color.white);
+        customButton6.setTheText("Cek Keuangan");
+        customButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton6ActionPerformed(evt);
+            }
+        });
+        add(customButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 140, 40));
+
+        customButton5.setText("customButton4");
+        customButton5.setBackgroundColor(new java.awt.Color(0, 51, 255));
+        customButton5.setFontSize(14);
+        customButton5.setTextBold(1);
+        customButton5.setTextColor(java.awt.Color.white);
+        customButton5.setTheText("Cetak");
+        customButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton5ActionPerformed(evt);
+            }
+        });
+        add(customButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 90, 40));
+
+        btnDetail.setText("customButton4");
+        btnDetail.setBackgroundColor(new java.awt.Color(0, 51, 255));
+        btnDetail.setFontSize(14);
+        btnDetail.setTextBold(1);
+        btnDetail.setTextColor(java.awt.Color.white);
+        btnDetail.setTheText("Detail");
+        btnDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailActionPerformed(evt);
+            }
+        });
+        add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 90, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -124,28 +166,37 @@ public class pnDataBarang extends javax.swing.JPanel {
         if(!edit) {
             JOptionPane.showMessageDialog(this, "Tidak bisa mengedit data ini!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        if(tblData.getSelectedRow() > -1) {
+            btnDetail.setEnabled(true);
+        } else {
+            btnDetail.setEnabled(false);
+        }
     }//GEN-LAST:event_tblDataMouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void customButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton4ActionPerformed
+    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customButton4ActionPerformed
+    }//GEN-LAST:event_customButton1ActionPerformed
 
     private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_customButton5ActionPerformed
 
-    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
+    private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customButton1ActionPerformed
+    }//GEN-LAST:event_btnDetailActionPerformed
+
+    private void customButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CustomComponent.CustomButton btnDetail;
     private CustomComponent.CustomButton customButton1;
-    private CustomComponent.CustomButton customButton4;
     private CustomComponent.CustomButton customButton5;
     private CustomComponent.CustomButton customButton6;
     private javax.swing.JScrollPane jScrollPane2;

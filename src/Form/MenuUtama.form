@@ -468,35 +468,42 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="Panel.pnMenuUtama" name="pnMenuUtama1">
+        <Component class="FormPanel.pnMenuUtama" name="pnMenuUtama1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Panel.pnDataBarang" name="pnDataBarang1">
+        <Component class="FormPanel.pnDataBarang" name="pnDataBarang1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="80" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Panel.pnDataSupplier" name="pnDataSupplier1">
+        <Component class="FormPanel.pnDataSupplier" name="pnDataSupplier1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Panel.pnKasir" name="pnKasir1">
+        <Component class="FormPanel.pnKasir" name="pnKasir1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="80" width="1190" height="680"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Panel.pnDataTransaksi" name="pnDataTransaksi1">
+        <Component class="FormPanel.pnDataTransaksi" name="pnDataTransaksi1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="PanelFormTambah.pnTambahSupplier" name="pnTambahSupplier1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>

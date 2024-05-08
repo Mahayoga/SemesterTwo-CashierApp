@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Panel;
+package FormPanel;
 
+import Demo.DemoMenuUtama;
+import Form.MenuUtama;
+import PanelFormTambah.pnTambahSupplier;
 import javax.swing.JOptionPane;
 
 /**
@@ -140,6 +143,8 @@ public class pnDataSupplier extends javax.swing.JPanel {
 
     private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
         // TODO add your handling code here:
+        MenuUtama mu = new MenuUtama("A");
+        mu.supplierTambahBtn(this);
     }//GEN-LAST:event_customButton5ActionPerformed
 
 

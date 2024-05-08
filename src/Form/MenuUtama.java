@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -60,6 +61,17 @@ public class MenuUtama extends javax.swing.JFrame {
         pnDataSupplier1.setVisible(false);
         pnKasir1.setVisible(false);
         pnDataTransaksi1.setVisible(false);
+        pnTambahSupplier1.setVisible(false);
+    }
+    
+    public void supplierTambahBtn(JPanel jp) {
+        jp.setVisible(false);
+        pnTambahSupplier1.setVisible(true);
+    }
+    
+    public void supplierBatalBtn(JPanel jp) {
+        jp.setVisible(false);
+        pnDataSupplier1.setVisible(true);
     }
     
     public void iconToko() {
@@ -167,11 +179,12 @@ public class MenuUtama extends javax.swing.JFrame {
         iconLogOut = new javax.swing.JLabel();
         pnFooter = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        pnMenuUtama1 = new Panel.pnMenuUtama();
-        pnDataBarang1 = new Panel.pnDataBarang();
-        pnDataSupplier1 = new Panel.pnDataSupplier();
-        pnKasir1 = new Panel.pnKasir();
-        pnDataTransaksi1 = new Panel.pnDataTransaksi();
+        pnMenuUtama1 = new FormPanel.pnMenuUtama();
+        pnDataBarang1 = new FormPanel.pnDataBarang();
+        pnDataSupplier1 = new FormPanel.pnDataSupplier();
+        pnKasir1 = new FormPanel.pnKasir();
+        pnDataTransaksi1 = new FormPanel.pnDataTransaksi();
+        pnTambahSupplier1 = new PanelFormTambah.pnTambahSupplier();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -393,6 +406,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel1.add(pnDataSupplier1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
         jPanel1.add(pnKasir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 680));
         jPanel1.add(pnDataTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
+        jPanel1.add(pnTambahSupplier1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -500,12 +514,13 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel lbKasir;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
-    private Panel.pnDataBarang pnDataBarang1;
-    private Panel.pnDataSupplier pnDataSupplier1;
-    private Panel.pnDataTransaksi pnDataTransaksi1;
+    private FormPanel.pnDataBarang pnDataBarang1;
+    private FormPanel.pnDataSupplier pnDataSupplier1;
+    private FormPanel.pnDataTransaksi pnDataTransaksi1;
     private javax.swing.JPanel pnFooter;
-    private Panel.pnKasir pnKasir1;
-    private Panel.pnMenuUtama pnMenuUtama1;
+    private FormPanel.pnKasir pnKasir1;
+    private FormPanel.pnMenuUtama pnMenuUtama1;
+    private PanelFormTambah.pnTambahSupplier pnTambahSupplier1;
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
     // End of variables declaration//GEN-END:variables
