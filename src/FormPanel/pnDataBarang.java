@@ -267,6 +267,11 @@ public class pnDataBarang extends javax.swing.JPanel {
                 tfCariActionPerformed(evt);
             }
         });
+        tfCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCariKeyReleased(evt);
+            }
+        });
         add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 190, 30));
 
         btnHapus.setText("customButton6");
@@ -360,6 +365,13 @@ public class pnDataBarang extends javax.swing.JPanel {
             setRow(tfCari.getText(), cbKategori);
         }
     }//GEN-LAST:event_cbKategoriActionPerformed
+
+    private void tfCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCariKeyReleased
+        // TODO add your handling code here:
+        if(tfCari.getText().equals("")) {
+            setRow();
+        }
+    }//GEN-LAST:event_tfCariKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
