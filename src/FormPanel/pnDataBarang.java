@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
@@ -173,19 +174,27 @@ public class pnDataBarang extends javax.swing.JPanel {
         }
     }
     
-    public void setRow(String search, int i) {
+    public void setRow(String search, JComboBox kat) {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE id_barang LIKE '%" + search + "%'");
+        String katt = String.valueOf(kat.getSelectedItem());
         try {
-            if(!rs.next()) {
-                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%'");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnDataBarang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+            ResultSet rs;
+            if(katt.equals("--Tidak dipilih--")) {
+                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE id_barang LIKE '%" + search + "%'");
+                if(!rs.next()) {
+                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%'");
+                }
+                while(rs.next()) {
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                }
+            } else {
+                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.id_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
+                if(!rs.next()) {
+                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
+                }
+                while(rs.next()) {
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                }
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -327,7 +336,7 @@ public class pnDataBarang extends javax.swing.JPanel {
 
     private void tfCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCariActionPerformed
         // TODO add your handling code here:
-        setRow(tfCari.getText(), 0);
+        setRow(tfCari.getText(), cbKategori);
     }//GEN-LAST:event_tfCariActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -340,15 +349,15 @@ public class pnDataBarang extends javax.swing.JPanel {
 
     private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
         // TODO add your handling code here:
-        setRow(tfCari.getText(), 0);
+        setRow(tfCari.getText(), cbKategori);
     }//GEN-LAST:event_customButton1ActionPerformed
 
     private void cbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKategoriActionPerformed
         // TODO add your handling code here:
         if(!cbKategori.getSelectedItem().equals("--Tidak dipilih--")) {
-            setRow(String.valueOf(cbKategori.getSelectedItem()));
+            setRow(tfCari.getText(), cbKategori);
         } else {
-            setRow();
+            setRow(tfCari.getText(), cbKategori);
         }
     }//GEN-LAST:event_cbKategoriActionPerformed
 
