@@ -66,7 +66,7 @@ public class CustomTable extends JTable{
             this.setBackground(new Color(78, 115, 223));
             this.setForeground(Color.WHITE);
             this.setFont(new Font(null, Font.BOLD, 15));
-            setBorder(new EmptyBorder(10, 5, 10, 5));
+            this.setBorder(new EmptyBorder(10, 5, 10, 5));
         }
     }
 }
