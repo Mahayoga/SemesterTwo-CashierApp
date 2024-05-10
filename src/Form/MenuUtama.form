@@ -468,48 +468,64 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="FormPanel.pnMenuUtama" name="pnMenuUtama1">
+        <Container class="javax.swing.JPanel" name="jPanel5">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
+              <AbsoluteConstraints x="180" y="80" width="1190" height="670"/>
             </Constraint>
           </Constraints>
-        </Component>
-        <Component class="FormPanel.pnDataBarang" name="pnDataBarang1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="80" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="FormPanel.pnDataSupplier" name="pnDataSupplier1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="FormPanel.pnKasir" name="pnKasir1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="80" width="1190" height="680"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="FormPanel.pnDataTransaksi" name="pnDataTransaksi1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="PanelFormTambah.pnTambahSupplier" name="pnTambahSupplier1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="80" width="1190" height="590"/>
-            </Constraint>
-          </Constraints>
-        </Component>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="1190" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="pnDataTransaksi1" min="-2" pref="1190" max="-2" attributes="0"/>
+                              <Component id="pnDataSupplier1" min="-2" pref="1190" max="-2" attributes="0"/>
+                              <Component id="pnKasir1" min="-2" pref="1190" max="-2" attributes="0"/>
+                              <Component id="pnMenuUtama1" min="-2" pref="1190" max="-2" attributes="0"/>
+                              <Component id="pnDataBarang1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="680" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="pnDataTransaksi1" min="-2" pref="590" max="-2" attributes="0"/>
+                              <Component id="pnDataSupplier1" min="-2" pref="590" max="-2" attributes="0"/>
+                              <Component id="pnKasir1" min="-2" pref="680" max="-2" attributes="0"/>
+                              <Component id="pnMenuUtama1" min="-2" pref="590" max="-2" attributes="0"/>
+                              <Component id="pnDataBarang1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="FormPanel.pnMenuUtama" name="pnMenuUtama1">
+            </Component>
+            <Component class="FormPanel.pnDataBarang" name="pnDataBarang1">
+            </Component>
+            <Component class="FormPanel.pnDataSupplier" name="pnDataSupplier1">
+            </Component>
+            <Component class="FormPanel.pnKasir" name="pnKasir1">
+            </Component>
+            <Component class="FormPanel.pnDataTransaksi" name="pnDataTransaksi1">
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

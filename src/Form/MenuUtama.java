@@ -1,8 +1,15 @@
 package Form;
 
 
+import FormPanel.pnDataBarang;
+import FormPanel.pnDataSupplier;
 import Login.login;
+import PanelFormEdit.pnEditBarang;
+import PanelFormEdit.pnEditSupplier;
+import PanelFormTambah.pnTambahBarang;
+import PanelFormTambah.pnTambahSupplier;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.JFrame;
@@ -28,7 +35,12 @@ public class MenuUtama extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     koneksi db = new koneksi();
     String role = "";
-
+    pnTambahSupplier pTDS = new pnTambahSupplier();
+    pnTambahBarang pTDB = new pnTambahBarang();
+    pnEditSupplier pEDS;
+    pnEditBarang pEDB;
+    boolean inForm = false;
+    String idData;
     /**
      * Creates new form MenuUtama
      * Panel Width: 1190
@@ -57,23 +69,206 @@ public class MenuUtama extends javax.swing.JFrame {
         resizeImage(30, 30, iconLogOut, "logout.png");
         resizeImage(33, 33, iconTime, "time.png");        
         iconToko();
-        pnDataBarang1.setVisible(false);
-        pnDataSupplier1.setVisible(false);
-        pnKasir1.setVisible(false);
-        pnDataTransaksi1.setVisible(false);
-        pnTambahSupplier1.setVisible(false);
+        jPanel5.removeAll();
+        jPanel5.repaint();
+        jPanel5.add(pnMenuUtama1);
+        
+        // Data Barang Interface Set
+        pnDataBarang1.setVariableTambah(new pnDataBarang.TambahData() {
+            @Override
+            public void tambahData() {
+                tambahDataBarang();
+            }
+        });
+        pnDataBarang1.setVariableEdit(new pnDataBarang.EditData() {
+            @Override
+            public void editData() {
+                editDataBarang(idData);
+            }
+        });
+        pnDataBarang1.setVariableAmbil(new pnDataBarang.AmbilData() {
+            @Override
+            public void ambilData(String id) {
+                setIdData(id);
+            }
+        });
+        pnDataBarang1.setVariableHapus(new pnDataBarang.HapusData() {
+            @Override
+            public void hapusData() {
+                btnHapusBarang(idData);
+            }
+        });
+        
+        // Tambah Data Barang Interface Set
+        pTDB.setVariableBatal(new pnTambahBarang.BatalBarang() {
+            @Override
+            public void batalBarang() {
+                btnBatalBarang();
+            }
+        });
+        pTDB.setVariableSimpan(new pnTambahBarang.SimpanBarang() {
+            @Override
+            public void simpanBarang() {
+                btnSimpanBarang();
+            }
+        });
+        
+        // Data Supplier Interface Set
+        pnDataSupplier1.setVariableTambah(new pnDataSupplier.TambahData() {
+            @Override
+            public void supplierTambahData() {
+                tambahDataSupplier();
+            }
+        });
+        pnDataSupplier1.setVariableEdit(new pnDataSupplier.EditData() {
+            @Override
+            public void supplierEditData() {
+                editDataSupplier(idData);
+            }
+        });
+        pnDataSupplier1.setVariableAmbil(new pnDataSupplier.AmbilDataPadaTabel() {
+            @Override
+            public void ambilDataSupplier(String id) {
+                setIdData(id);
+            }
+        });
+        
+        //Tambah Data Supplier Interface Set
+        pTDS.setVariableBatal(new pnTambahSupplier.BatalSupplier() {
+            @Override
+            public void batalSupplier() {
+                btnBatalSupplier();
+            }
+        });
+        pTDS.setVariableSimpan(new pnTambahSupplier.SimpanSupplier() {
+            @Override
+            public void simpanSupplier() {
+                btnSimpanSupplier();
+            }
+        });
     }
     
-    public void supplierTambahBtn(JPanel jp) {
-        jp.setVisible(false);
-        pnTambahSupplier1.setVisible(true);
+    // ------------------------------------------ Method Data Barang ------------------------------------------
+    public void tambahDataBarang() {
+        jPanel5.removeAll();
+        jPanel5.repaint();
+        pTDB.setBounds(0, 0, 1190, 590);
+        jPanel5.add(pTDB);
+        inForm = true;
+    }
+    public void editDataBarang(String id) {
+        pEDB = new pnEditBarang(id);
+        pEDB.setVariableBatal(new pnEditBarang.BatalBarang() {
+            @Override
+            public void batalBarang() {
+                btnBatalBarang();
+            }
+        });
+        pEDB.setVariableEdit(new pnEditBarang.EditBarang() {
+            @Override
+            public void editBarang() {
+                btnEditBarang();
+            }
+        });
+        jPanel5.removeAll();
+        jPanel5.repaint();
+        pEDB.setBounds(0, 0, 1190, 590);
+        jPanel5.add(pEDB);
+        inForm = true;
+    }
+    public void btnHapusBarang(String id) {
+        pnDataBarang1.hapusData(id);
+        pnDataBarang1.setRow();
+    }
+    public void btnSimpanBarang() {
+        if(inForm) {
+            pTDB.simpanData();
+            inForm = false;
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            pnDataBarang1.setRow();
+            clickBtn(1);
+        }
+    }
+    public void btnEditBarang() {
+        if(inForm) {
+            pEDB.simpanData(idData);
+            inForm = false;
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            pnDataBarang1.setRow();
+            clickBtn(1);
+        }
+    }
+    public void btnBatalBarang() {
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Barang?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            clickBtn(1);
+        }
     }
     
-    public void supplierBatalBtn(JPanel jp) {
-        jp.setVisible(false);
-        pnDataSupplier1.setVisible(true);
+    // ------------------------------------------ Edit Supplier Method ------------------------------------------
+    public void btnEditSupplier() {
+        if(inForm) {
+            pEDS.simpanData();
+            inForm = false;
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            pnDataSupplier1.setRow();
+            clickBtn(2);
+        }
     }
     
+    // ------------------------------------------ Tambah Supplier Method ------------------------------------------
+    public void btnSimpanSupplier() {
+        if(inForm) {
+            pTDS.simpanData();
+            inForm = false;
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            pnDataSupplier1.setRow();
+            clickBtn(2);
+        }
+    }
+    public void btnBatalSupplier() {
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Supplier?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            clickBtn(2);
+        }
+    }
+    
+    // ------------------------------------------ Data Supplier Method ------------------------------------------
+    public void tambahDataSupplier() {
+        jPanel5.removeAll();
+        jPanel5.repaint();
+        pTDS.setBounds(0, 0, 1190, 590);
+        jPanel5.add(pTDS);
+        inForm = true;
+    }
+    
+    public void editDataSupplier(String id) {
+        pEDS = new pnEditSupplier(id);
+        pEDS.setVariableBatal(new pnEditSupplier.BatalSupplier() {
+            @Override
+            public void batalSupplier() {
+                btnBatalSupplier();
+            }
+        });
+        pEDS.setVariableEdit(new pnEditSupplier.EditSupplier() {
+            @Override
+            public void editSupplier() {
+                btnEditSupplier();
+            }
+        });
+        jPanel5.removeAll();
+        jPanel5.repaint();
+        pEDS.setBounds(0, 0, 1190, 590);
+        jPanel5.add(pEDS);
+        inForm = true;
+    }
+    
+    public void setIdData(String id) {
+        this.idData = id;
+    }
+    
+    
+    // Logo Method
     public void iconToko() {
         try {
             File file = new File("src/img/Toko Ku (5).png");
@@ -98,46 +293,42 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }
     
+    
+    // Button / Label Method
     public void clickBtn(int pn) {
         switch(pn) {
             case 0 -> {
-                pnMenuUtama1.setVisible(true);
-                pnDataBarang1.setVisible(false);
-                pnDataSupplier1.setVisible(false);
-                pnKasir1.setVisible(false);
-                pnDataTransaksi1.setVisible(false);
+                jPanel5.removeAll();
+                jPanel5.repaint();
+                jPanel5.add(pnMenuUtama1);
+                pnFooter.setVisible(false);
                 pnFooter.setVisible(true);
             }
             case 1 -> { 
-                pnDataBarang1.setVisible(true);
-                pnMenuUtama1.setVisible(false);
-                pnDataSupplier1.setVisible(false);
-                pnKasir1.setVisible(false);
-                pnDataTransaksi1.setVisible(false);
+                jPanel5.removeAll();
+                jPanel5.repaint();
+                jPanel5.add(pnDataBarang1);
+                pnFooter.setVisible(false);
                 pnFooter.setVisible(true);
             }
             case 2 -> {
-                pnDataSupplier1.setVisible(true);
-                pnMenuUtama1.setVisible(false);
-                pnDataBarang1.setVisible(false);
-                pnKasir1.setVisible(false);
-                pnDataTransaksi1.setVisible(false);
+                jPanel5.removeAll();
+                jPanel5.repaint();
+                jPanel5.add(pnDataSupplier1);
+                pnFooter.setVisible(false);
                 pnFooter.setVisible(true);
             }
             case 3 -> {
-                pnKasir1.setVisible(true);
-                pnMenuUtama1.setVisible(false);
-                pnDataBarang1.setVisible(false);
-                pnDataSupplier1.setVisible(false);
-                pnDataTransaksi1.setVisible(false);
+                jPanel5.removeAll();
+                jPanel5.repaint();
+                jPanel5.add(pnKasir1);
                 pnFooter.setVisible(false);
             }
             case 4 -> {
-                pnDataTransaksi1.setVisible(true);
-                pnKasir1.setVisible(false);
-                pnMenuUtama1.setVisible(false);
-                pnDataBarang1.setVisible(false);
-                pnDataSupplier1.setVisible(false);
+                jPanel5.removeAll();
+                jPanel5.repaint();
+                jPanel5.add(pnDataTransaksi1);
+                pnFooter.setVisible(false);
                 pnFooter.setVisible(true);
             }
         }
@@ -179,12 +370,12 @@ public class MenuUtama extends javax.swing.JFrame {
         iconLogOut = new javax.swing.JLabel();
         pnFooter = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         pnMenuUtama1 = new FormPanel.pnMenuUtama();
         pnDataBarang1 = new FormPanel.pnDataBarang();
         pnDataSupplier1 = new FormPanel.pnDataSupplier();
         pnKasir1 = new FormPanel.pnKasir();
         pnDataTransaksi1 = new FormPanel.pnDataTransaksi();
-        pnTambahSupplier1 = new PanelFormTambah.pnTambahSupplier();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -401,12 +592,39 @@ public class MenuUtama extends javax.swing.JFrame {
         );
 
         jPanel1.add(pnFooter, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 670, 1240, 80));
-        jPanel1.add(pnMenuUtama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
-        jPanel1.add(pnDataBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-        jPanel1.add(pnDataSupplier1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
-        jPanel1.add(pnKasir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 680));
-        jPanel1.add(pnDataTransaksi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
-        jPanel1.add(pnTambahSupplier1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 590));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1190, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnDataTransaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnDataSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnKasir1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnDataBarang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnDataTransaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnDataSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnKasir1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnDataBarang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -424,34 +642,84 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
-        login log = new login();
-        log.setVisible(true);
-        this.dispose();
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan akan Log Out?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                login log = new login();
+                log.setVisible(true);
+                this.dispose();
+                inForm = false;
+            }
+        } else {
+            login log = new login();
+            log.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void lbDataBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataBarangMouseClicked
         // TODO add your handling code here:
-        clickBtn(1);
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                clickBtn(1);
+                inForm = false;
+            }
+        } else {
+            clickBtn(1);
+        }
     }//GEN-LAST:event_lbDataBarangMouseClicked
 
     private void lbMenuUtamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMenuUtamaMouseClicked
         // TODO add your handling code here:
-        clickBtn(0);
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                clickBtn(0);
+                inForm = false;
+            }
+        } else {
+            clickBtn(0);
+        }
     }//GEN-LAST:event_lbMenuUtamaMouseClicked
 
     private void lbDataSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataSupplierMouseClicked
         // TODO add your handling code here:
-        clickBtn(2);
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                clickBtn(2);
+                inForm = false;
+            }
+        } else {
+            clickBtn(2);
+        }
     }//GEN-LAST:event_lbDataSupplierMouseClicked
 
     private void lbKasirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbKasirMouseClicked
         // TODO add your handling code here:
-        clickBtn(3);
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                clickBtn(3);
+                inForm = false;
+            }
+        } else {
+            clickBtn(3);
+        }
     }//GEN-LAST:event_lbKasirMouseClicked
 
     private void lbDataTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataTransaksiMouseClicked
         // TODO add your handling code here:
-        clickBtn(4);
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                clickBtn(4);
+                inForm = false;
+            }
+        } else {
+            clickBtn(4);
+        }
     }//GEN-LAST:event_lbDataTransaksiMouseClicked
 
     /**
@@ -508,6 +776,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
     private javax.swing.JLabel lbDataTransaksi;
@@ -520,7 +789,6 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel pnFooter;
     private FormPanel.pnKasir pnKasir1;
     private FormPanel.pnMenuUtama pnMenuUtama1;
-    private PanelFormTambah.pnTambahSupplier pnTambahSupplier1;
     private javax.swing.JPanel secAdmin;
     private javax.swing.JPanel secUser;
     // End of variables declaration//GEN-END:variables

@@ -9,7 +9,6 @@ package Login;
  *
  * @author user
  */
-import Demo.DemoMenuUtama;
 import Form.MenuUtama;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -296,18 +295,12 @@ public class login extends javax.swing.JFrame {
                 if(rs.next()) {
                     JOptionPane.showMessageDialog(this, "Login Berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
                     if(rs.getString("role").equals("A")) {
-                        DemoMenuUtama demo = new DemoMenuUtama();
-                        demo.setRole("A");
-                        demo.main();
-//                        MenuUtama b = new MenuUtama("A");
-//                        b.setVisible(true);
+                        MenuUtama b = new MenuUtama("A");
+                        b.setVisible(true);
                         this.dispose();
                     } else if(rs.getString("role").equals("U")) {
-                        DemoMenuUtama demo = new DemoMenuUtama();
-                        demo.setRole("U"); 
-                        demo.main();
-//                        MenuUtama b = new MenuUtama("U");
-//                        b.setVisible(true);
+                        MenuUtama b = new MenuUtama("U");
+                        b.setVisible(true);
                         this.dispose();
                     }
                 } else {

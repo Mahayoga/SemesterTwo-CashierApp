@@ -33,7 +33,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         initComponents();
         tblData.setModel(model);
         tblData.setRowHeight(40);
-        countTotal();
+        //countTotal();
     }
     
     public void countTotal() {
