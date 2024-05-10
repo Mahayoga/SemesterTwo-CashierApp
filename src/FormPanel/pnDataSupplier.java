@@ -22,6 +22,7 @@ public class pnDataSupplier extends javax.swing.JPanel {
     private TambahData tambahData;
     private EditData editData;
     private AmbilDataPadaTabel ambilDataPadaTabel;
+    private HapusData hapusData;
     DefaultTableModel model = new DefaultTableModel();
     koneksi db = new koneksi();
 
@@ -42,6 +43,12 @@ public class pnDataSupplier extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 theEditEvent();
+            }
+        });
+        btnHapus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                theHapusEvent();
             }
         });
         tblData.addMouseListener(new MouseListener() {
@@ -70,11 +77,13 @@ public class pnDataSupplier extends javax.swing.JPanel {
                 String a = String.valueOf(tblData.getValueAt(tblData.getSelectedRow(), 0));
                 if(!a.equals("")) {
                     btnEdit.setEnabled(true);
+                    btnHapus.setEnabled(true);
                 }
                 theAmbilEvent(a);
             }
         });
         btnEdit.setEnabled(false);
+        btnHapus.setEnabled(false);
     }
     
     public interface TambahData {
@@ -86,6 +95,9 @@ public class pnDataSupplier extends javax.swing.JPanel {
     public interface AmbilDataPadaTabel {
         void ambilDataSupplier(String id);
     }
+    public interface HapusData {
+        void supplierHapusData();
+    }
     
     public void setVariableTambah(TambahData td) {
         this.tambahData = td;
@@ -96,22 +108,28 @@ public class pnDataSupplier extends javax.swing.JPanel {
     public void setVariableAmbil(AmbilDataPadaTabel adpt) {
         this.ambilDataPadaTabel = adpt;
     }
+    public void setVariableHapus(HapusData hd) {
+        this.hapusData = hd;
+    }
     
     public void theTambahEvent() {
         if(tambahData != null) {
             tambahData.supplierTambahData();
         }
     }
-    
     public void theEditEvent() {
         if(editData != null) {
             editData.supplierEditData();
         }
     }
-    
     public void theAmbilEvent(String id) {
         if(ambilDataPadaTabel != null) {
             ambilDataPadaTabel.ambilDataSupplier(id);
+        }
+    }
+    public void theHapusEvent() {
+        if(hapusData != null) {
+            hapusData.supplierHapusData();
         }
     }
     
@@ -135,6 +153,18 @@ public class pnDataSupplier extends javax.swing.JPanel {
             }
             tblData.setModel(model);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void hapusData(String id) {
+        try {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data barang dengan ID: '" + id + "'?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(asn == JOptionPane.YES_NO_OPTION) {
+                db.aksi("DELETE FROM suppliers WHERE id_supplier = '" + id + "'");
+                JOptionPane.showMessageDialog(this, "Hapus data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -204,7 +234,7 @@ public class pnDataSupplier extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 1060, 350));
 
         btnHapus.setText("customButton6");
-        btnHapus.setBackgroundColor(new java.awt.Color(255, 102, 102));
+        btnHapus.setBackgroundColor(new java.awt.Color(247, 64, 64));
         btnHapus.setFontSize(14);
         btnHapus.setTextBold(1);
         btnHapus.setTextColor(java.awt.Color.white);
@@ -225,7 +255,7 @@ public class pnDataSupplier extends javax.swing.JPanel {
         add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 90, 40));
 
         btnTambah.setText("customButton4");
-        btnTambah.setBackgroundColor(new java.awt.Color(102, 255, 51));
+        btnTambah.setBackgroundColor(new java.awt.Color(0, 51, 255));
         btnTambah.setFontSize(14);
         btnTambah.setTextBold(1);
         btnTambah.setTextColor(java.awt.Color.white);

@@ -132,6 +132,12 @@ public class MenuUtama extends javax.swing.JFrame {
                 setIdData(id);
             }
         });
+        pnDataSupplier1.setVariableHapus(new pnDataSupplier.HapusData() {
+            @Override
+            public void supplierHapusData() {
+                hapusDataSupplier(idData);
+            }
+        });
         
         //Tambah Data Supplier Interface Set
         pTDS.setVariableBatal(new pnTambahSupplier.BatalSupplier() {
@@ -208,7 +214,7 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }
     
-    // ------------------------------------------ Edit Supplier Method ------------------------------------------
+    // ------------------------------------------ Method Supplier ------------------------------------------
     public void btnEditSupplier() {
         if(inForm) {
             int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -221,8 +227,6 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         }
     }
-    
-    // ------------------------------------------ Tambah Supplier Method ------------------------------------------
     public void btnSimpanSupplier() {
         if(inForm) {
             pTDS.simpanData();
@@ -238,8 +242,6 @@ public class MenuUtama extends javax.swing.JFrame {
             clickBtn(2);
         }
     }
-    
-    // ------------------------------------------ Data Supplier Method ------------------------------------------
     public void tambahDataSupplier() {
         jPanel5.removeAll();
         jPanel5.repaint();
@@ -247,7 +249,6 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel5.add(pTDS);
         inForm = true;
     }
-    
     public void editDataSupplier(String id) {
         pEDS = new pnEditSupplier(id);
         pEDS.setVariableBatal(new pnEditSupplier.BatalSupplier() {
@@ -268,7 +269,12 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel5.add(pEDS);
         inForm = true;
     }
+    public void hapusDataSupplier(String id) {
+        pnDataSupplier1.hapusData(id);
+        pnDataSupplier1.setRow();
+    }
     
+    // ------------------------------------------ Setter buat ID ------------------------------------------
     public void setIdData(String id) {
         this.idData = id;
     }

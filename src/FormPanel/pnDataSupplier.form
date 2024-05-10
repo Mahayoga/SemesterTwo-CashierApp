@@ -100,7 +100,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="customButton6"/>
         <Property name="backgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="ff" type="rgb"/>
+          <Color blue="40" green="40" red="f7" type="rgb"/>
         </Property>
         <Property name="fontSize" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="14" type="code"/>
@@ -149,7 +149,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="customButton4"/>
         <Property name="backgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="ff" red="66" type="rgb"/>
+          <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
         <Property name="fontSize" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="14" type="code"/>
