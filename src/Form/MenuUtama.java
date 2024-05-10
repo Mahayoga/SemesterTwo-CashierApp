@@ -191,11 +191,14 @@ public class MenuUtama extends javax.swing.JFrame {
     }
     public void btnEditBarang() {
         if(inForm) {
-            pEDB.simpanData(idData);
-            inForm = false;
-            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-            pnDataBarang1.setRow();
-            clickBtn(1);
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                pEDB.simpanData(idData);
+                inForm = false;
+                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                pnDataBarang1.setRow();
+                clickBtn(1);
+            }
         }
     }
     public void btnBatalBarang() {
@@ -208,11 +211,14 @@ public class MenuUtama extends javax.swing.JFrame {
     // ------------------------------------------ Edit Supplier Method ------------------------------------------
     public void btnEditSupplier() {
         if(inForm) {
-            pEDS.simpanData();
-            inForm = false;
-            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-            pnDataSupplier1.setRow();
-            clickBtn(2);
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                pEDS.simpanData();
+                inForm = false;
+                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                pnDataSupplier1.setRow();
+                clickBtn(2);
+            }
         }
     }
     
