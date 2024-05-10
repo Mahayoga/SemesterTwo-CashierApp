@@ -157,6 +157,19 @@ public class pnDataSupplier extends javax.swing.JPanel {
         }
     }
     
+    public void setRow(String search) {
+        model.setRowCount(0);
+        ResultSet rs = db.ambilData("SELECT * FROM suppliers WHERE nama_supplier LIKE '%" + search + "%' OR alamat_supplier LIKE '%" + search + "%' OR no_telp LIKE '%" + search + "%' OR email_supplier LIKE '%" + search + "%' OR asal_perusahaan LIKE '%" + search + "%';");
+        try {
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_supplier"), rs.getString("nama_supplier"), rs.getString("alamat_supplier"), rs.getString("no_telp"), rs.getString("email_supplier"), rs.getString("asal_perusahaan")});
+            }
+            tblData.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void hapusData(String id) {
         try {
             int asn = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data barang dengan ID: '" + id + "'?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -179,7 +192,7 @@ public class pnDataSupplier extends javax.swing.JPanel {
     private void initComponents() {
 
         lbTitle = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfCari = new javax.swing.JTextField();
         customButton1 = new CustomComponent.CustomButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
@@ -195,12 +208,17 @@ public class pnDataSupplier extends javax.swing.JPanel {
         lbTitle.setText("Data Supplier");
         add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 370, 33));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfCariActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 190, 30));
+        tfCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCariKeyReleased(evt);
+            }
+        });
+        add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 190, 30));
 
         customButton1.setText("CARI");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
@@ -268,12 +286,13 @@ public class pnDataSupplier extends javax.swing.JPanel {
         add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 90, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCariActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfCariActionPerformed
 
     private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
         // TODO add your handling code here:
+        setRow(tfCari.getText());
     }//GEN-LAST:event_customButton1ActionPerformed
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -292,6 +311,13 @@ public class pnDataSupplier extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTambahActionPerformed
 
+    private void tfCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCariKeyReleased
+        // TODO add your handling code here:
+        if(tfCari.getText().equals("")) {
+            setRow();
+        }
+    }//GEN-LAST:event_tfCariKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnEdit;
@@ -299,8 +325,8 @@ public class pnDataSupplier extends javax.swing.JPanel {
     private CustomComponent.CustomButton btnTambah;
     private CustomComponent.CustomButton customButton1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbTitle;
     private CustomComponent.CustomTable tblData;
+    private javax.swing.JTextField tfCari;
     // End of variables declaration//GEN-END:variables
 }
