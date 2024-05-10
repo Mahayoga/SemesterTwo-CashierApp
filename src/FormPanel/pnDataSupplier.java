@@ -288,6 +288,7 @@ public class pnDataSupplier extends javax.swing.JPanel {
 
     private void tfCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCariActionPerformed
         // TODO add your handling code here:
+        setRow(tfCari.getText());
     }//GEN-LAST:event_tfCariActionPerformed
 
     private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
