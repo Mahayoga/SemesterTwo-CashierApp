@@ -126,7 +126,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pnDataKadaluarsa1.setVariableEdit(new pnDataKadaluarsa.EditData() {
             @Override
             public void editData() {
-                btnEditKadaluarsa();
+                editDataKadaluarsa(idData);
             }
         });
         
