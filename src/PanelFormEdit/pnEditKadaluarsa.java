@@ -124,7 +124,7 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         }
     }
     
-    public boolean simpanData(String id) {
+    public void simpanData(String id) {
         /*
         * kode_barang	
         * tgl_kadaluarsa	
@@ -144,21 +144,10 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         
         try {
             for(int i = 0; i < jumlah; i++) {
-                db.aksi("INSERT INTO detail_barang VALUES ('" + kd + "', '" + tglJadi + "', 'Belum Terbuang')");
-                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                db.aksi("UPDATE detail_barang SET tgl_kadaluarsa = '" + tglJadi + "' WHERE kode_barang = '" + kd + "'");
             }
         } catch(Exception e) {
             e.printStackTrace();
-        }
-        
-        int asn = JOptionPane.showConfirmDialog(this, "Apakah ada data yang akan ditambahkan lagi dengan kode barang '" + kd + "'?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        if(asn == JOptionPane.YES_OPTION) {
-            cbTanggal.setSelectedItem("--Tidak dipilih--");
-            cbBulan.setSelectedItem("--Tidak dipilih--");
-            cbTahun.setSelectedItem("--Tidak dipilih--");
-            return true;
-        } else {
-            return false;
         }
     }
     
