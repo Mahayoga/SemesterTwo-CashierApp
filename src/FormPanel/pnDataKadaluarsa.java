@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -21,19 +22,19 @@ import koneksi.koneksi;
  *
  * @author Mahayoga
  */
-public class pnDataBarang extends javax.swing.JPanel {
+public class pnDataKadaluarsa extends javax.swing.JPanel {
     private TambahData tambahData;
     private EditData editData;
     private AmbilData ambilData;
     private HapusData hapusData;
-    private DataKadaluarsa dataKadaluarsa;
+    private Kembali kembali;
     DefaultTableModel model = new DefaultTableModel();
     koneksi db = new koneksi();
 
     /**
      * Creates new form pnDataBarang
      */
-    public pnDataBarang() {
+    public pnDataKadaluarsa() {
         initComponents();
         setColumn();
         setRow();
@@ -54,22 +55,23 @@ public class pnDataBarang extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 theEventHapus();
             }
-        });
-        btnKadaluarsa.addActionListener(new ActionListener() {
-            @Override
+        }); 
+        btnKembali.addActionListener(new ActionListener() {
+            @Override 
             public void actionPerformed(ActionEvent e) {
-                theEventKadaluarsa();
+                theEventKembali();
             }
         });
         tblData.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String a = String.valueOf(tblData.getValueAt(tblData.getSelectedRow(), 0));
+                String b = String.valueOf(tblData.getValueAt(tblData.getSelectedRow(), 4));
                 if(!a.equals("")) {
                     btnEdit.setEnabled(true);
                     btnHapus.setEnabled(true);
                 }
-                theEventAmbil(a);
+                theEventAmbil(a, b);
             }
 
             @Override
@@ -104,13 +106,13 @@ public class pnDataBarang extends javax.swing.JPanel {
         void editData();
     }
     public interface AmbilData {
-        void ambilData(String id);
+        void ambilData(String id, String date);
     }
     public interface HapusData {
         void hapusData();
     }
-    public interface DataKadaluarsa {
-        void dataKadaluarsa();
+    public interface Kembali {
+        void kembali();
     }
     
     public void setVariableTambah(TambahData td) {
@@ -125,8 +127,8 @@ public class pnDataBarang extends javax.swing.JPanel {
     public void setVariableHapus(HapusData hd) {
         this.hapusData = hd;
     }
-    public void setVariableKadaluarsa(DataKadaluarsa dk) {
-        this.dataKadaluarsa = dk;
+    public void setVariableKembali(Kembali k) {
+        this.kembali = k;
     }
     
     public void theEventTambah() {
@@ -139,9 +141,9 @@ public class pnDataBarang extends javax.swing.JPanel {
             editData.editData();
         }
     }
-    public void theEventAmbil(String id) {
+    public void theEventAmbil(String id, String date) {
         if(ambilData != null) {
-            ambilData.ambilData(id);
+            ambilData.ambilData(id, date);
         }
     }
     public void theEventHapus() {
@@ -149,9 +151,9 @@ public class pnDataBarang extends javax.swing.JPanel {
             hapusData.hapusData();
         }
     }
-    public void theEventKadaluarsa() {
-        if(dataKadaluarsa != null) {
-            dataKadaluarsa.dataKadaluarsa();
+    public void theEventKembali() {
+        if(kembali != null) {
+            kembali.kembali();
         }
     }
     
@@ -160,18 +162,17 @@ public class pnDataBarang extends javax.swing.JPanel {
         model.addColumn("Kode Barang");
         model.addColumn("Nama Barang");
         model.addColumn("Kategori Barang");
-        model.addColumn("Stok Tersedia");
-        model.addColumn("Harga Beli");
-        model.addColumn("Harga Jual");
+        model.addColumn("Jumlah Barang (dengan tanggal yang sama)");
+        model.addColumn("Tanggal Kadaluarsa");
         tblData.setModel(model);
     }
     
     public void setRow() {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori");
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa < '" + LocalDate.now()  + "' GROUP BY tgl_kadaluarsa");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -181,10 +182,10 @@ public class pnDataBarang extends javax.swing.JPanel {
     
     public void setRow(String kategori) {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE k.nama_kategori = '" + kategori + "'");
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa < '" + LocalDate.now() + "' AND sb.kategori_barang = '" + kategori + "' GROUP BY tgl_kadaluarsa");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -198,20 +199,14 @@ public class pnDataBarang extends javax.swing.JPanel {
         try {
             ResultSet rs;
             if(katt.equals("--Tidak dipilih--")) {
-                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE id_barang LIKE '%" + search + "%'");
-                if(!rs.next()) {
-                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%'");
-                }
+                rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa < '" + LocalDate.now() + "' AND sb.nama_barang LIKE '%"+ search +"%' GROUP BY tgl_kadaluarsa");
                 while(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
                 }
             } else {
-                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.id_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
-                if(!rs.next()) {
-                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
-                }
+                rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa < '" + LocalDate.now() + "' AND sb.kategori_barang = '" + katt + "' AND sb.nama_barang LIKE '%"+ search +"%' GROUP BY tgl_kadaluarsa");
                 while(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
                 }
             }
             tblData.setModel(model);
@@ -220,11 +215,11 @@ public class pnDataBarang extends javax.swing.JPanel {
         }
     }
     
-    public void hapusData(String id) {
+    public void hapusData(String id, String date) {
         try {
             int asn = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data barang dengan ID: '" + id + "'?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(asn == JOptionPane.YES_NO_OPTION) {
-                db.aksi("DELETE FROM stok_barang WHERE id_barang = '" + id + "'");
+                db.aksi("UPDATE detail_barang SET status = 'Sudah Terbuang' WHERE id_barang = '" + id + "' AND tgl_kadaluarsa = '" + date + "'");
                 JOptionPane.showMessageDialog(this, "Hapus data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch(Exception e) {
@@ -251,14 +246,14 @@ public class pnDataBarang extends javax.swing.JPanel {
         customButton1 = new CustomComponent.CustomButton();
         cbKategori = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        btnKadaluarsa = new CustomComponent.CustomButton();
+        btnKembali = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
-        lbTitle.setText("Data Barang");
+        lbTitle.setText("Data Barang Kadaluarsa");
         add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 370, 33));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
@@ -349,18 +344,18 @@ public class pnDataBarang extends javax.swing.JPanel {
         jLabel1.setText("*Urutkan berdasarkan Kategori*");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 30));
 
-        btnKadaluarsa.setText("customButton4");
-        btnKadaluarsa.setBackgroundColor(new java.awt.Color(0, 51, 255));
-        btnKadaluarsa.setFontSize(14);
-        btnKadaluarsa.setTextBold(1);
-        btnKadaluarsa.setTextColor(java.awt.Color.white);
-        btnKadaluarsa.setTheText("Cek Kadaluarsa");
-        btnKadaluarsa.addActionListener(new java.awt.event.ActionListener() {
+        btnKembali.setText("customButton4");
+        btnKembali.setBackgroundColor(new java.awt.Color(0, 51, 255));
+        btnKembali.setFontSize(14);
+        btnKembali.setTextBold(1);
+        btnKembali.setTextColor(java.awt.Color.white);
+        btnKembali.setTheText("Kembali");
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKadaluarsaActionPerformed(evt);
+                btnKembaliActionPerformed(evt);
             }
         });
-        add(btnKadaluarsa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 150, 40));
+        add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 90, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -405,15 +400,15 @@ public class pnDataBarang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tfCariKeyReleased
 
-    private void btnKadaluarsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKadaluarsaActionPerformed
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnKadaluarsaActionPerformed
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnEdit;
     private CustomComponent.CustomButton btnHapus;
-    private CustomComponent.CustomButton btnKadaluarsa;
+    private CustomComponent.CustomButton btnKembali;
     private CustomComponent.CustomButton btnTambah;
     private javax.swing.JComboBox<String> cbKategori;
     private CustomComponent.CustomButton customButton1;

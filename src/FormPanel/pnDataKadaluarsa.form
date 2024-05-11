@@ -29,7 +29,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="96" green="87" red="85" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Data Barang"/>
+        <Property name="text" type="java.lang.String" value="Data Barang Kadaluarsa"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -207,7 +207,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="CustomComponent.CustomButton" name="btnKadaluarsa">
+    <Component class="CustomComponent.CustomButton" name="btnKembali">
       <Properties>
         <Property name="text" type="java.lang.String" value="customButton4"/>
         <Property name="backgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -222,14 +222,14 @@
         <Property name="textColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
         </Property>
-        <Property name="theText" type="java.lang.String" value="Cek Kadaluarsa"/>
+        <Property name="theText" type="java.lang.String" value="Kembali"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKadaluarsaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKembaliActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="490" width="150" height="40"/>
+          <AbsoluteConstraints x="40" y="490" width="90" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

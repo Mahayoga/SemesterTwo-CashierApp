@@ -2,11 +2,14 @@ package Form;
 
 
 import FormPanel.pnDataBarang;
+import FormPanel.pnDataKadaluarsa;
 import FormPanel.pnDataSupplier;
 import Login.login;
 import PanelFormEdit.pnEditBarang;
+import PanelFormEdit.pnEditKadaluarsa;
 import PanelFormEdit.pnEditSupplier;
 import PanelFormTambah.pnTambahBarang;
+import PanelFormTambah.pnTambahKadaluarsa;
 import PanelFormTambah.pnTambahSupplier;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -37,8 +40,10 @@ public class MenuUtama extends javax.swing.JFrame {
     String role = "";
     pnTambahSupplier pTDS = new pnTambahSupplier();
     pnTambahBarang pTDB = new pnTambahBarang();
+    pnTambahKadaluarsa pTDK = new pnTambahKadaluarsa();
     pnEditSupplier pEDS;
     pnEditBarang pEDB;
+    pnEditKadaluarsa pEDK;
     boolean inForm = false;
     String idData;
     /**
@@ -69,11 +74,11 @@ public class MenuUtama extends javax.swing.JFrame {
         resizeImage(30, 30, iconLogOut, "logout.png");
         resizeImage(33, 33, iconTime, "time.png");        
         iconToko();
-        jPanel5.removeAll();
-        jPanel5.repaint();
-        jPanel5.add(pnMenuUtama1);
+        container.removeAll();
+        container.repaint();
+        container.add(pnMenuUtama1);
         
-        // Data Barang Interface Set
+        // ------------------------------------------ Data Barang Interface Set ------------------------------------------
         pnDataBarang1.setVariableTambah(new pnDataBarang.TambahData() {
             @Override
             public void tambahData() {
@@ -98,8 +103,48 @@ public class MenuUtama extends javax.swing.JFrame {
                 btnHapusBarang(idData);
             }
         });
+        pnDataBarang1.setVariableKadaluarsa(new pnDataBarang.DataKadaluarsa() {
+            @Override
+            public void dataKadaluarsa() {
+                clickBtn(10);
+            }
+        });
         
-        // Tambah Data Barang Interface Set
+        // ------------------------------------------ Data Kadaluarsa Interface Set ------------------------------------------
+        pnDataKadaluarsa1.setVariableKembali(new pnDataKadaluarsa.Kembali() {
+            @Override
+            public void kembali() {
+                btnKembaliBarang();
+            }
+        });
+        pnDataKadaluarsa1.setVariableTambah(new pnDataKadaluarsa.TambahData() {
+            @Override
+            public void tambahData() {
+                tambahDataKadaluarsa();
+            }
+        });
+        pnDataKadaluarsa1.setVariableEdit(new pnDataKadaluarsa.EditData() {
+            @Override
+            public void editData() {
+                btnEditKadaluarsa();
+            }
+        });
+        
+        // ------------------------------------------ Tambah Data Kadaluarsa Interface Set ------------------------------------------
+        pTDK.setVariableBatal(new pnTambahKadaluarsa.BatalKadaluarsa() {
+            @Override
+            public void batalBarang() {
+                btnBatalKadaluarsa();
+            }
+        });
+        pTDK.setVariableSimpan(new pnTambahKadaluarsa.SimpanKadaluarsa() {
+            @Override
+            public void simpanBarang() {
+                btnSimpanKadaluarsa();
+            }
+        });
+        
+        // ------------------------------------------ Tambah Data Barang Interface Set ------------------------------------------
         pTDB.setVariableBatal(new pnTambahBarang.BatalBarang() {
             @Override
             public void batalBarang() {
@@ -113,7 +158,7 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         
-        // Data Supplier Interface Set
+        // ------------------------------------------ Data Supplier Interface Set ------------------------------------------
         pnDataSupplier1.setVariableTambah(new pnDataSupplier.TambahData() {
             @Override
             public void supplierTambahData() {
@@ -139,7 +184,7 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         
-        //Tambah Data Supplier Interface Set
+        // ------------------------------------------ Tambah Data Supplier Interface Set ------------------------------------------
         pTDS.setVariableBatal(new pnTambahSupplier.BatalSupplier() {
             @Override
             public void batalSupplier() {
@@ -156,10 +201,10 @@ public class MenuUtama extends javax.swing.JFrame {
     
     // ------------------------------------------ Method Data Barang ------------------------------------------
     public void tambahDataBarang() {
-        jPanel5.removeAll();
-        jPanel5.repaint();
+        container.removeAll();
+        container.repaint();
         pTDB.setBounds(0, 0, 1190, 590);
-        jPanel5.add(pTDB);
+        container.add(pTDB);
         inForm = true;
     }
     public void editDataBarang(String id) {
@@ -176,10 +221,10 @@ public class MenuUtama extends javax.swing.JFrame {
                 btnEditBarang();
             }
         });
-        jPanel5.removeAll();
-        jPanel5.repaint();
+        container.removeAll();
+        container.repaint();
         pEDB.setBounds(0, 0, 1190, 590);
-        jPanel5.add(pEDB);
+        container.add(pEDB);
         inForm = true;
     }
     public void btnHapusBarang(String id) {
@@ -213,6 +258,71 @@ public class MenuUtama extends javax.swing.JFrame {
             clickBtn(1);
         }
     }
+    public void dataKadaluarsa() {
+        container.removeAll();
+        container.repaint();
+        pTDB.setBounds(0, 0, 1190, 590);
+        container.add(pTDB);
+        inForm = true;
+    }
+    
+    // ------------------------------------------ Method Kadaluarsa ------------------------------------------
+    public void btnKembaliBarang() {
+        clickBtn(1);
+    }
+    public void btnBatalKadaluarsa() {
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Kadaluarsa?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            clickBtn(10);
+        }
+    }
+    public void btnSimpanKadaluarsa() {
+        if(!pTDK.simpanData() && inForm) {
+            inForm = false;
+            pnDataKadaluarsa1.setRow();
+            clickBtn(10);
+        }
+    }
+    public void btnEditKadaluarsa() {
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                pEDK.simpanData(idData);
+                inForm = false;
+                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                pnDataKadaluarsa1.setRow();
+                clickBtn(10);
+            }
+        }
+    }
+    public void editDataKadaluarsa(String id) {
+        pEDK = new pnEditKadaluarsa(id);
+        pEDK.setVariableBatal(new pnEditKadaluarsa.BatalKadaluarsa() {
+            @Override
+            public void batalKadaluarsa() {
+                btnBatalKadaluarsa();
+            }
+        });
+        pEDK.setVariableEdit(new pnEditKadaluarsa.EditKadaluarsa() {
+            @Override
+            public void editKadaluarsa() {
+                btnEditKadaluarsa();
+            }
+        });
+        container.removeAll();
+        container.repaint();
+        pEDK.setBounds(0, 0, 1190, 590);
+        container.add(pEDK);
+        inForm = true;
+    }
+    public void tambahDataKadaluarsa() {
+        container.removeAll();
+        container.repaint();
+        pTDK.setBounds(0, 0, 1190, 590);
+        container.add(pTDK);
+        inForm = true;
+        resetFooter();
+    }
     
     // ------------------------------------------ Method Supplier ------------------------------------------
     public void btnEditSupplier() {
@@ -243,10 +353,10 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }
     public void tambahDataSupplier() {
-        jPanel5.removeAll();
-        jPanel5.repaint();
+        container.removeAll();
+        container.repaint();
         pTDS.setBounds(0, 0, 1190, 590);
-        jPanel5.add(pTDS);
+        container.add(pTDS);
         inForm = true;
     }
     public void editDataSupplier(String id) {
@@ -263,10 +373,10 @@ public class MenuUtama extends javax.swing.JFrame {
                 btnEditSupplier();
             }
         });
-        jPanel5.removeAll();
-        jPanel5.repaint();
+        container.removeAll();
+        container.repaint();
         pEDS.setBounds(0, 0, 1190, 590);
-        jPanel5.add(pEDS);
+        container.add(pEDS);
         inForm = true;
     }
     public void hapusDataSupplier(String id) {
@@ -310,40 +420,47 @@ public class MenuUtama extends javax.swing.JFrame {
     public void clickBtn(int pn) {
         switch(pn) {
             case 0 -> {
-                jPanel5.removeAll();
-                jPanel5.repaint();
-                jPanel5.add(pnMenuUtama1);
-                pnFooter.setVisible(false);
-                pnFooter.setVisible(true);
+                container.removeAll();
+                container.repaint();
+                container.add(pnMenuUtama1);
+                resetFooter();
             }
             case 1 -> { 
-                jPanel5.removeAll();
-                jPanel5.repaint();
-                jPanel5.add(pnDataBarang1);
-                pnFooter.setVisible(false);
-                pnFooter.setVisible(true);
+                container.removeAll();
+                container.repaint();
+                container.add(pnDataBarang1);
+                resetFooter();
             }
             case 2 -> {
-                jPanel5.removeAll();
-                jPanel5.repaint();
-                jPanel5.add(pnDataSupplier1);
-                pnFooter.setVisible(false);
-                pnFooter.setVisible(true);
+                container.removeAll();
+                container.repaint();
+                container.add(pnDataSupplier1);
+                resetFooter();
             }
             case 3 -> {
-                jPanel5.removeAll();
-                jPanel5.repaint();
-                jPanel5.add(pnKasir1);
+                container.removeAll();
+                container.repaint();
+                container.add(pnKasir1);
                 pnFooter.setVisible(false);
             }
             case 4 -> {
-                jPanel5.removeAll();
-                jPanel5.repaint();
-                jPanel5.add(pnDataTransaksi1);
-                pnFooter.setVisible(false);
-                pnFooter.setVisible(true);
+                container.removeAll();
+                container.repaint();
+                container.add(pnDataTransaksi1);
+                resetFooter();
+            }
+            case 10 -> {
+                container.removeAll();
+                container.repaint();
+                container.add(pnDataKadaluarsa1);
+                resetFooter();
             }
         }
+    }
+    
+    public void resetFooter() {
+        pnFooter.setVisible(false);
+        pnFooter.setVisible(true);
     }
     
     /**
@@ -382,12 +499,13 @@ public class MenuUtama extends javax.swing.JFrame {
         iconLogOut = new javax.swing.JLabel();
         pnFooter = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        container = new javax.swing.JPanel();
         pnMenuUtama1 = new FormPanel.pnMenuUtama();
         pnDataBarang1 = new FormPanel.pnDataBarang();
         pnDataSupplier1 = new FormPanel.pnDataSupplier();
         pnKasir1 = new FormPanel.pnKasir();
         pnDataTransaksi1 = new FormPanel.pnDataTransaksi();
+        pnDataKadaluarsa1 = new FormPanel.pnDataKadaluarsa();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -605,38 +723,40 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jPanel1.add(pnFooter, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 670, 1240, 80));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1190, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
+        container.setLayout(containerLayout);
+        containerLayout.setHorizontalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnDataKadaluarsa1, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
+            .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(containerLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataTransaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnKasir1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataBarang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
+        containerLayout.setVerticalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(containerLayout.createSequentialGroup()
+                .addComponent(pnDataKadaluarsa1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 91, Short.MAX_VALUE))
+            .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(containerLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataTransaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnKasir1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataBarang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 670));
+        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1190, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -770,6 +890,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel container;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataSupplier;
@@ -788,7 +909,6 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
     private javax.swing.JLabel lbDataTransaksi;
@@ -796,6 +916,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
     private FormPanel.pnDataBarang pnDataBarang1;
+    private FormPanel.pnDataKadaluarsa pnDataKadaluarsa1;
     private FormPanel.pnDataSupplier pnDataSupplier1;
     private FormPanel.pnDataTransaksi pnDataTransaksi1;
     private javax.swing.JPanel pnFooter;
