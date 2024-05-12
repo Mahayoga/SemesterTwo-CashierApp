@@ -68,6 +68,7 @@ public class CustomButton extends JButton {
             return null;
         }
         String color = String.valueOf(bgColor);
+        System.out.println(color);
         String r1 = color.split("java.awt.Color")[1];
         String red = r1.split("=")[1].split(",")[0];
         String green = r1.split(",")[1].split("=")[1];
