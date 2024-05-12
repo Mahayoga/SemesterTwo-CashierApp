@@ -208,7 +208,7 @@ public class pnDataBarang extends javax.swing.JPanel {
             } else {
                 rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.id_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
                 if(!rs.next()) {
-                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
+                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
                 }
                 while(rs.next()) {
                     model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
