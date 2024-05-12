@@ -46,6 +46,7 @@ public class MenuUtama extends javax.swing.JFrame {
     pnEditKadaluarsa pEDK;
     boolean inForm = false;
     String idData;
+    String date;
     /**
      * Creates new form MenuUtama
      * Panel Width: 1190
@@ -126,7 +127,14 @@ public class MenuUtama extends javax.swing.JFrame {
         pnDataKadaluarsa1.setVariableEdit(new pnDataKadaluarsa.EditData() {
             @Override
             public void editData() {
-                editDataKadaluarsa(idData);
+                editDataKadaluarsa(idData, date);
+            }
+        });
+        pnDataKadaluarsa1.setVariableAmbil(new pnDataKadaluarsa.AmbilData() {
+            @Override
+            public void ambilData(String id, String date) {
+                setIdData(id);
+                setDateData(date);
             }
         });
         
@@ -295,8 +303,8 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         }
     }
-    public void editDataKadaluarsa(String id) {
-        pEDK = new pnEditKadaluarsa(id);
+    public void editDataKadaluarsa(String id, String date) {
+        pEDK = new pnEditKadaluarsa(id, date);
         pEDK.setVariableBatal(new pnEditKadaluarsa.BatalKadaluarsa() {
             @Override
             public void batalKadaluarsa() {
@@ -384,9 +392,12 @@ public class MenuUtama extends javax.swing.JFrame {
         pnDataSupplier1.setRow();
     }
     
-    // ------------------------------------------ Setter buat ID ------------------------------------------
+    // ------------------------------------------ Setter Method ------------------------------------------
     public void setIdData(String id) {
         this.idData = id;
+    }
+    public void setDateData(String date) {
+        this.date = date;
     }
     
     
