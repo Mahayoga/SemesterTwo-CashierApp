@@ -23,19 +23,25 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
     /**
      * Creates new form pnTambahKadaluarsa
      */
-    public pnEditKadaluarsa(String id) {
+    public pnEditKadaluarsa(String id, String date) {
         initComponents();
+        String[] bln = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
         // ComboBox set
         try {
             ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + id + "'");
             if(rs.next()) {
                 cbKodeBarang.addItem(rs.getString("id_barang"));
+                cbKodeBarang.setSelectedItem(rs.getString("id_barang"));
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
         setCbBulan();
         setCbTahun();
+        String[] dt = date.split("-");
+        cbTahun.setSelectedItem(dt[0]);
+        cbBulan.setSelectedItem(bln[Integer.parseInt(dt[1]) + 1]);
+        cbTanggal.setSelectedItem(dt[2]);
         btnBatal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
