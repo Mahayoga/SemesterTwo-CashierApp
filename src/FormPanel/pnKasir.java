@@ -38,9 +38,7 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -54,10 +52,14 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        customButton1 = new CustomComponent.CustomButton();
+        customButton2 = new CustomComponent.CustomButton();
+        customButton3 = new CustomComponent.CustomButton();
+        customButton5 = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -75,14 +77,14 @@ public class pnKasir extends javax.swing.JPanel {
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel17.setText("Nama Barang");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField8ActionPerformed(evt);
             }
         });
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 200, 30));
+        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 130, 30));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel20.setText("Barcode");
@@ -100,54 +102,47 @@ public class pnKasir extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 390, 30));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 420, 30));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 80, 30));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 50, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("Stok");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 150, 30));
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 100, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Harga");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel15.setText("Jumlah Harga");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, -1, 30));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 80, -1, -1));
 
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
             }
         });
-        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 170, 220, 30));
-
-        jButton2.setText("Tambah");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 220, 220, 30));
+        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 110, 130, 30));
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
             }
         });
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 110, 170, 30));
+        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 60, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel12.setText("Jumlah");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, 70, -1));
+        jLabel12.setText("Jumlah Harga");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 110, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Tanggal");
@@ -182,7 +177,7 @@ public class pnKasir extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 1120, 310));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        jLabel8.setText("Pilih item barang ini dibawah ini apabila hendak membatalkan transaksi pembelian barang");
+        jLabel8.setText("*Pilih item barang ini dibawah ini apabila hendak membatalkan transaksi pembelian barang");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 610, -1));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -218,23 +213,67 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel19.setText("Kembali");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 590, -1, -1));
 
-        jButton5.setText("Simpan");
-        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 620, 80, 30));
-
-        jButton6.setText("Cetak");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 620, 80, 30));
-
-        jButton4.setText("Batal ");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 620, 80, 30));
-
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel21.setText("Kode Barang");
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setText("Jumlah");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 60, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 120, 30));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel14.setText("Tgl Kadaluarsa");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 80, 120, -1));
+
+        customButton1.setText("customButton1");
+        customButton1.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customButton1.setFontSize(14);
+        customButton1.setTextBold(1);
+        customButton1.setTextColor(java.awt.Color.white);
+        customButton1.setTheText("Batal");
+        customButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton1ActionPerformed(evt);
+            }
+        });
+        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 620, 80, 30));
+
+        customButton2.setText("customButton1");
+        customButton2.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customButton2.setFontSize(14);
+        customButton2.setTextBold(1);
+        customButton2.setTextColor(java.awt.Color.white);
+        customButton2.setTheText("Tambah");
+        add(customButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 160, 120, 30));
+
+        customButton3.setText("customButton1");
+        customButton3.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customButton3.setFontSize(14);
+        customButton3.setTextBold(1);
+        customButton3.setTextColor(java.awt.Color.white);
+        customButton3.setTheText("Cetak");
+        customButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton3ActionPerformed(evt);
+            }
+        });
+        add(customButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 620, 80, 30));
+
+        customButton5.setText("customButton1");
+        customButton5.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customButton5.setFontSize(14);
+        customButton5.setTextBold(1);
+        customButton5.setTextColor(java.awt.Color.white);
+        customButton5.setTheText("Simpan");
+        customButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton5ActionPerformed(evt);
+            }
+        });
+        add(customButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 620, 80, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -293,20 +332,30 @@ public class pnKasir extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void customButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_customButton3ActionPerformed
+
+    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customButton1ActionPerformed
+
+    private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private CustomComponent.CustomButton customButton1;
+    private CustomComponent.CustomButton customButton2;
+    private CustomComponent.CustomButton customButton3;
+    private CustomComponent.CustomButton customButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
