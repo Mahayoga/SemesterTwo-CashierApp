@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Bulan Mei 2024 pada 14.28
+-- Waktu pembuatan: 13 Bulan Mei 2024 pada 03.29
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -106,6 +106,29 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 (4, 'ATK'),
 (5, 'Obat'),
 (6, 'Aksesoris');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengeluaran`
+--
+
+CREATE TABLE `pengeluaran` (
+  `kode_pengeluaran` char(7) NOT NULL,
+  `tanggal_pengeluaran` date NOT NULL,
+  `jenis_pengeluaran` char(30) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `keterangan` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pengeluaran`
+--
+
+INSERT INTO `pengeluaran` (`kode_pengeluaran`, `tanggal_pengeluaran`, `jenis_pengeluaran`, `harga`, `keterangan`) VALUES
+('KP0001', '2024-05-13', 'Operasional', 100000, 'Heheheheheheheheheheh wwkwkkwkw sanshu uhoeipe bebej,auegu ueueywiu'),
+('KP0002', '2024-05-13', 'Barang', 121200, 'Heheheh bewbieuiuwhdi beuidwiebi r ygoyo87y8  gdb iayeui'),
+('KP0003', '2024-05-13', 'Lainnya', 121333, 'Hehe');
 
 -- --------------------------------------------------------
 
@@ -284,6 +307,12 @@ ALTER TABLE `detail_transaksi`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indeks untuk tabel `pengeluaran`
+--
+ALTER TABLE `pengeluaran`
+  ADD PRIMARY KEY (`kode_pengeluaran`);
 
 --
 -- Indeks untuk tabel `stok_barang`
