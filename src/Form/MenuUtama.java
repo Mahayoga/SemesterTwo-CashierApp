@@ -74,11 +74,12 @@ public class MenuUtama extends javax.swing.JFrame {
         //model.
         resizeImage(30, 30, iconMenuUtama, "dashboard.png");
         resizeImage(30, 30, iconDataBarang, "items.png");
-        resizeImage(30, 30, iconDataSupplierm, "supplier.png");
+        resizeImage(30, 30, iconDataSupplier, "supplier.png");
+        resizeImage(33, 33, iconDataKeuangan, "transaction.png");
         resizeImage(30, 30, iconKasir, "kasir.png");
-        resizeImage(30, 30, iconDataTransaksi, "transaction.png");
+        resizeImage(35, 35, iconDataTransaksi, "iconTransaksi.png");
         resizeImage(30, 30, iconLogOut, "logout.png");
-        resizeImage(33, 33, iconTime, "time.png");        
+        resizeImage(33, 33, iconTime, "time.png");
         iconToko();
         container.removeAll();
         container.repaint();
@@ -560,7 +561,7 @@ public class MenuUtama extends javax.swing.JFrame {
             case 3 -> {
                 container.removeAll();
                 container.repaint();
-                pnKasir1.setBounds(0, 0, 1190, 590);
+                pnKasir1.setBounds(0, 0, 1190, 670);
                 container.add(pnKasir1);
                 pnFooter.setVisible(false);
             }
@@ -617,9 +618,10 @@ public class MenuUtama extends javax.swing.JFrame {
         lbDataSupplier = new javax.swing.JLabel();
         iconMenuUtama = new javax.swing.JLabel();
         iconDataBarang = new javax.swing.JLabel();
-        iconDataSupplierm = new javax.swing.JLabel();
+        iconDataKeuangan = new javax.swing.JLabel();
         lbDataSupplier1 = new javax.swing.JLabel();
-        iconDataSupplie = new javax.swing.JLabel();
+        iconDataSupplier = new javax.swing.JLabel();
+        iconDataSupplierm1 = new javax.swing.JLabel();
         secUser = new javax.swing.JPanel();
         lbKasir = new javax.swing.JLabel();
         lbDataTransaksi = new javax.swing.JLabel();
@@ -736,7 +738,7 @@ public class MenuUtama extends javax.swing.JFrame {
         secAdmin.add(lbDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
         secAdmin.add(iconMenuUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
         secAdmin.add(iconDataBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 30, 30));
-        secAdmin.add(iconDataSupplierm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 30, 30));
+        secAdmin.add(iconDataKeuangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 30, 30));
 
         lbDataSupplier1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbDataSupplier1.setForeground(new java.awt.Color(255, 255, 255));
@@ -747,7 +749,8 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         secAdmin.add(lbDataSupplier1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 30));
-        secAdmin.add(iconDataSupplie, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 30, 30));
+        secAdmin.add(iconDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 30, 30));
+        secAdmin.add(iconDataSupplierm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 30, 30));
 
         secUser.setBackground(new java.awt.Color(78, 115, 223));
         secUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -792,16 +795,16 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lbLogin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(lbLogin)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -819,7 +822,7 @@ public class MenuUtama extends javax.swing.JFrame {
                         .addComponent(iconLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,8 +1060,9 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel container;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
-    private javax.swing.JLabel iconDataSupplie;
-    private javax.swing.JLabel iconDataSupplierm;
+    private javax.swing.JLabel iconDataKeuangan;
+    private javax.swing.JLabel iconDataSupplier;
+    private javax.swing.JLabel iconDataSupplierm1;
     private javax.swing.JLabel iconDataTransaksi;
     private javax.swing.JLabel iconKasir;
     private javax.swing.JLabel iconLogOut;
