@@ -24,6 +24,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
      */
     public pnTambahBarang() {
         initComponents();
+        checkCategori();
         ResultSet rs1 = db.ambilData("SELECT * FROM kategori");
         ResultSet rs2 = db.ambilData("SELECT * FROM suppliers");
         try {
@@ -72,6 +73,31 @@ public class pnTambahBarang extends javax.swing.JPanel {
     public void theEventSimpan() {
         if(simpanBarang != null) {
             simpanBarang.simpanBarang();
+        }
+    }
+    
+    public void checkCategori() {
+        if(String.valueOf(cbKategori.getSelectedItem()).equals("--Tidak dipilih--")) {
+            tfIdBarang.setText("Pilih kategori dahulu!");
+        } else {
+            ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE k.nama_kategori = '" + String.valueOf(cbKategori.getSelectedItem()) + "' ORDER BY sb.id_barang DESC");
+            try {
+                if(rs.next()) {
+                    int id = Integer.parseInt(rs.getString("id_barang").substring(2, 6)); //KP0001 
+                    id++;
+                    if(id < 9) {
+                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "000" + id);
+                    } else if(id < 99) {
+                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "00" + id);
+                    } else if(id < 999) {
+                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "0" + id);
+                    } else if(id < 9999) {
+                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "" + id);
+                    }
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     
@@ -223,19 +249,21 @@ public class pnTambahBarang extends javax.swing.JPanel {
         cbNamaSupplier = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        tfIdBarang = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Kode Barang ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 83, -1, -1));
+        jLabel6.setText("ID Barang ");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodeBarangActionPerformed(evt);
             }
         });
-        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 123, 180, 30));
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Nama Barang ");
@@ -280,7 +308,12 @@ public class pnTambahBarang extends javax.swing.JPanel {
         jLabel9.setText("Kategori");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 243, -1, -1));
 
-        cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
+        cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
+        cbKategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKategoriActionPerformed(evt);
+            }
+        });
         add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 180, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -315,13 +348,20 @@ public class pnTambahBarang extends javax.swing.JPanel {
         jLabel11.setText("Nama Supplier");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 163, -1, -1));
 
-        cbNamaSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
+        cbNamaSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
         add(cbNamaSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 203, 158, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Barcode");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 118, 34));
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 140, 60));
+
+        tfIdBarang.setEnabled(false);
+        add(tfIdBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Kode Barang ");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
@@ -348,6 +388,11 @@ public class pnTambahBarang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBatalActionPerformed
 
+    private void cbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKategoriActionPerformed
+        // TODO add your handling code here:
+        checkCategori();
+    }//GEN-LAST:event_cbKategoriActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnBatal;
@@ -357,6 +402,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -366,6 +412,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfHargaBeli;
     private javax.swing.JTextField tfHargaJual;
+    private javax.swing.JTextField tfIdBarang;
     private javax.swing.JTextField tfKodeBarang;
     private javax.swing.JTextField tfNamaBarang;
     private javax.swing.JTextField tfStok;
