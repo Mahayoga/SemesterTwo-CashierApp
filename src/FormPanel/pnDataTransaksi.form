@@ -96,32 +96,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="CustomComponent.CustomButton" name="customButton6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="customButton6"/>
-        <Property name="backgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="ff" type="rgb"/>
-        </Property>
-        <Property name="fontSize" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="14" type="code"/>
-        </Property>
-        <Property name="textBold" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="1" type="code"/>
-        </Property>
-        <Property name="textColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
-        </Property>
-        <Property name="theText" type="java.lang.String" value="Cek Keuangan"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customButton6ActionPerformed"/>
-      </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="490" width="140" height="40"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="CustomComponent.CustomButton" name="customButton5">
       <Properties>
         <Property name="text" type="java.lang.String" value="customButton4"/>

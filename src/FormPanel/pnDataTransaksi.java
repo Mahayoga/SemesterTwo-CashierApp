@@ -70,7 +70,6 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         lbTitle = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         customButton1 = new CustomComponent.CustomButton();
-        customButton6 = new CustomComponent.CustomButton();
         customButton5 = new CustomComponent.CustomButton();
         btnDetail = new CustomComponent.CustomButton();
 
@@ -119,19 +118,6 @@ public class pnDataTransaksi extends javax.swing.JPanel {
             }
         });
         add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 80, 70, 30));
-
-        customButton6.setText("customButton6");
-        customButton6.setBackgroundColor(new java.awt.Color(255, 102, 102));
-        customButton6.setFontSize(14);
-        customButton6.setTextBold(1);
-        customButton6.setTextColor(java.awt.Color.white);
-        customButton6.setTheText("Cek Keuangan");
-        customButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton6ActionPerformed(evt);
-            }
-        });
-        add(customButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 140, 40));
 
         customButton5.setText("customButton4");
         customButton5.setBackgroundColor(new java.awt.Color(0, 51, 255));
@@ -189,16 +175,11 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDetailActionPerformed
 
-    private void customButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customButton6ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnDetail;
     private CustomComponent.CustomButton customButton1;
     private CustomComponent.CustomButton customButton5;
-    private CustomComponent.CustomButton customButton6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbTitle;
