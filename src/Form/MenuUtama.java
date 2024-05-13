@@ -3,13 +3,16 @@ package Form;
 
 import FormPanel.pnDataBarang;
 import FormPanel.pnDataKadaluarsa;
+import FormPanel.pnDataKeuangan;
 import FormPanel.pnDataSupplier;
 import Login.login;
 import PanelFormEdit.pnEditBarang;
 import PanelFormEdit.pnEditKadaluarsa;
+import PanelFormEdit.pnEditKeuangan;
 import PanelFormEdit.pnEditSupplier;
 import PanelFormTambah.pnTambahBarang;
 import PanelFormTambah.pnTambahKadaluarsa;
+import PanelFormTambah.pnTambahKeuangan;
 import PanelFormTambah.pnTambahSupplier;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -41,9 +44,11 @@ public class MenuUtama extends javax.swing.JFrame {
     pnTambahSupplier pTDS = new pnTambahSupplier();
     pnTambahBarang pTDB = new pnTambahBarang();
     pnTambahKadaluarsa pTDK = new pnTambahKadaluarsa();
+    pnTambahKeuangan pTDKu = new pnTambahKeuangan();
     pnEditSupplier pEDS;
     pnEditBarang pEDB;
     pnEditKadaluarsa pEDK;
+    pnEditKeuangan pEDKu;
     boolean inForm = false;
     String idData;
     String date;
@@ -69,7 +74,7 @@ public class MenuUtama extends javax.swing.JFrame {
         //model.
         resizeImage(30, 30, iconMenuUtama, "dashboard.png");
         resizeImage(30, 30, iconDataBarang, "items.png");
-        resizeImage(30, 30, iconDataSupplier, "supplier.png");
+        resizeImage(30, 30, iconDataSupplierm, "supplier.png");
         resizeImage(30, 30, iconKasir, "kasir.png");
         resizeImage(30, 30, iconDataTransaksi, "transaction.png");
         resizeImage(30, 30, iconLogOut, "logout.png");
@@ -77,6 +82,7 @@ public class MenuUtama extends javax.swing.JFrame {
         iconToko();
         container.removeAll();
         container.repaint();
+        pnMenuUtama1.setBounds(0, 0, 1190, 590);
         container.add(pnMenuUtama1);
         
         // ------------------------------------------ Data Barang Interface Set ------------------------------------------
@@ -205,6 +211,106 @@ public class MenuUtama extends javax.swing.JFrame {
                 btnSimpanSupplier();
             }
         });
+        
+        // ------------------------------------------ Tambah Data Keuangan Interface Set ------------------------------------------
+        pnDataKeuangan1.setVariableTambah(new pnDataKeuangan.TambahData() {
+            @Override
+            public void tambahData() {
+                btnTambahKeuangan();
+            }
+        });
+        pnDataKeuangan1.setVariableEdit(new pnDataKeuangan.EditData() {
+            @Override
+            public void editData() {
+                editDataKeuangan(idData);
+            }
+        });
+        pnDataKeuangan1.setVariableAmbil(new pnDataKeuangan.AmbilData() {
+            @Override
+            public void ambilData(String id) {
+                setIdData(id);
+            }
+        });
+        pnDataKeuangan1.setVariableHapus(new pnDataKeuangan.HapusData() {
+            @Override
+            public void hapusData() {
+                btnHapusKeuangan(idData);
+            }
+        });
+        
+        // ------------------------------------------ Tambah Data Keuangan Interface Set ------------------------------------------
+        pTDKu.setVariableBatal(new pnTambahKeuangan.BatalKeuangan() {
+            @Override
+            public void batalKeuangan() {
+                btnBatalKeuangan();
+            }
+        });
+        pTDKu.setVariableSimpan(new pnTambahKeuangan.SimpanKeuangan() {
+            @Override
+            public void simpanKeuangan() {
+                btnSimpanKeuangan();
+            }
+        });
+    }
+    
+    // ------------------------------------------ Method Data Keuangan ------------------------------------------
+    public void btnTambahKeuangan() {
+        container.removeAll();
+        container.repaint();
+        pTDKu.setBounds(0, 0, 1190, 590);
+        container.add(pTDKu);
+        inForm = true;
+    }
+    public void editDataKeuangan(String id) {
+        pEDKu = new pnEditKeuangan(id);
+        pEDKu.setVariableBatal(new pnEditKeuangan.BatalBarang() {
+            @Override
+            public void batalBarang() {
+                btnBatalKeuangan();
+            }
+        });
+        pEDKu.setVariableSimpan(new pnEditKeuangan.SimpanBarang() {
+            @Override
+            public void simpanBarang() {
+                btnEditKeuangan();
+            }
+        });
+        container.removeAll();
+        container.repaint();
+        pEDKu.setBounds(0, 0, 1190, 590);
+        container.add(pEDKu);
+        inForm = true;
+    }
+    public void btnSimpanKeuangan() {
+        if(inForm) {
+            pTDKu.simpanData();
+            inForm = false;
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            pnDataKeuangan1.setRow();
+            clickBtn(5);
+        }
+    }
+    public void btnEditKeuangan() {
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                pEDKu.simpanData(idData);
+                inForm = false;
+                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                pnDataKeuangan1.setRow();
+                clickBtn(5);
+            }
+        }
+    }
+    public void btnHapusKeuangan(String id) {
+        pnDataKeuangan1.hapusData(id);
+        pnDataKeuangan1.setRow();
+    }
+    public void btnBatalKeuangan() {
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Keuangan?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            clickBtn(1);
+        }
     }
     
     // ------------------------------------------ Method Data Barang ------------------------------------------
@@ -433,36 +539,49 @@ public class MenuUtama extends javax.swing.JFrame {
             case 0 -> {
                 container.removeAll();
                 container.repaint();
+                pnMenuUtama1.setBounds(0, 0, 1190, 590);
                 container.add(pnMenuUtama1);
                 resetFooter();
             }
             case 1 -> { 
                 container.removeAll();
                 container.repaint();
+                pnDataBarang1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataBarang1);
                 resetFooter();
             }
             case 2 -> {
                 container.removeAll();
                 container.repaint();
+                pnDataSupplier1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataSupplier1);
                 resetFooter();
             }
             case 3 -> {
                 container.removeAll();
                 container.repaint();
+                pnKasir1.setBounds(0, 0, 1190, 590);
                 container.add(pnKasir1);
                 pnFooter.setVisible(false);
             }
             case 4 -> {
                 container.removeAll();
                 container.repaint();
+                pnDataTransaksi1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataTransaksi1);
+                resetFooter();
+            }
+            case 5 -> {
+                container.removeAll();
+                container.repaint();
+                pnDataKeuangan1.setBounds(0, 0, 1190, 590);
+                container.add(pnDataKeuangan1);
                 resetFooter();
             }
             case 10 -> {
                 container.removeAll();
                 container.repaint();
+                pnDataKadaluarsa1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataKadaluarsa1);
                 resetFooter();
             }
@@ -498,7 +617,9 @@ public class MenuUtama extends javax.swing.JFrame {
         lbDataSupplier = new javax.swing.JLabel();
         iconMenuUtama = new javax.swing.JLabel();
         iconDataBarang = new javax.swing.JLabel();
-        iconDataSupplier = new javax.swing.JLabel();
+        iconDataSupplierm = new javax.swing.JLabel();
+        lbDataSupplier1 = new javax.swing.JLabel();
+        iconDataSupplie = new javax.swing.JLabel();
         secUser = new javax.swing.JPanel();
         lbKasir = new javax.swing.JLabel();
         lbDataTransaksi = new javax.swing.JLabel();
@@ -517,6 +638,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pnKasir1 = new FormPanel.pnKasir();
         pnDataTransaksi1 = new FormPanel.pnDataTransaksi();
         pnDataKadaluarsa1 = new FormPanel.pnDataKadaluarsa();
+        pnDataKeuangan1 = new FormPanel.pnDataKeuangan();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -614,7 +736,18 @@ public class MenuUtama extends javax.swing.JFrame {
         secAdmin.add(lbDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
         secAdmin.add(iconMenuUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
         secAdmin.add(iconDataBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 30, 30));
-        secAdmin.add(iconDataSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 30, 30));
+        secAdmin.add(iconDataSupplierm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 30, 30));
+
+        lbDataSupplier1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbDataSupplier1.setForeground(new java.awt.Color(255, 255, 255));
+        lbDataSupplier1.setText("Data Keuangan");
+        lbDataSupplier1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbDataSupplier1MouseClicked(evt);
+            }
+        });
+        secAdmin.add(lbDataSupplier1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 30));
+        secAdmin.add(iconDataSupplie, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 30, 30));
 
         secUser.setBackground(new java.awt.Color(78, 115, 223));
         secUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -686,7 +819,7 @@ public class MenuUtama extends javax.swing.JFrame {
                         .addComponent(iconLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,7 +830,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addComponent(secUser, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iconLogOut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -738,22 +871,29 @@ public class MenuUtama extends javax.swing.JFrame {
         container.setLayout(containerLayout);
         containerLayout.setHorizontalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnDataKadaluarsa1, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
+            .addGroup(containerLayout.createSequentialGroup()
+                .addComponent(pnDataKeuangan1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnDataKadaluarsa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(containerLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 553, Short.MAX_VALUE)
                     .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataTransaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnKasir1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnDataBarang1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 553, Short.MAX_VALUE))
+                .addGroup(containerLayout.createSequentialGroup()
+                    .addComponent(pnMenuUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(containerLayout.createSequentialGroup()
-                .addComponent(pnDataKadaluarsa1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnDataKadaluarsa1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+                    .addComponent(pnDataKeuangan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 91, Short.MAX_VALUE))
             .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(containerLayout.createSequentialGroup()
@@ -865,6 +1005,19 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbDataTransaksiMouseClicked
 
+    private void lbDataSupplier1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDataSupplier1MouseClicked
+        // TODO add your handling code here:
+        if(inForm) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                clickBtn(5);
+                inForm = false;
+            }
+        } else {
+            clickBtn(5);
+        }
+    }//GEN-LAST:event_lbDataSupplier1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -904,7 +1057,8 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel container;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
-    private javax.swing.JLabel iconDataSupplier;
+    private javax.swing.JLabel iconDataSupplie;
+    private javax.swing.JLabel iconDataSupplierm;
     private javax.swing.JLabel iconDataTransaksi;
     private javax.swing.JLabel iconKasir;
     private javax.swing.JLabel iconLogOut;
@@ -922,12 +1076,14 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lbDataBarang;
     private javax.swing.JLabel lbDataSupplier;
+    private javax.swing.JLabel lbDataSupplier1;
     private javax.swing.JLabel lbDataTransaksi;
     private javax.swing.JLabel lbKasir;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
     private FormPanel.pnDataBarang pnDataBarang1;
     private FormPanel.pnDataKadaluarsa pnDataKadaluarsa1;
+    private FormPanel.pnDataKeuangan pnDataKeuangan1;
     private FormPanel.pnDataSupplier pnDataSupplier1;
     private FormPanel.pnDataTransaksi pnDataTransaksi1;
     private javax.swing.JPanel pnFooter;
