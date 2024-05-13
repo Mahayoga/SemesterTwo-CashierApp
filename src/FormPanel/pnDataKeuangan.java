@@ -247,6 +247,7 @@ public class pnDataKeuangan extends javax.swing.JPanel {
         customButton1 = new CustomComponent.CustomButton();
         cbKategori = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        customButton6 = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -339,10 +340,18 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 cbKategoriActionPerformed(evt);
             }
         });
-        add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 160, 30));
+        add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 160, 30));
 
-        jLabel1.setText("*Urutkan berdasarkan Kategori*");
+        jLabel1.setText("*Pilih berdasarkan Jenis Pengeluaran*");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 30));
+
+        customButton6.setText("customButton6");
+        customButton6.setBackgroundColor(new java.awt.Color(247, 64, 64));
+        customButton6.setFontSize(14);
+        customButton6.setTextBold(1);
+        customButton6.setTextColor(java.awt.Color.white);
+        customButton6.setTheText("Cek Keuangan");
+        add(customButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -394,6 +403,7 @@ public class pnDataKeuangan extends javax.swing.JPanel {
     private CustomComponent.CustomButton btnTambah;
     private javax.swing.JComboBox<String> cbKategori;
     private CustomComponent.CustomButton customButton1;
+    private CustomComponent.CustomButton customButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbTitle;

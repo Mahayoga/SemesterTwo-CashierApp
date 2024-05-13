@@ -286,7 +286,7 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 tfCariKeyReleased(evt);
             }
         });
-        add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 190, 30));
+        add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 190, 30));
 
         btnHapus.setText("customButton6");
         btnHapus.setBackgroundColor(new java.awt.Color(247, 64, 64));
@@ -331,7 +331,7 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 customButton1ActionPerformed(evt);
             }
         });
-        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 80, 70, 30));
+        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 90, 70, 30));
 
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--", "Makanan", "Minuman", "Kebutuhan Pokok", "ATK", "Obat" }));
         cbKategori.addActionListener(new java.awt.event.ActionListener() {

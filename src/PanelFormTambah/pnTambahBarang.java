@@ -221,61 +221,78 @@ public class pnTambahBarang extends javax.swing.JPanel {
         btnSimpan = new CustomComponent.CustomButton();
         jLabel11 = new javax.swing.JLabel();
         cbNamaSupplier = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Kode Barang ");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 83, -1, -1));
 
         tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodeBarangActionPerformed(evt);
             }
         });
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 123, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Nama Barang ");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 163, -1, -1));
 
         tfNamaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNamaBarangActionPerformed(evt);
             }
         });
+        add(tfNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 203, 310, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Stok Tersedia");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 243, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Harga Beli");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         tfStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfStokActionPerformed(evt);
             }
         });
+        add(tfStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 110, 30));
 
         tfHargaBeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfHargaBeliActionPerformed(evt);
             }
         });
+        add(tfHargaBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 150, 30));
 
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
         lbTitle.setText("Tambah Data Barang");
+        add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 32, 370, 33));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Kategori");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 243, -1, -1));
 
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
+        add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 180, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("Harga Jual");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
 
         tfHargaJual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfHargaJualActionPerformed(evt);
             }
         });
+        add(tfHargaJual, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 150, 30));
 
         btnBatal.setText("customButton1");
         btnBatal.setBackgroundColor(new java.awt.Color(255, 151, 51));
@@ -286,97 +303,25 @@ public class pnTambahBarang extends javax.swing.JPanel {
                 btnBatalActionPerformed(evt);
             }
         });
+        add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 90, 40));
 
         btnSimpan.setText("customButton1");
         btnSimpan.setBackgroundColor(new java.awt.Color(78, 115, 223));
         btnSimpan.setTextColor(java.awt.Color.white);
         btnSimpan.setTheText("Simpan");
+        add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 90, 40));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Nama Supplier");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 163, -1, -1));
 
         cbNamaSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
+        add(cbNamaSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 203, 158, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabel10))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfHargaBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(tfHargaJual, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(tfStok, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(cbKategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(tfNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(cbNamaSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(628, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(15, 15, 15)
-                .addComponent(tfKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel11))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbNamaSupplier)
-                    .addComponent(tfNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfStok, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel10))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfHargaBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfHargaJual, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Barcode");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 118, 34));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 140, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
@@ -409,6 +354,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
     private CustomComponent.CustomButton btnSimpan;
     private javax.swing.JComboBox<String> cbKategori;
     private javax.swing.JComboBox<String> cbNamaSupplier;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel5;
@@ -416,6 +362,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfHargaBeli;
     private javax.swing.JTextField tfHargaJual;

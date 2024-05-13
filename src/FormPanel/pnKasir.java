@@ -57,6 +57,7 @@ public class pnKasir extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,8 +74,8 @@ public class pnKasir extends javax.swing.JPanel {
         add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 90, 30));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel17.setText("Kode Barang");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jLabel17.setText("Nama Barang");
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +100,7 @@ public class pnKasir extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 360, 30));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 390, 30));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +231,10 @@ public class pnKasir extends javax.swing.JPanel {
 
         jButton4.setText("Batal ");
         add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 620, 80, 30));
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel21.setText("Kode Barang");
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -307,6 +312,7 @@ public class pnKasir extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
