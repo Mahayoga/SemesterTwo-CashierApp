@@ -35,6 +35,7 @@ public class pnKeuangan extends javax.swing.JPanel {
         customButton1 = new CustomComponent.CustomButton();
         customButton5 = new CustomComponent.CustomButton();
         btnDetail = new CustomComponent.CustomButton();
+        btnHapus = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -87,7 +88,7 @@ public class pnKeuangan extends javax.swing.JPanel {
         customButton5.setFontSize(14);
         customButton5.setTextBold(1);
         customButton5.setTextColor(java.awt.Color.white);
-        customButton5.setTheText("Cetak");
+        customButton5.setTheText("Tambah");
         customButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 customButton5ActionPerformed(evt);
@@ -100,13 +101,21 @@ public class pnKeuangan extends javax.swing.JPanel {
         btnDetail.setFontSize(14);
         btnDetail.setTextBold(1);
         btnDetail.setTextColor(java.awt.Color.white);
-        btnDetail.setTheText("Detail");
+        btnDetail.setTheText("Edit");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDetailActionPerformed(evt);
             }
         });
         add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 90, 40));
+
+        btnHapus.setText("customButton6");
+        btnHapus.setBackgroundColor(new java.awt.Color(247, 64, 64));
+        btnHapus.setFontSize(14);
+        btnHapus.setTextBold(1);
+        btnHapus.setTextColor(java.awt.Color.white);
+        btnHapus.setTheText("Hapus");
+        add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 90, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -141,6 +150,7 @@ public class pnKeuangan extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnDetail;
+    private CustomComponent.CustomButton btnHapus;
     private CustomComponent.CustomButton customButton1;
     private CustomComponent.CustomButton customButton5;
     private javax.swing.JScrollPane jScrollPane2;

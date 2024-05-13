@@ -26,19 +26,121 @@ public class pnEditKeuangan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        lbTitle = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tfKodeBarang = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        tfNamaBarang = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        cbKategori = new javax.swing.JComboBox<>();
+        btnBatal = new CustomComponent.CustomButton();
+        btnSimpan = new CustomComponent.CustomButton();
+        jLabel8 = new javax.swing.JLabel();
+        tfStok = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        tfNamaBarang1 = new javax.swing.JTextField();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbTitle.setBackground(new java.awt.Color(133, 135, 150));
+        lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(133, 135, 150));
+        lbTitle.setText("Edit Pengeluaran");
+        add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 32, 370, 33));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Kode Pengeluaran");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 83, -1, -1));
+
+        tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfKodeBarangActionPerformed(evt);
+            }
+        });
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 123, 180, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Tanggal Pengeluaran");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+
+        tfNamaBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNamaBarangActionPerformed(evt);
+            }
+        });
+        add(tfNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 110, 30));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("Jenis Pengeluaran ");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+
+        cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
+        add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 180, 30));
+
+        btnBatal.setText("customButton1");
+        btnBatal.setBackgroundColor(new java.awt.Color(255, 151, 51));
+        btnBatal.setTextColor(java.awt.Color.white);
+        btnBatal.setTheText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalActionPerformed(evt);
+            }
+        });
+        add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 90, 40));
+
+        btnSimpan.setText("customButton1");
+        btnSimpan.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        btnSimpan.setTextColor(java.awt.Color.white);
+        btnSimpan.setTheText("Simpan");
+        add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 90, 40));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("Jumlah Harga");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+        add(tfStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 160, 30));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setText("Keterangan");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+
+        tfNamaBarang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNamaBarang1ActionPerformed(evt);
+            }
+        });
+        add(tfNamaBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 280, 90));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfKodeBarangActionPerformed
+
+    private void tfNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNamaBarangActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void tfNamaBarang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarang1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNamaBarang1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CustomComponent.CustomButton btnBatal;
+    private CustomComponent.CustomButton btnSimpan;
+    private javax.swing.JComboBox<String> cbKategori;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbTitle;
+    private javax.swing.JTextField tfKodeBarang;
+    private javax.swing.JTextField tfNamaBarang;
+    private javax.swing.JTextField tfNamaBarang1;
+    private javax.swing.JTextField tfStok;
     // End of variables declaration//GEN-END:variables
 }
