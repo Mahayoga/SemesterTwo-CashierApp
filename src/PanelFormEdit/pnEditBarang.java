@@ -79,6 +79,7 @@ public class pnEditBarang extends javax.swing.JPanel {
         ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE id_barang = '" + id + "'");
         try {
             if(rs.next()) {
+                tfIdBarang.setText(id);
                 tfKodeBarang.setText(rs.getString("kode_barang"));
                 cbNamaSupplier.setSelectedItem(rs.getString("nama_supplier"));
                 tfNamaBarang.setText(rs.getString("nama_barang"));
@@ -151,13 +152,15 @@ public class pnEditBarang extends javax.swing.JPanel {
         tfHargaBeli = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cbKategori = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        tfKodeBarang = new javax.swing.JTextField();
         tfHargaJual = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        tfIdBarang = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        tfKodeBarang = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -227,20 +230,9 @@ public class pnEditBarang extends javax.swing.JPanel {
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
         add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 180, 30));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Kode Barang ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 83, -1, -1));
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("Harga Jual");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
-
-        tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfKodeBarangActionPerformed(evt);
-            }
-        });
-        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 123, 180, 30));
 
         tfHargaJual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +249,24 @@ public class pnEditBarang extends javax.swing.JPanel {
         jLabel1.setText("Barcode");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 118, 34));
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 140, 60));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("ID Barang ");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        tfIdBarang.setEnabled(false);
+        add(tfIdBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Kode Barang ");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+
+        tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfKodeBarangActionPerformed(evt);
+            }
+        });
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
@@ -275,13 +285,13 @@ public class pnEditBarang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfHargaBeliActionPerformed
 
-    private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfKodeBarangActionPerformed
-
     private void tfHargaJualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHargaJualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfHargaJualActionPerformed
+
+    private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfKodeBarangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -292,6 +302,7 @@ public class pnEditBarang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -301,6 +312,7 @@ public class pnEditBarang extends javax.swing.JPanel {
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfHargaBeli;
     private javax.swing.JTextField tfHargaJual;
+    private javax.swing.JTextField tfIdBarang;
     private javax.swing.JTextField tfKodeBarang;
     private javax.swing.JTextField tfNamaBarang;
     private javax.swing.JTextField tfStok;
