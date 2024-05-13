@@ -3,19 +3,79 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package FormPanel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import koneksi.koneksi;
 
 /**
  *
  * @author Mahayoga
  */
 public class pnKasir extends javax.swing.JPanel {
+    koneksi db = new koneksi();
+    DefaultTableModel model = new DefaultTableModel();
+    HashMap<String, Integer> dateMap = new HashMap<>();
 
     /**
      * Creates new form pnKasir
      */
     public pnKasir() {
         initComponents();
+        autoNumber();
+        autoTgl();
+        setColumn();
+    }
+    
+    public void countTotal() {
+        int sumTotal = 0;
+        int row = tblData.getRowCount();
+        for(int i = 0; i < row; i++) {
+            sumTotal += Integer.parseInt(String.valueOf(tblData.getValueAt(i, 5)));
+        }
+        tfTotal.setText(String.valueOf(sumTotal));
+    }
+    
+    public void setColumn() {
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        model.addColumn("ID Barang");
+        model.addColumn("Kode Barang");
+        model.addColumn("Nama Barang");
+        model.addColumn("Jumlah (beli)");
+        model.addColumn("Harga (awal)");
+        model.addColumn("Harga (total)");
+        tblData.setModel(model);
+    }
+    
+    public void autoTgl() {
+        tfTanggal.setText(String.valueOf(LocalDate.now()));
+    }
+    
+    public void autoNumber() {
+        ResultSet rs = db.ambilData("SELECT * FROM transaksi ORDER BY id_transaksi DESC");
+        try {
+            if(rs.next()) {
+                int id = Integer.parseInt(rs.getString("id_transaksi").substring(2, 6)); //KP0001 
+                id++;
+                if(id < 9) {
+                    tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "000" + id);
+                } else if(id < 99) {
+                    tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "00" + id);
+                } else if(id < 999) {
+                    tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "0" + id);
+                } else if(id < 9999) {
+                    tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "" + id);
+                }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -28,38 +88,38 @@ public class pnKasir extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tfNoTransaksi = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        tfKodeBarang = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tfNamaBarang = new javax.swing.JTextField();
+        tfStok = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        tfHarga = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        tfJumlahHarga = new javax.swing.JTextField();
+        tfJumlahBeli = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tfTanggal = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
         jLabel8 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        tfTotal = new javax.swing.JTextField();
+        tfBayar = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        tfKembali = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbTanggalKadaluarsa = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        customButton1 = new CustomComponent.CustomButton();
-        customButton2 = new CustomComponent.CustomButton();
-        customButton3 = new CustomComponent.CustomButton();
-        customButton5 = new CustomComponent.CustomButton();
+        btnBatal = new CustomComponent.CustomButton();
+        btnTambah = new CustomComponent.CustomButton();
+        btnCetak = new CustomComponent.CustomButton();
+        btnSimpan = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,24 +127,25 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel6.setText("No Transaksi");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, 30));
 
-        jTextField3.setBackground(new java.awt.Color(242, 242, 242));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        tfNoTransaksi.setBackground(new java.awt.Color(242, 242, 242));
+        tfNoTransaksi.setEnabled(false);
+        tfNoTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tfNoTransaksiActionPerformed(evt);
             }
         });
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 90, 30));
+        add(tfNoTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 90, 30));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel17.setText("Nama Barang");
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                tfKodeBarangActionPerformed(evt);
             }
         });
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 130, 30));
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 130, 30));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel20.setText("Barcode");
@@ -97,48 +158,52 @@ public class pnKasir extends javax.swing.JPanel {
         });
         add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 200, 60));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfNamaBarang.setEnabled(false);
+        tfNamaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfNamaBarangActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 420, 30));
+        add(tfNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 420, 30));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        tfStok.setEnabled(false);
+        tfStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                tfStokActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 50, 30));
+        add(tfStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 50, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("Stok");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        tfHarga.setEnabled(false);
+        tfHarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                tfHargaActionPerformed(evt);
             }
         });
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 100, 30));
+        add(tfHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 100, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Harga");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 80, -1, -1));
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        tfJumlahHarga.setEnabled(false);
+        tfJumlahHarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                tfJumlahHargaActionPerformed(evt);
             }
         });
-        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 110, 130, 30));
+        add(tfJumlahHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 110, 130, 30));
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        tfJumlahBeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                tfJumlahBeliActionPerformed(evt);
             }
         });
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 60, 30));
+        add(tfJumlahBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 110, 60, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("Jumlah Harga");
@@ -148,13 +213,14 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel7.setText("Tanggal");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 30, -1, 30));
 
-        jTextField4.setBackground(new java.awt.Color(242, 242, 242));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        tfTanggal.setBackground(new java.awt.Color(242, 242, 242));
+        tfTanggal.setEnabled(false);
+        tfTanggal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                tfTanggalActionPerformed(evt);
             }
         });
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 30, 100, 30));
+        add(tfTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 30, 100, 30));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,30 +250,32 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel16.setText("Total");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, -1, -1));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        tfTotal.setEnabled(false);
+        tfTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                tfTotalActionPerformed(evt);
             }
         });
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 200, 30));
+        add(tfTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 200, 30));
 
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        tfBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                tfBayarActionPerformed(evt);
             }
         });
-        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 620, 200, 30));
+        add(tfBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 620, 200, 30));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel18.setText("Bayar");
         add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, -1, -1));
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        tfKembali.setEnabled(false);
+        tfKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                tfKembaliActionPerformed(evt);
             }
         });
-        add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 620, 200, 30));
+        add(tfKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 620, 200, 30));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel19.setText("Kembali");
@@ -219,138 +287,222 @@ public class pnKasir extends javax.swing.JPanel {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setText("Jumlah");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 60, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 80, 60, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 120, 30));
+        cbTanggalKadaluarsa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
+        cbTanggalKadaluarsa.setEnabled(false);
+        cbTanggalKadaluarsa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTanggalKadaluarsaActionPerformed(evt);
+            }
+        });
+        add(cbTanggalKadaluarsa, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 120, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel14.setText("Tgl Kadaluarsa");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 80, 120, -1));
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 120, -1));
 
-        customButton1.setText("customButton1");
-        customButton1.setBackgroundColor(new java.awt.Color(78, 115, 223));
-        customButton1.setFontSize(14);
-        customButton1.setTextBold(1);
-        customButton1.setTextColor(java.awt.Color.white);
-        customButton1.setTheText("Batal");
-        customButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBatal.setText("customButton1");
+        btnBatal.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        btnBatal.setFontSize(14);
+        btnBatal.setTextBold(1);
+        btnBatal.setTextColor(java.awt.Color.white);
+        btnBatal.setTheText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton1ActionPerformed(evt);
+                btnBatalActionPerformed(evt);
             }
         });
-        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 620, 80, 30));
+        add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 620, 80, 30));
 
-        customButton2.setText("customButton1");
-        customButton2.setBackgroundColor(new java.awt.Color(78, 115, 223));
-        customButton2.setFontSize(14);
-        customButton2.setTextBold(1);
-        customButton2.setTextColor(java.awt.Color.white);
-        customButton2.setTheText("Tambah");
-        add(customButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 160, 120, 30));
-
-        customButton3.setText("customButton1");
-        customButton3.setBackgroundColor(new java.awt.Color(78, 115, 223));
-        customButton3.setFontSize(14);
-        customButton3.setTextBold(1);
-        customButton3.setTextColor(java.awt.Color.white);
-        customButton3.setTheText("Cetak");
-        customButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnTambah.setText("customButton1");
+        btnTambah.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        btnTambah.setFontSize(14);
+        btnTambah.setTextBold(1);
+        btnTambah.setTextColor(java.awt.Color.white);
+        btnTambah.setTheText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton3ActionPerformed(evt);
+                btnTambahActionPerformed(evt);
             }
         });
-        add(customButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 620, 80, 30));
+        add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 160, 120, 30));
 
-        customButton5.setText("customButton1");
-        customButton5.setBackgroundColor(new java.awt.Color(78, 115, 223));
-        customButton5.setFontSize(14);
-        customButton5.setTextBold(1);
-        customButton5.setTextColor(java.awt.Color.white);
-        customButton5.setTheText("Simpan");
-        customButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnCetak.setText("customButton1");
+        btnCetak.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        btnCetak.setFontSize(14);
+        btnCetak.setTextBold(1);
+        btnCetak.setTextColor(java.awt.Color.white);
+        btnCetak.setTheText("Cetak");
+        btnCetak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customButton5ActionPerformed(evt);
+                btnCetakActionPerformed(evt);
             }
         });
-        add(customButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 620, 80, 30));
+        add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 620, 80, 30));
+
+        btnSimpan.setText("customButton1");
+        btnSimpan.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        btnSimpan.setFontSize(14);
+        btnSimpan.setTextBold(1);
+        btnSimpan.setTextColor(java.awt.Color.white);
+        btnSimpan.setTheText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
+        add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 620, 80, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void tfNoTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNoTransaksiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_tfNoTransaksiActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE kode_barang = '" + tfKodeBarang.getText() + "'");
+        try {
+            if(rs.next()) {
+                tfNamaBarang.setText(rs.getString("nama_barang"));
+                tfStok.setText(rs.getString("stok_tersedia"));
+                tfHarga.setText(rs.getString("harga_jual"));
+                rs = db.ambilData("SELECT * FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' GROUP BY tgl_kadaluarsa");
+                while(rs.next()) {
+                    cbTanggalKadaluarsa.addItem(rs.getString("tgl_kadaluarsa"));
+                }
+                cbTanggalKadaluarsa.setEnabled(true);
+                tfJumlahBeli.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(this, "Data denga kode barang '" + tfKodeBarang.getText() + "' tidak tersedia dalam database!\nSilahkan periksa kembali kode barang!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_tfKodeBarangActionPerformed
 
     private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfNamaBarangActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void tfStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfStokActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_tfStokActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void tfHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHargaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_tfHargaActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void tfJumlahHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahHargaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_tfJumlahHargaActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void tfJumlahBeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahBeliActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+        tfJumlahHarga.setText(String.valueOf(Integer.parseInt(tfHarga.getText()) * Integer.parseInt(tfJumlahBeli.getText())));
+    }//GEN-LAST:event_tfJumlahBeliActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void tfTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTanggalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_tfTanggalActionPerformed
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         // TODO add your handling code here:
         boolean edit = tblData.isEditing();
+        int row = tblData.getSelectedRow();
         if(!edit) {
-            JOptionPane.showMessageDialog(this, "Tidak bisa mengedit data ini!", "Error", JOptionPane.ERROR_MESSAGE);
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda ingin membatalkan barang ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + String.valueOf(tblData.getValueAt(row, 0) + "'"));
+                try {
+                    rs.next();
+                    int stokKembali = Integer.parseInt(String.valueOf(tblData.getValueAt(row, 3))) + Integer.parseInt(String.valueOf(rs.getString("stok_tersedia")));
+                    db.aksi("UPDATE stok_barang SET stok_tersedia = " + stokKembali + " WHERE id_barang = '" + rs.getString("id_barang") + "'");
+                    JOptionPane.showMessageDialog(this, "Hapus barang berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                    model.removeRow(row);
+                    tblData.setModel(model);
+                    countTotal();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
     }//GEN-LAST:event_tblDataMouseClicked
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void tfTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_tfTotalActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void tfBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBayarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+        int result = Integer.parseInt(tfBayar.getText()) - Integer.parseInt(tfTotal.getText());
+        if(result < 0) {
+            JOptionPane.showMessageDialog(this, "Uang anda tidak cukup!\nSilahkan masukkan jumlah yang tepat", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        } else {
+            tfKembali.setText(String.valueOf(result));
+        }
+    }//GEN-LAST:event_tfBayarActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void tfKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKembaliActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_tfKembaliActionPerformed
 
-    private void customButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton3ActionPerformed
+    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customButton3ActionPerformed
+    }//GEN-LAST:event_btnCetakActionPerformed
 
-    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customButton1ActionPerformed
+    }//GEN-LAST:event_btnBatalActionPerformed
 
-    private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customButton5ActionPerformed
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        // TODO add your handling code here:
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE kode_barang = '" + tfKodeBarang.getText() + "'");
+        try {
+            if(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_barang"), tfKodeBarang.getText(), tfNamaBarang.getText(), tfJumlahBeli.getText(), tfHarga.getText(), tfJumlahHarga.getText()});
+                int result = Integer.parseInt(tfStok.getText()) - Integer.parseInt(tfJumlahBeli.getText());
+                db.aksi("UPDATE stok_barang SET stok_tersedia = " + result + " WHERE id_barang = '" + rs.getString("id_barang") + "'");
+                dateMap.put(String.valueOf(cbTanggalKadaluarsa.getSelectedItem()), Integer.parseInt(tfJumlahBeli.getText())); // ??
+                db.aksi("DELETE FROM detail_barang WHERE kode_barang = '" + cbTanggalKadaluarsa.getSelectedItem() + "' LIMIT " + tfJumlahBeli.getText());
+                tfKodeBarang.setText("");
+                tfNamaBarang.setText("");
+                tfStok.setText("");
+                tfHarga.setText("");
+                tfJumlahBeli.setText("");
+                cbTanggalKadaluarsa.removeAllItems();
+                cbTanggalKadaluarsa.addItem("--Tidak dipilih--");
+                cbTanggalKadaluarsa.setSelectedItem("--Tidak dipilih--");
+                tfJumlahHarga.setText("");
+                countTotal();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        tblData.setModel(model);
+    }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void cbTanggalKadaluarsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTanggalKadaluarsaActionPerformed
+        // TODO add your handling code here:
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS 'hehe' FROM stok_barang sb INNER JOIN detail_barang dt ON sb.id_barang = dt.kode_barang WHERE sb.kode_barang = '" + tfKodeBarang.getText() + "'");
+        btnTambah.requestFocus();
+    }//GEN-LAST:event_cbTanggalKadaluarsaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private CustomComponent.CustomButton customButton1;
-    private CustomComponent.CustomButton customButton2;
-    private CustomComponent.CustomButton customButton3;
-    private CustomComponent.CustomButton customButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private CustomComponent.CustomButton btnBatal;
+    private CustomComponent.CustomButton btnCetak;
+    private CustomComponent.CustomButton btnSimpan;
+    private CustomComponent.CustomButton btnTambah;
+    private javax.swing.JComboBox<String> cbTanggalKadaluarsa;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -366,18 +518,18 @@ public class pnKasir extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private CustomComponent.CustomTable tblData;
+    private javax.swing.JTextField tfBayar;
+    private javax.swing.JTextField tfHarga;
+    private javax.swing.JTextField tfJumlahBeli;
+    private javax.swing.JTextField tfJumlahHarga;
+    private javax.swing.JTextField tfKembali;
+    private javax.swing.JTextField tfKodeBarang;
+    private javax.swing.JTextField tfNamaBarang;
+    private javax.swing.JTextField tfNoTransaksi;
+    private javax.swing.JTextField tfStok;
+    private javax.swing.JTextField tfTanggal;
+    private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
 }
