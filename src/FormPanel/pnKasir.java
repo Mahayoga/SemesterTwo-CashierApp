@@ -20,7 +20,8 @@ import koneksi.koneksi;
 public class pnKasir extends javax.swing.JPanel {
     koneksi db = new koneksi();
     DefaultTableModel model = new DefaultTableModel();
-    HashMap<String, Integer> dateMap = new HashMap<>();
+    HashMap<String, String> dateMap = new HashMap<>();
+    int jumlahHarusDipesan;
 
     /**
      * Creates new form pnKasir
@@ -47,6 +48,7 @@ public class pnKasir extends javax.swing.JPanel {
         model.addColumn("ID Barang");
         model.addColumn("Kode Barang");
         model.addColumn("Nama Barang");
+        model.addColumn("Tgl Kadaluarsa");
         model.addColumn("Jumlah (beli)");
         model.addColumn("Harga (awal)");
         model.addColumn("Harga (total)");
@@ -113,7 +115,7 @@ public class pnKasir extends javax.swing.JPanel {
         tfKembali = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lbJumlah = new javax.swing.JLabel();
         cbTanggalKadaluarsa = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         btnBatal = new CustomComponent.CustomButton();
@@ -196,7 +198,7 @@ public class pnKasir extends javax.swing.JPanel {
                 tfJumlahHargaActionPerformed(evt);
             }
         });
-        add(tfJumlahHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 110, 130, 30));
+        add(tfJumlahHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, 100, 30));
 
         tfJumlahBeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,7 +209,7 @@ public class pnKasir extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("Jumlah Harga");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 110, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 80, 110, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Tanggal");
@@ -285,9 +287,9 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel21.setText("Kode Barang");
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel13.setText("Jumlah");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 80, 60, -1));
+        lbJumlah.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbJumlah.setText("Jumlah");
+        add(lbJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 80, 110, -1));
 
         cbTanggalKadaluarsa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
         cbTanggalKadaluarsa.setEnabled(false);
@@ -326,7 +328,7 @@ public class pnKasir extends javax.swing.JPanel {
                 btnTambahActionPerformed(evt);
             }
         });
-        add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 160, 120, 30));
+        add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 160, 120, 30));
 
         btnCetak.setText("customButton1");
         btnCetak.setBackgroundColor(new java.awt.Color(78, 115, 223));
@@ -368,11 +370,14 @@ public class pnKasir extends javax.swing.JPanel {
                 tfStok.setText(rs.getString("stok_tersedia"));
                 tfHarga.setText(rs.getString("harga_jual"));
                 rs = db.ambilData("SELECT * FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' GROUP BY tgl_kadaluarsa");
+                cbTanggalKadaluarsa.removeAllItems();
+                cbTanggalKadaluarsa.addItem("--Tidak dipilih--");
+                cbTanggalKadaluarsa.setSelectedItem("--Tidak dipilih--");
                 while(rs.next()) {
                     cbTanggalKadaluarsa.addItem(rs.getString("tgl_kadaluarsa"));
                 }
                 cbTanggalKadaluarsa.setEnabled(true);
-                tfJumlahBeli.requestFocus();
+                cbTanggalKadaluarsa.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Data denga kode barang '" + tfKodeBarang.getText() + "' tidak tersedia dalam database!\nSilahkan periksa kembali kode barang!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             }
@@ -403,7 +408,12 @@ public class pnKasir extends javax.swing.JPanel {
 
     private void tfJumlahBeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahBeliActionPerformed
         // TODO add your handling code here:
-        tfJumlahHarga.setText(String.valueOf(Integer.parseInt(tfHarga.getText()) * Integer.parseInt(tfJumlahBeli.getText())));
+        if(Integer.parseInt(tfJumlahBeli.getText()) > jumlahHarusDipesan) {
+            JOptionPane.showMessageDialog(this, "Jumlah melebihi stok kadaluarsa!\nMasukkan jumlah yang sesuai!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            tfJumlahBeli.setText("");
+        } else {
+            tfJumlahHarga.setText(String.valueOf(Integer.parseInt(tfHarga.getText()) * Integer.parseInt(tfJumlahBeli.getText())));
+        }
     }//GEN-LAST:event_tfJumlahBeliActionPerformed
 
     private void tfTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTanggalActionPerformed
@@ -420,8 +430,9 @@ public class pnKasir extends javax.swing.JPanel {
                 ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + String.valueOf(tblData.getValueAt(row, 0) + "'"));
                 try {
                     rs.next();
-                    int stokKembali = Integer.parseInt(String.valueOf(tblData.getValueAt(row, 3))) + Integer.parseInt(String.valueOf(rs.getString("stok_tersedia")));
+                    int stokKembali = Integer.parseInt(String.valueOf(tblData.getValueAt(row, 4))) + Integer.parseInt(String.valueOf(rs.getString("stok_tersedia")));
                     db.aksi("UPDATE stok_barang SET stok_tersedia = " + stokKembali + " WHERE id_barang = '" + rs.getString("id_barang") + "'");
+                    db.aksi("INSERT INTO detail_barang VALUES ('" + String.valueOf(tblData.getValueAt(row, 0)) + "', '" + String.valueOf(tblData.getValueAt(row, 3)) + "', 'Belum Terbuang')");
                     JOptionPane.showMessageDialog(this, "Hapus barang berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
                     model.removeRow(row);
                     tblData.setModel(model);
@@ -466,22 +477,43 @@ public class pnKasir extends javax.swing.JPanel {
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         // TODO add your handling code here:
         ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE kode_barang = '" + tfKodeBarang.getText() + "'");
+        boolean found = false;
         try {
             if(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), tfKodeBarang.getText(), tfNamaBarang.getText(), tfJumlahBeli.getText(), tfHarga.getText(), tfJumlahHarga.getText()});
+                for(int i = 0; i < tblData.getRowCount(); i++) {
+                    if(tblData.getValueAt(i, 0).equals(rs.getString("id_barang")) && tblData.getValueAt(i, 3).equals(cbTanggalKadaluarsa.getSelectedItem())) {
+                        int resultJumlahBeli = Integer.parseInt(tfJumlahBeli.getText()) + Integer.parseInt(String.valueOf(tblData.getValueAt(i, 4)));
+                        int resultJumlahHarga = Integer.parseInt(tfJumlahHarga.getText()) + Integer.parseInt(String.valueOf(tblData.getValueAt(i, 6)));
+                        tblData.setValueAt(resultJumlahBeli, i, 4);
+                        tblData.setValueAt(resultJumlahHarga, i, 6);
+                        i = tblData.getRowCount();
+                        found = true;
+                    } else {
+                        found = false;
+                    }
+                }
+                if(!found) {
+                    model.addRow(new Object[]{rs.getString("id_barang"), tfKodeBarang.getText(), tfNamaBarang.getText(), cbTanggalKadaluarsa.getSelectedItem(), tfJumlahBeli.getText(), tfHarga.getText(), tfJumlahHarga.getText()});
+                }
+                
                 int result = Integer.parseInt(tfStok.getText()) - Integer.parseInt(tfJumlahBeli.getText());
                 db.aksi("UPDATE stok_barang SET stok_tersedia = " + result + " WHERE id_barang = '" + rs.getString("id_barang") + "'");
-                dateMap.put(String.valueOf(cbTanggalKadaluarsa.getSelectedItem()), Integer.parseInt(tfJumlahBeli.getText())); // ??
-                db.aksi("DELETE FROM detail_barang WHERE kode_barang = '" + cbTanggalKadaluarsa.getSelectedItem() + "' LIMIT " + tfJumlahBeli.getText());
+                
+                //dateMap.put(String.valueOf(cbTanggalKadaluarsa.getSelectedItem()), rs.getString("id_barang")); // ??
+                db.aksi("DELETE FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' LIMIT " + tfJumlahBeli.getText());
+                
                 tfKodeBarang.setText("");
                 tfNamaBarang.setText("");
                 tfStok.setText("");
                 tfHarga.setText("");
                 tfJumlahBeli.setText("");
+                
                 cbTanggalKadaluarsa.removeAllItems();
                 cbTanggalKadaluarsa.addItem("--Tidak dipilih--");
                 cbTanggalKadaluarsa.setSelectedItem("--Tidak dipilih--");
+                
                 tfJumlahHarga.setText("");
+                lbJumlah.setText("Jumlah");
                 countTotal();
             }
         } catch (Exception ex) {
@@ -492,7 +524,15 @@ public class pnKasir extends javax.swing.JPanel {
 
     private void cbTanggalKadaluarsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTanggalKadaluarsaActionPerformed
         // TODO add your handling code here:
-        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS 'hehe' FROM stok_barang sb INNER JOIN detail_barang dt ON sb.id_barang = dt.kode_barang WHERE sb.kode_barang = '" + tfKodeBarang.getText() + "'");
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS 'hehe' FROM stok_barang sb INNER JOIN detail_barang dt ON sb.id_barang = dt.kode_barang WHERE sb.kode_barang = '" + tfKodeBarang.getText() + "' AND dt.tgl_kadaluarsa = '" + cbTanggalKadaluarsa.getSelectedItem() + "'");
+        try {
+            rs.next();
+            lbJumlah.setText("Jumlah");
+            lbJumlah.setText(lbJumlah.getText() + "(" + rs.getString("hehe") + ")");
+            this.jumlahHarusDipesan = Integer.parseInt(rs.getString("hehe"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         btnTambah.requestFocus();
     }//GEN-LAST:event_cbTanggalKadaluarsaActionPerformed
 
@@ -506,7 +546,6 @@ public class pnKasir extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -519,6 +558,7 @@ public class pnKasir extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JLabel lbJumlah;
     private CustomComponent.CustomTable tblData;
     private javax.swing.JTextField tfBayar;
     private javax.swing.JTextField tfHarga;
