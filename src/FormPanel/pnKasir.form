@@ -404,7 +404,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="customButton1"/>
         <Property name="backgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="df" green="73" red="4e" type="rgb"/>
+          <Color blue="33" green="97" red="ff" type="rgb"/>
         </Property>
         <Property name="fontSize" type="int" value="14"/>
         <Property name="textBold" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">

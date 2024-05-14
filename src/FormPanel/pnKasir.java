@@ -31,6 +31,16 @@ public class pnKasir extends javax.swing.JPanel {
         autoNumber();
         autoTgl();
         setColumn();
+        btnCetak.setEnabled(false);
+        btnSimpan.setEnabled(false);
+    }
+    
+    public void checkItemInTable() {
+        if(tblData.getRowCount() > 0) {
+            btnSimpan.setEnabled(true);
+        } else {
+            btnSimpan.setEnabled(false);
+        }
     }
     
     public void countTotal() {
@@ -305,7 +315,7 @@ public class pnKasir extends javax.swing.JPanel {
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 120, -1));
 
         btnBatal.setText("customButton1");
-        btnBatal.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        btnBatal.setBackgroundColor(new java.awt.Color(255, 151, 51));
         btnBatal.setFontSize(14);
         btnBatal.setTextBold(1);
         btnBatal.setTextColor(java.awt.Color.white);
@@ -369,11 +379,12 @@ public class pnKasir extends javax.swing.JPanel {
                 tfNamaBarang.setText(rs.getString("nama_barang"));
                 tfStok.setText(rs.getString("stok_tersedia"));
                 tfHarga.setText(rs.getString("harga_jual"));
-                rs = db.ambilData("SELECT * FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' GROUP BY tgl_kadaluarsa");
+                rs = db.ambilData("SELECT * FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' AND status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
                 cbTanggalKadaluarsa.removeAllItems();
                 cbTanggalKadaluarsa.addItem("--Tidak dipilih--");
                 cbTanggalKadaluarsa.setSelectedItem("--Tidak dipilih--");
                 while(rs.next()) {
+                    System.out.println(rs.getString("status"));
                     cbTanggalKadaluarsa.addItem(rs.getString("tgl_kadaluarsa"));
                 }
                 cbTanggalKadaluarsa.setEnabled(true);
@@ -432,7 +443,7 @@ public class pnKasir extends javax.swing.JPanel {
                     rs.next();
                     int stokKembali = Integer.parseInt(String.valueOf(tblData.getValueAt(row, 4))) + Integer.parseInt(String.valueOf(rs.getString("stok_tersedia")));
                     db.aksi("UPDATE stok_barang SET stok_tersedia = " + stokKembali + " WHERE id_barang = '" + rs.getString("id_barang") + "'");
-                    db.aksi("INSERT INTO detail_barang VALUES ('" + String.valueOf(tblData.getValueAt(row, 0)) + "', '" + String.valueOf(tblData.getValueAt(row, 3)) + "', 'Belum Terbuang')");
+                    db.aksi("UPDATE detail_barang SET status = 'Belum Terbuang' WHERE tgl_kadaluarsa = '" + String.valueOf(tblData.getValueAt(row, 3)) + "' AND kode_barang = '" + String.valueOf(tblData.getValueAt(row, 0) + "' LIMIT " + String.valueOf(tblData.getValueAt(row, 4))));
                     JOptionPane.showMessageDialog(this, "Hapus barang berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
                     model.removeRow(row);
                     tblData.setModel(model);
@@ -442,6 +453,7 @@ public class pnKasir extends javax.swing.JPanel {
                 }
             }
         }
+        checkItemInTable();
     }//GEN-LAST:event_tblDataMouseClicked
 
     private void tfTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTotalActionPerformed
@@ -468,10 +480,70 @@ public class pnKasir extends javax.swing.JPanel {
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
         // TODO add your handling code here:
+        /*
+            * Stok Barang (stok)
+            * Kadaluarsa (semua)
+        */
+        if(tblData.getRowCount() > 0) {
+            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda mau membatalkan transaksi dan kembali ke Menu Utama?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(asn == JOptionPane.YES_OPTION) {
+                for(int i = 0; i < tblData.getRowCount(); i++) {
+                    try {
+                        String idBr = String.valueOf(tblData.getValueAt(i, 0));
+                        ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + idBr + "'");
+                        rs.next();
+                        String jumlahBr = String.valueOf(tblData.getValueAt(i, 4));
+                        String tgl_kadaluarsa = String.valueOf(tblData.getValueAt(i, 3));
+                        int jumlahBrInt = Integer.parseInt(jumlahBr) + Integer.parseInt(rs.getString("stok_tersedia"));
+                        db.aksi("UPDATE stok_barang SET stok_tersedia = '" + jumlahBrInt + "' WHERE id_barang = '" + idBr + "'");
+                        db.aksi("UPDATE detail_barang SET status = 'Belum Terbuang' WHERE kode_barang = '" + idBr + "' AND tgl_kadaluarsa = '" + tgl_kadaluarsa + "' AND status = 'Sudah Terjual' LIMIT " + jumlahBr);
+                        model.removeRow(i);
+                        tblData.setModel(model);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
+        try {
+            /*
+                * Transaksi
+                - id_transaksi	
+                - tanggal_transaksi	
+                - harga_total
+            */
+            String idTr = tfNoTransaksi.getText();
+            String tgl = tfTanggal.getText();
+            String hargaTotal = tfTotal.getText();
+            db.aksi("INSERT INTO transaksi VALUES ('" + idTr + "', '" + tgl + "', '" + hargaTotal + "')");
+            System.out.println("Transaksi Berhasil!");
+
+            /*
+                * Detail Transaksi
+                - id_transaksi x
+                - kode_barang
+                - tanggal x
+                - jumlah_barang
+                - harga_barang
+            */
+            for(int i = 0; i < tblData.getRowCount(); i++) {
+                String idBr = String.valueOf(tblData.getValueAt(i, 0));
+                String jumlahBr = String.valueOf(tblData.getValueAt(i, 4));
+                String hargaBr = String.valueOf(tblData.getValueAt(i, 5));
+                db.aksi("INSERT INTO detail_transaksi VALUES ('" + idTr + "', '" + idBr + "', '" + tgl + "', '" + jumlahBr + "', '" + hargaBr + "')");
+            }
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            autoTgl();
+            autoNumber();
+            btnSimpan.setEnabled(false);
+            btnCetak.setEnabled(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
@@ -500,7 +572,7 @@ public class pnKasir extends javax.swing.JPanel {
                 db.aksi("UPDATE stok_barang SET stok_tersedia = " + result + " WHERE id_barang = '" + rs.getString("id_barang") + "'");
                 
                 //dateMap.put(String.valueOf(cbTanggalKadaluarsa.getSelectedItem()), rs.getString("id_barang")); // ??
-                db.aksi("DELETE FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' LIMIT " + tfJumlahBeli.getText());
+                db.aksi("UPDATE detail_barang SET status = 'Sudah Terjual' WHERE kode_barang = '" + rs.getString("id_barang") + "' AND tgl_kadaluarsa = '" + String.valueOf(cbTanggalKadaluarsa.getSelectedItem()) + "' AND status = 'Belum Terbuang' LIMIT " + tfJumlahBeli.getText());
                 
                 tfKodeBarang.setText("");
                 tfNamaBarang.setText("");
@@ -520,11 +592,12 @@ public class pnKasir extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         tblData.setModel(model);
+        checkItemInTable();
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void cbTanggalKadaluarsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTanggalKadaluarsaActionPerformed
         // TODO add your handling code here:
-        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS 'hehe' FROM stok_barang sb INNER JOIN detail_barang dt ON sb.id_barang = dt.kode_barang WHERE sb.kode_barang = '" + tfKodeBarang.getText() + "' AND dt.tgl_kadaluarsa = '" + cbTanggalKadaluarsa.getSelectedItem() + "'");
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS 'hehe' FROM stok_barang sb INNER JOIN detail_barang dt ON sb.id_barang = dt.kode_barang WHERE sb.kode_barang = '" + tfKodeBarang.getText() + "' AND dt.tgl_kadaluarsa = '" + cbTanggalKadaluarsa.getSelectedItem() + "' AND dt.status = 'Belum Terbuang'");
         try {
             rs.next();
             lbJumlah.setText("Jumlah");
