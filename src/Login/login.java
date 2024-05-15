@@ -22,6 +22,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class login extends javax.swing.JFrame {
     koneksi db = new koneksi();
@@ -109,9 +111,21 @@ public class login extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password");
 
+        txtUsername.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtUsernameInputMethodTextChanged(evt);
+            }
+        });
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
+            }
+        });
+        txtUsername.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtUsernamePropertyChange(evt);
             }
         });
 
@@ -274,6 +288,21 @@ public class login extends javax.swing.JFrame {
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
+        ResultSet rs = db.ambilData("SELECT * FROM data_pengguna WHERE kode_pengguna = '" + txtUsername.getText() + "'");
+        try {
+            if(rs.next()) {
+                txtUsername.setText("");
+                int asn = JOptionPane.showConfirmDialog(this, "Apakan anda akan login dengan user: '" + rs.getString("username") + "' dengan role: '" + rs.getString("role") + "'?");
+                if(asn == JOptionPane.YES_OPTION) {
+                    MenuUtama b = new MenuUtama(rs.getString("role"));
+                    b.setVisible(true);
+                    this.dispose();
+                }
+            }
+            txtUsername.setText("");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         txtPassword.requestFocus();
     }//GEN-LAST:event_txtUsernameActionPerformed
 
@@ -313,6 +342,16 @@ public class login extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUsernamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtUsernamePropertyChange
+        // TODO add your handling code here:
+        System.out.println("Heiii");
+    }//GEN-LAST:event_txtUsernamePropertyChange
+
+    private void txtUsernameInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtUsernameInputMethodTextChanged
+        // TODO add your handling code here:
+        System.out.println("Wadoo");
+    }//GEN-LAST:event_txtUsernameInputMethodTextChanged
 
     /**
      * @param args the command line arguments
