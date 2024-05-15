@@ -107,26 +107,26 @@ public class pnKasir extends javax.swing.JPanel {
                 jTextField2ActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 80, 30));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 80, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("Stok");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 150, 30));
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 160, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Harga");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel15.setText("Jumlah Harga");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, -1, 30));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 170, 110, 30));
 
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

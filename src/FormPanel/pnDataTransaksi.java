@@ -106,7 +106,7 @@ public class pnDataTransaksi extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 190, 30));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 190, 30));
 
         customButton1.setText("CARI");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
@@ -117,7 +117,7 @@ public class pnDataTransaksi extends javax.swing.JPanel {
                 customButton1ActionPerformed(evt);
             }
         });
-        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 80, 70, 30));
+        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 90, 70, 30));
 
         customButton5.setText("customButton4");
         customButton5.setBackgroundColor(new java.awt.Color(0, 51, 255));

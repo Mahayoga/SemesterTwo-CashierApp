@@ -154,6 +154,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cek Tabel Barang");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
@@ -396,26 +397,6 @@ public class pnMenuUtama extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 1150, 290));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        model.addColumn("Kode Barang");
-        model.addColumn("Nama Barang");
-        model.addColumn("Stok Tersedia");
-        model.addColumn("Harga Barang");
-        try {
-            ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
-            while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), rs.getString("harga_jual")});
-            }
-            tblData.setModel(model);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        pnNoData.setVisible(false);
-    }//GEN-LAST:event_jLabel3MouseClicked
-
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         model.setRowCount(0);
@@ -460,6 +441,26 @@ public class pnMenuUtama extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Tidak bisa mengedit data ini!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_tblDataMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        model.addColumn("Kode Barang");
+        model.addColumn("Nama Barang");
+        model.addColumn("Stok Tersedia");
+        model.addColumn("Harga Barang");
+        try {
+            ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), rs.getString("harga_jual")});
+            }
+            tblData.setModel(model);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        pnNoData.setVisible(false);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

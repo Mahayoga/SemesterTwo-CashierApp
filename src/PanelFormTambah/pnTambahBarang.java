@@ -251,6 +251,8 @@ public class pnTambahBarang extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         tfIdBarang = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -263,7 +265,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
                 tfKodeBarangActionPerformed(evt);
             }
         });
-        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 30));
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Nama Barang ");
@@ -346,15 +348,15 @@ public class pnTambahBarang extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Nama Supplier");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 163, -1, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
 
         cbNamaSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
-        add(cbNamaSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 203, 158, 30));
+        add(cbNamaSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 130, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Barcode");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 118, 34));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 140, 60));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 118, 34));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 140, 60));
 
         tfIdBarang.setEnabled(false);
         add(tfIdBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 30));
@@ -362,6 +364,11 @@ public class pnTambahBarang extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("Kode Barang ");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setText("Nama Perusahaan");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, -1, 20));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 130, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
@@ -403,12 +410,14 @@ public class pnTambahBarang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfHargaBeli;
     private javax.swing.JTextField tfHargaJual;
