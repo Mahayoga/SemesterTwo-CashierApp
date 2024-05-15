@@ -34,6 +34,8 @@ public class pnDataTransaksi extends javax.swing.JPanel {
      */
     public pnDataTransaksi() {
         initComponents();
+        setColumn();
+        setRow();
     }
     
     public void setRow() {
