@@ -5,6 +5,7 @@
 package CustomComponent;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -40,6 +41,7 @@ public class CustomButton extends JButton {
         this.setText("");
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setPreferredSize(new Dimension(200, 80));
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent evt) {
