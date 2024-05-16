@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="223" pageHeight="566" columnWidth="151" leftMargin="36" rightMargin="36" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="7b98dc33-2069-4fe9-864f-d46e0cdd691d">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="133"/>
+	<property name="ireport.y" value="85"/>
 	<subDataset name="Detail Barang" uuid="7c959e32-6169-413e-b8d4-786d5bc222b3">
 		<parameter name="query" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
