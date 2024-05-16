@@ -534,7 +534,8 @@ public class pnKasir extends javax.swing.JPanel {
                 String idBr = String.valueOf(tblData.getValueAt(i, 0));
                 String jumlahBr = String.valueOf(tblData.getValueAt(i, 4));
                 String hargaBr = String.valueOf(tblData.getValueAt(i, 5));
-                db.aksi("INSERT INTO detail_transaksi VALUES ('" + idTr + "', '" + idBr + "', '" + tgl + "', '" + jumlahBr + "', '" + hargaBr + "')");
+                String hargaTotalTabel = String.valueOf(tblData.getValueAt(i, 6));
+                db.aksi("INSERT INTO detail_transaksi VALUES ('" + idTr + "', '" + idBr + "', '" + tgl + "', '" + jumlahBr + "', '" + hargaBr + "', '" + hargaTotalTabel + "')");
             }
             JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
             autoTgl();
