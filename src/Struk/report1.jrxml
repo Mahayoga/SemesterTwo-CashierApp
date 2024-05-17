@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="223" pageHeight="566" columnWidth="151" leftMargin="36" rightMargin="36" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="7b98dc33-2069-4fe9-864f-d46e0cdd691d">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="85"/>
+	<property name="ireport.y" value="268"/>
 	<subDataset name="Detail Barang" uuid="7c959e32-6169-413e-b8d4-786d5bc222b3">
 		<parameter name="query" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -98,15 +98,12 @@
 		</field>
 	</subDataset>
 	<parameter name="nama_kasir" class="java.lang.String"/>
-	<parameter name="query" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<parameter name="no_transaksi" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Mahayoga\\Documents\\NetBeansProjects\\CustomComponent\\src\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM transaksi WHERE id_transaksi = $P{query}]]>
+		<![CDATA[SELECT * FROM transaksi WHERE id_transaksi = $P{no_transaksi}]]>
 	</queryString>
 	<field name="id_transaksi" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -138,7 +135,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="116" splitType="Stretch">
+		<band height="132" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="151" height="13" uuid="29433815-d828-4464-adeb-d7fc5b1447c1"/>
 				<textElement textAlignment="Center">
@@ -195,11 +192,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{no_transaksi}]]></textFieldExpression>
 			</textField>
-			<subreport>
-				<reportElement x="0" y="103" width="151" height="13" uuid="e86f5ce3-a7f2-4f17-b501-e4b667ca11b0"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "detail_barang.jasper"]]></subreportExpression>
-			</subreport>
 			<staticText>
 				<reportElement mode="Transparent" x="0" y="92" width="57" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="02d605d9-3dfb-4579-8f5d-663c5e791a99"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
@@ -232,6 +224,11 @@
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
+			<subreport>
+				<reportElement x="0" y="103" width="151" height="29" uuid="164864b0-1bad-4a56-935c-2cffca5b09b6"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["D:\\2. Mahayoga\\GitHub\\Java Cashier App (Semester 2)\\src\\Struk\\detail_barang.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<columnFooter>
@@ -241,10 +238,48 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="47" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="fbe2cd18-20bd-4b2b-b312-5eb33cbefbc2"/>
-				<text><![CDATA[Static text]]></text>
+				<reportElement x="0" y="1" width="151" height="11" uuid="8e2a8c20-704f-40ba-8574-23411933f144"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="14" width="42" height="11" uuid="46a5b412-9123-4ed6-8622-048b2d06a797"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Item :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="39" width="26" height="12" uuid="fa625bea-4e02-40a5-a618-8f03e142c208"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tunai :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="52" width="35" height="11" uuid="9495cf74-9958-4db0-9b4f-8ba46cb17700"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Kembali :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="65" width="151" height="11" uuid="42630509-a347-4c2d-9bdd-e8f4723271c8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[=================================]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="53" height="12" uuid="88f0471b-fad1-4837-a7ad-d24f40deb216"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Belanja :]]></text>
 			</staticText>
 		</band>
 	</summary>
