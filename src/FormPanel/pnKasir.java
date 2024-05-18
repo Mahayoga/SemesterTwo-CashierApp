@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -75,13 +78,13 @@ public class pnKasir extends javax.swing.JPanel {
             if(rs.next()) {
                 int id = Integer.parseInt(rs.getString("id_transaksi").substring(2, 6)); //KP0001 
                 id++;
-                if(id < 9) {
+                if(id <= 9) {
                     tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "000" + id);
-                } else if(id < 99) {
+                } else if(id <= 99) {
                     tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "00" + id);
-                } else if(id < 999) {
+                } else if(id <= 999) {
                     tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "0" + id);
-                } else if(id < 9999) {
+                } else if(id <= 9999) {
                     tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "" + id);
                 }
             }
@@ -476,6 +479,18 @@ public class pnKasir extends javax.swing.JPanel {
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
         // TODO add your handling code here:
+        try {
+            db.koneksi();
+            String file = "D:\\2. Mahayoga\\GitHub\\Java Cashier App (Semester 2)\\src\\Struk\\report1.jasper";
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructors();
+            HashMap<String, Object> param = new HashMap<>();
+            param.put("nama_kasir", new String("Mahayoga"));
+            param.put("no_transaksi", new String("TR0006"));
+            JasperPrint print = JasperFillManager.fillReport(file, param, db.con);
+            JasperViewer.viewReport(print, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnCetakActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
