@@ -83,7 +83,7 @@
 			<textField>
 				<reportElement x="0" y="0" width="62" height="11" uuid="64ef8624-98b6-4f93-9ee0-a22c2bec4d18"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
 			</textField>
