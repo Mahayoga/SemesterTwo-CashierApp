@@ -50,7 +50,7 @@ public class pnKasir extends javax.swing.JPanel {
         int sumTotal = 0;
         int row = tblData.getRowCount();
         for(int i = 0; i < row; i++) {
-            sumTotal += Integer.parseInt(String.valueOf(tblData.getValueAt(i, 5)));
+            sumTotal += Integer.parseInt(String.valueOf(tblData.getValueAt(i, 6)));
         }
         tfTotal.setText(String.valueOf(sumTotal));
     }
