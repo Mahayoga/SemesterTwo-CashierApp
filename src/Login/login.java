@@ -191,19 +191,20 @@ public class login extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 70, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbShowPassword))
-                .addGap(60, 60, 60))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbShowPassword))
+                        .addGap(60, 60, 60))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(163, 163, 163))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +295,7 @@ public class login extends javax.swing.JFrame {
                 txtUsername.setText("");
                 int asn = JOptionPane.showConfirmDialog(this, "Apakan anda akan login dengan user: '" + rs.getString("username") + "' dengan role: '" + rs.getString("role") + "'?");
                 if(asn == JOptionPane.YES_OPTION) {
-                    MenuUtama b = new MenuUtama(rs.getString("role"));
+                    MenuUtama b = new MenuUtama(rs.getString("role"), rs.getString("username"));
                     b.setVisible(true);
                     this.dispose();
                 }
@@ -324,11 +325,11 @@ public class login extends javax.swing.JFrame {
                 if(rs.next()) {
                     JOptionPane.showMessageDialog(this, "Login Berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
                     if(rs.getString("role").equals("A")) {
-                        MenuUtama b = new MenuUtama("A");
+                        MenuUtama b = new MenuUtama("A", rs.getString("username"));
                         b.setVisible(true);
                         this.dispose();
                     } else if(rs.getString("role").equals("U")) {
-                        MenuUtama b = new MenuUtama("U");
+                        MenuUtama b = new MenuUtama("U", rs.getString("username"));
                         b.setVisible(true);
                         this.dispose();
                     }
