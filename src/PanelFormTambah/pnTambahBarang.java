@@ -4,11 +4,19 @@
  */
 package PanelFormTambah;
 
+import com.barcodelib.barcode.Linear;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import koneksi.koneksi;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,6 +84,18 @@ public class pnTambahBarang extends javax.swing.JPanel {
         }
     }
     
+    public void setBarcodeImage(int width, int height, JLabel label, String path) {        
+        try {
+            File file = new File("src/BarcodeImg/" + path);
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            label.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public void checkCategori() {
         if(String.valueOf(cbKategori.getSelectedItem()).equals("--Tidak dipilih--")) {
             tfIdBarang.setText("Pilih kategori dahulu!");
@@ -85,13 +105,13 @@ public class pnTambahBarang extends javax.swing.JPanel {
                 if(rs.next()) {
                     int id = Integer.parseInt(rs.getString("id_barang").substring(2, 6)); //KP0001 
                     id++;
-                    if(id < 9) {
+                    if(id <= 9) {
                         tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "000" + id);
-                    } else if(id < 99) {
+                    } else if(id <= 99) {
                         tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "00" + id);
-                    } else if(id < 999) {
+                    } else if(id <= 999) {
                         tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "0" + id);
-                    } else if(id < 9999) {
+                    } else if(id <= 9999) {
                         tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "" + id);
                     }
                 }
@@ -159,16 +179,16 @@ public class pnTambahBarang extends javax.swing.JPanel {
                     id = "KP";
                     insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
                 }
-                case "ATK" -> {
-                    id = "ATK";
+                case "AK" -> {
+                    id = "AK";
                     insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
                 }
                 case "OB" -> {
                     id = "OB";
                     insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
                 }
-                case "AKS" -> {
-                    id = "AKS";
+                case "AS" -> {
+                    id = "AS";
                     insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
                 }
             }
@@ -181,16 +201,16 @@ public class pnTambahBarang extends javax.swing.JPanel {
         try {
             int idNum = Integer.parseInt(rs.getString("id_barang").substring(2, 6)); //BR0001
             idNum++;
-            if(idNum < 9) {
+            if(idNum <= 9) {
                 return id += "000" + idNum;
-            } else if(idNum < 99) {
+            } else if(idNum <= 99) {
                 return id += "00" + idNum;
-            } else if(idNum < 999) {
+            } else if(idNum <= 999) {
                 return id += "0" + idNum;
-            } else if(idNum < 9999) {
+            } else if(idNum <= 9999) {
                 return id += idNum;
             }
-            return null;
+            return id + "0001";
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -248,11 +268,11 @@ public class pnTambahBarang extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         cbNamaSupplier = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         tfIdBarang = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfNamaPerushaan = new javax.swing.JTextField();
+        lbBarcode = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -351,12 +371,16 @@ public class pnTambahBarang extends javax.swing.JPanel {
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
 
         cbNamaSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
+        cbNamaSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNamaSupplierActionPerformed(evt);
+            }
+        });
         add(cbNamaSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 130, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Barcode");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 118, 34));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 140, 60));
 
         tfIdBarang.setEnabled(false);
         add(tfIdBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 30));
@@ -367,12 +391,33 @@ public class pnTambahBarang extends javax.swing.JPanel {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setText("Nama Perusahaan");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, -1, 20));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 130, 30));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, 20));
+
+        tfNamaPerushaan.setEnabled(false);
+        tfNamaPerushaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNamaPerushaanActionPerformed(evt);
+            }
+        });
+        add(tfNamaPerushaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 190, 30));
+        add(lbBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 180, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
         // TODO add your handling code here:
+        try {
+            Linear barcode = new Linear();
+            barcode.setType(Linear.CODE128);
+            barcode.setData(tfKodeBarang.getText());
+            barcode.setI(1.0f);
+            String path = tfNamaBarang.getText();
+            
+            File file = new File("src/BarcodeImg");
+            barcode.renderBarcode(file.getAbsolutePath() + "\\" + path + ".png");
+            setBarcodeImage(180, 60, lbBarcode, path + ".png");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_tfKodeBarangActionPerformed
 
     private void tfNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarangActionPerformed
@@ -400,6 +445,26 @@ public class pnTambahBarang extends javax.swing.JPanel {
         checkCategori();
     }//GEN-LAST:event_cbKategoriActionPerformed
 
+    private void cbNamaSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaSupplierActionPerformed
+        // TODO add your handling code here:
+        if(!cbNamaSupplier.getSelectedItem().toString().equals("--Tidak dipilih--")) {
+            ResultSet rs = db.ambilData("SELECT * FROM suppliers WHERE nama_supplier = '" + cbNamaSupplier.getSelectedItem().toString() + "'");
+            try {
+                if(rs.next()) {
+                    tfNamaPerushaan.setText(rs.getString("asal_perusahaan"));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tidak ditemukan data supplier dengan nama '" + cbNamaSupplier.getSelectedItem().toString() + "'!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_cbNamaSupplierActionPerformed
+
+    private void tfNamaPerushaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaPerushaanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNamaPerushaanActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnBatal;
@@ -416,14 +481,14 @@ public class pnTambahBarang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lbBarcode;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfHargaBeli;
     private javax.swing.JTextField tfHargaJual;
     private javax.swing.JTextField tfIdBarang;
     private javax.swing.JTextField tfKodeBarang;
     private javax.swing.JTextField tfNamaBarang;
+    private javax.swing.JTextField tfNamaPerushaan;
     private javax.swing.JTextField tfStok;
     // End of variables declaration//GEN-END:variables
 }
