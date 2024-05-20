@@ -612,14 +612,6 @@ public class pnKeuangan extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private CustomComponent.CustomButton btnBatal;
-    private CustomComponent.CustomButton btnBatal1;
-    private CustomComponent.CustomButton btnBatal2;
-    private CustomComponent.CustomButton btnBatal3;
-    private CustomComponent.CustomButton btnBatal4;
-    private CustomComponent.CustomButton btnBatal5;
-    private CustomComponent.CustomButton btnBatal6;
-    private CustomComponent.CustomButton btnBatal7;
     private CustomComponent.CustomButton btnCek;
     private javax.swing.JComboBox<String> cbBulan;
     private javax.swing.JComboBox<String> cbTahun;
