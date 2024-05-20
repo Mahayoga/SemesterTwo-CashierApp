@@ -3,12 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package FormPanel;
+import Form.MenuUtama;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
@@ -25,6 +32,8 @@ public class pnKasir extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel();
     HashMap<String, String> dateMap = new HashMap<>();
     int jumlahHarusDipesan;
+    int totalItem;
+    String notr;
 
     /**
      * Creates new form pnKasir
@@ -36,6 +45,28 @@ public class pnKasir extends javax.swing.JPanel {
         setColumn();
         btnCetak.setEnabled(false);
         btnSimpan.setEnabled(false);
+    }
+    
+    public void resetAll() {
+        model.setRowCount(0);
+        tblData.setModel(model);
+        tfTotal.setText("");
+        tfBayar.setText("");
+        tfKembali.setText("");
+        checkItemInTable();
+        btnCetak.setEnabled(false);
+    }
+    
+    public void setBarcodeImage(int width, int height, JLabel label, String path) {        
+        try {
+            File file = new File("src/BarcodeImg/" + path);
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            label.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void checkItemInTable() {
@@ -107,7 +138,6 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         tfKodeBarang = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
         tfNamaBarang = new javax.swing.JTextField();
         tfStok = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -135,6 +165,7 @@ public class pnKasir extends javax.swing.JPanel {
         btnTambah = new CustomComponent.CustomButton();
         btnCetak = new CustomComponent.CustomButton();
         btnSimpan = new CustomComponent.CustomButton();
+        lbBarcode = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -165,13 +196,6 @@ public class pnKasir extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel20.setText("Barcode");
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
-
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
-            }
-        });
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 200, 60));
 
         tfNamaBarang.setEnabled(false);
         tfNamaBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -368,6 +392,7 @@ public class pnKasir extends javax.swing.JPanel {
             }
         });
         add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 620, 80, 30));
+        add(lbBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 200, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfNoTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNoTransaksiActionPerformed
@@ -390,6 +415,7 @@ public class pnKasir extends javax.swing.JPanel {
                     System.out.println(rs.getString("status"));
                     cbTanggalKadaluarsa.addItem(rs.getString("tgl_kadaluarsa"));
                 }
+                setBarcodeImage(180, 60, lbBarcode, tfNamaBarang.getText() + ".png");
                 cbTanggalKadaluarsa.setEnabled(true);
                 cbTanggalKadaluarsa.requestFocus();
             } else {
@@ -399,10 +425,6 @@ public class pnKasir extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_tfKodeBarangActionPerformed
-
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
 
     private void tfNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarangActionPerformed
         // TODO add your handling code here:
@@ -481,13 +503,16 @@ public class pnKasir extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             db.koneksi();
-            String file = "D:\\2. Mahayoga\\GitHub\\Java Cashier App (Semester 2)\\src\\Struk\\report1.jasper";
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructors();
+            File f = new File("src/Struk/report1.jasper");
+            
             HashMap<String, Object> param = new HashMap<>();
-            param.put("nama_kasir", new String("Mahayoga"));
-            param.put("no_transaksi", new String("TR0006"));
-            JasperPrint print = JasperFillManager.fillReport(file, param, db.con);
+            param.put("nama_kasir", new String(MenuUtama.kasir));
+            param.put("no_transaksi", new String(notr));
+            JasperPrint print = JasperFillManager.fillReport(f.getAbsolutePath(), param, db.con);
+            
             JasperViewer.viewReport(print, false);
+            
+            resetAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -525,16 +550,23 @@ public class pnKasir extends javax.swing.JPanel {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
         try {
+            totalItem = tblData.getRowCount();
+            
             /*
                 * Transaksi
                 - id_transaksi	
-                - tanggal_transaksi	
+                - tanggal_transaksi
+                - total_item
                 - harga_total
+                - bayar
+                - kembali
             */
             String idTr = tfNoTransaksi.getText();
             String tgl = tfTanggal.getText();
             String hargaTotal = tfTotal.getText();
-            db.aksi("INSERT INTO transaksi VALUES ('" + idTr + "', '" + tgl + "', '" + hargaTotal + "')");
+            String bayar = tfBayar.getText();
+            String kembali = tfKembali.getText();
+            db.aksi("INSERT INTO transaksi VALUES ('" + idTr + "', '" + tgl + "', '" + totalItem + "', '" + hargaTotal + "', '" + bayar + "', '" + kembali + "')");
             System.out.println("Transaksi Berhasil!");
 
             /*
@@ -546,6 +578,7 @@ public class pnKasir extends javax.swing.JPanel {
                 - harga_barang
             */
             for(int i = 0; i < tblData.getRowCount(); i++) {
+                totalItem = i + 1;
                 String idBr = String.valueOf(tblData.getValueAt(i, 0));
                 String jumlahBr = String.valueOf(tblData.getValueAt(i, 4));
                 String hargaBr = String.valueOf(tblData.getValueAt(i, 5));
@@ -553,6 +586,7 @@ public class pnKasir extends javax.swing.JPanel {
                 db.aksi("INSERT INTO detail_transaksi VALUES ('" + idTr + "', '" + idBr + "', '" + tgl + "', '" + jumlahBr + "', '" + hargaBr + "', '" + hargaTotalTabel + "')");
             }
             JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            this.notr = idTr;
             autoTgl();
             autoNumber();
             btnSimpan.setEnabled(false);
@@ -646,7 +680,7 @@ public class pnKasir extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField12;
+    private javax.swing.JLabel lbBarcode;
     private javax.swing.JLabel lbJumlah;
     private CustomComponent.CustomTable tblData;
     private javax.swing.JTextField tfBayar;
