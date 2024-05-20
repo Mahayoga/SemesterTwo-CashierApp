@@ -3,8 +3,9 @@
 	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="nomor_transaksi" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM detail_transaksi dt INNER JOIN stok_barang sb ON dt.kode_barang = sb.id_barang WHERE dt.id_transaksi = 'TR0006']]>
+		<![CDATA[SELECT * FROM detail_transaksi dt INNER JOIN stok_barang sb ON dt.kode_barang = sb.id_barang WHERE dt.id_transaksi = $P{nomor_transaksi}]]>
 	</queryString>
 	<field name="id_transaksi" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
