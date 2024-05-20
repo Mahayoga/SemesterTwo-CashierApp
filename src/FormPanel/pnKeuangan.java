@@ -4,17 +4,73 @@
  */
 package FormPanel;
 
+import java.util.HashMap;
+import koneksi.koneksi;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rangg
  */
 public class pnKeuangan extends javax.swing.JPanel {
-
+    koneksi db = new koneksi();
+    HashMap<String, Integer> map = new HashMap<>();
+    
     /**
      * Creates new form pnKeuangan
      */
     public pnKeuangan() {
         initComponents();
+        setCbTahun();
+        String[] blnArr = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
+        for(int i = 0; i < blnArr.length; i++) {
+            map.put(blnArr[i], i + 1);
+        }
+    }
+    
+    public void setCbTahun() {
+        for(int i = 2024; i < 2050; i++) {
+            cbTahun.addItem(String.valueOf(i));
+        }
+    }
+    
+    public void setCbTgl() {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Januari", 31);
+        map.put("Februari", 28);
+        map.put("Maret", 31);
+        map.put("April", 30);
+        map.put("Mei", 31);
+        map.put("Juni", 30);
+        map.put("Juli", 31);
+        map.put("Agustus", 31);
+        map.put("September", 30);
+        map.put("Oktober", 31);
+        map.put("November", 30);
+        map.put("Desember", 31);
+        cbTanggal.removeAllItems();
+        cbTanggal.addItem("--Tidak dipilih--");
+        try {
+            if(!cbTahun.getSelectedItem().equals("--Tidak dipilih--") || !cbBulan.getSelectedItem().equals("--Tidak dipilih--")) {
+                int kabisat = Integer.parseInt(String.valueOf(cbTahun.getSelectedItem())) % 4;
+                if(kabisat == 0 && cbBulan.getSelectedItem().equals("Februari")) {
+                    for(int i = 0; i < map.get("Februari") + 1; i++) {
+                        cbTanggal.addItem(String.valueOf(i + 1));
+                    }
+                } else {
+                    for(int i = 0; i < map.get(String.valueOf(cbBulan.getSelectedItem())); i++) {
+                        cbTanggal.addItem(String.valueOf(i + 1));
+                    }
+                }
+            } else {
+                // Hehe
+            }
+        } catch(Exception e) {
+            System.err.println("Masukin dulu bulan atau tahun nya!");
+        }
     }
 
     /**
@@ -30,37 +86,39 @@ public class pnKeuangan extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbTahun = new javax.swing.JComboBox<>();
+        cbBulan = new javax.swing.JComboBox<>();
+        cbTanggal = new javax.swing.JComboBox<>();
         customPanel1 = new CustomComponent.CustomPanel();
         jLabel19 = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
+        lbKeuanganHarian = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         customPanel4 = new CustomComponent.CustomPanel();
         jLabel22 = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
+        lbKeuanganBulanan = new javax.swing.JLabel();
         customPanel5 = new CustomComponent.CustomPanel();
         jLabel23 = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        lbKeuanganTahunan = new javax.swing.JLabel();
         customPanel7 = new CustomComponent.CustomPanel();
         jLabel25 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
+        lbPengeluaranBulanan = new javax.swing.JLabel();
         customPanel6 = new CustomComponent.CustomPanel();
         jLabel24 = new javax.swing.JLabel();
         jPanel29 = new javax.swing.JPanel();
+        lbPengeluaranHarian = new javax.swing.JLabel();
         customPanel8 = new CustomComponent.CustomPanel();
         jLabel26 = new javax.swing.JLabel();
         jPanel31 = new javax.swing.JPanel();
+        lbPengeluaranTahunan = new javax.swing.JLabel();
         customPanel9 = new CustomComponent.CustomPanel();
         jLabel27 = new javax.swing.JLabel();
         jPanel32 = new javax.swing.JPanel();
+        lbLabaBersih = new javax.swing.JLabel();
+        btnCek = new CustomComponent.CustomButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -72,24 +130,34 @@ public class pnKeuangan extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Tahun");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Bulan");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 60, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 60, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Tanggal");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 80, -1));
+        cbTahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
+        cbTahun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTahunActionPerformed(evt);
+            }
+        });
+        add(cbTahun, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 130, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 90, -1));
+        cbBulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
+        cbBulan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBulanActionPerformed(evt);
+            }
+        });
+        add(cbBulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 130, 30));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
-        add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 80, -1));
+        cbTanggal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--" }));
+        add(cbTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 130, 30));
 
         customPanel1.setBackground(new java.awt.Color(78, 115, 223));
         customPanel1.setBackgroundColor(new java.awt.Color(78, 115, 223));
@@ -102,28 +170,35 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel24.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbKeuanganHarian.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbKeuanganHarian.setText("1234567890");
+
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(lbKeuanganHarian)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lbKeuanganHarian)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel1Layout = new javax.swing.GroupLayout(customPanel1);
         customPanel1.setLayout(customPanel1Layout);
         customPanel1Layout.setHorizontalGroup(
             customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(customPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jLabel19)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         customPanel1Layout.setVerticalGroup(
             customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,28 +225,37 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel27.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel27.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbKeuanganBulanan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbKeuanganBulanan.setText("1234567890");
+
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbKeuanganBulanan)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbKeuanganBulanan)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel4Layout = new javax.swing.GroupLayout(customPanel4);
         customPanel4.setLayout(customPanel4Layout);
         customPanel4Layout.setHorizontalGroup(
             customPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(customPanel4Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabel22)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(customPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         customPanel4Layout.setVerticalGroup(
             customPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,15 +279,24 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel28.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbKeuanganTahunan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbKeuanganTahunan.setText("1234567890");
+
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbKeuanganTahunan)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbKeuanganTahunan)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel5Layout = new javax.swing.GroupLayout(customPanel5);
@@ -229,27 +322,6 @@ public class pnKeuangan extends javax.swing.JPanel {
 
         add(customPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 220, -1));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("Tahun");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel10.setText("Bulan");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 60, -1));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setText("Tanggal");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
-        add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 80, -1));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
-        add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 90, -1));
-
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--" }));
-        add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 80, -1));
-
         customPanel7.setBackground(new java.awt.Color(78, 115, 223));
         customPanel7.setBackgroundColor(new java.awt.Color(78, 115, 223));
 
@@ -261,15 +333,24 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel30.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel30.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbPengeluaranBulanan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbPengeluaranBulanan.setText("1234567890");
+
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbPengeluaranBulanan)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbPengeluaranBulanan)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel7Layout = new javax.swing.GroupLayout(customPanel7);
@@ -306,15 +387,24 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel29.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel29.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbPengeluaranHarian.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbPengeluaranHarian.setText("1234567890");
+
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbPengeluaranHarian)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbPengeluaranHarian)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel6Layout = new javax.swing.GroupLayout(customPanel6);
@@ -351,15 +441,24 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel31.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel31.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbPengeluaranTahunan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbPengeluaranTahunan.setText("1234567890");
+
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel31Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbPengeluaranTahunan)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel31Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbPengeluaranTahunan)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel8Layout = new javax.swing.GroupLayout(customPanel8);
@@ -396,15 +495,24 @@ public class pnKeuangan extends javax.swing.JPanel {
         jPanel32.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel32.setForeground(new java.awt.Color(255, 255, 255));
 
+        lbLabaBersih.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbLabaBersih.setText("1234567890");
+
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
         jPanel32Layout.setHorizontalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGroup(jPanel32Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbLabaBersih)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel32Layout.setVerticalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(jPanel32Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbLabaBersih)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customPanel9Layout = new javax.swing.GroupLayout(customPanel9);
@@ -429,10 +537,93 @@ public class pnKeuangan extends javax.swing.JPanel {
         );
 
         add(customPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 220, -1));
+
+        btnCek.setText("customButton1");
+        btnCek.setBackgroundColor(new java.awt.Color(255, 151, 51));
+        btnCek.setTextBold(0);
+        btnCek.setTextColor(java.awt.Color.white);
+        btnCek.setTheText("Cek!");
+        btnCek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCekActionPerformed(evt);
+            }
+        });
+        add(btnCek, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbTahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTahunActionPerformed
+        // TODO add your handling code here:
+        setCbTgl();
+    }//GEN-LAST:event_cbTahunActionPerformed
+
+    private void cbBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBulanActionPerformed
+        // TODO add your handling code here:
+        setCbTgl();
+    }//GEN-LAST:event_cbBulanActionPerformed
+
+    private void btnCekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekActionPerformed
+        // TODO add your handling code here:
+        String tgl = cbTanggal.getSelectedItem().toString();
+        String bln = cbBulan.getSelectedItem().toString();
+        String thn = cbTahun.getSelectedItem().toString();
+        ResultSet pemasukanHarian = db.ambilData("SELECT SUM(harga_total) AS hehe FROM transaksi WHERE tanggal_transaksi = '" + thn + "-" + map.get(bln) + "-" + tgl + "'");
+        ResultSet pemasukanBulanan = db.ambilData("SELECT SUM(harga_total) AS hehe FROM transaksi WHERE tanggal_transaksi >= '" + thn + "-" + map.get(bln) + "-01' AND tanggal_transaksi <= '" + thn + "-" + map.get(bln) + "-31'");
+        ResultSet pemasukanTahunan = db.ambilData("SELECT SUM(harga_total) AS hehe FROM transaksi WHERE tanggal_transaksi >= '" + thn + "-01-01' AND tanggal_transaksi <= '" + thn + "-12-31'");
+        
+        ResultSet pengeluaranHarian = db.ambilData("SELECT SUM(harga) AS hehe FROM pengeluaran WHERE tanggal_pengeluaran = '" + thn + "-" + map.get(bln) + "-" + tgl + "'");
+        ResultSet pengeluaranBulanan = db.ambilData("SELECT SUM(harga) AS hehe FROM pengeluaran WHERE tanggal_pengeluaran >= '" + thn + "-" + map.get(bln) + "-01' AND tanggal_pengeluaran <= '" + thn + "-" + map.get(bln) + "-31'");
+        ResultSet pengeluaranTahunan = db.ambilData("SELECT SUM(harga) AS hehe FROM pengeluaran WHERE tanggal_pengeluaran >= '" + thn + "-01-01' AND tanggal_pengeluaran <= '" + thn + "-12-31'");
+        try {
+            if(pemasukanHarian.next()) {
+                lbKeuanganHarian.setText(pemasukanHarian.getString("hehe"));
+            } else {
+                lbKeuanganHarian.setText("Tidak ada Data!");
+            }
+            if(pemasukanBulanan.next()) {
+                lbKeuanganBulanan.setText(pemasukanBulanan.getString("hehe"));
+            } else {
+                lbKeuanganBulanan.setText("Tidak ada Data!");
+            }
+            if(pemasukanTahunan.next()) {
+                lbKeuanganTahunan.setText(pemasukanTahunan.getString("hehe"));
+            } else {
+                lbKeuanganTahunan.setText("Tidak ada Data!");
+            }
+            
+            if(pengeluaranHarian.next()) {
+                lbPengeluaranHarian.setText(pengeluaranHarian.getString("hehe"));
+            } else {
+                lbPengeluaranHarian.setText("Tidak ada Data!");
+            }
+            if(pengeluaranBulanan.next()) {
+                lbPengeluaranBulanan.setText(pengeluaranBulanan.getString("hehe"));
+            } else {
+                lbPengeluaranBulanan.setText("Tidak ada Data!");
+            }
+            if(pengeluaranTahunan.next()) {
+                lbPengeluaranTahunan.setText(pengeluaranTahunan.getString("hehe"));
+            } else {
+                lbPengeluaranTahunan.setText("Tidak ada Data!");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCekActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CustomComponent.CustomButton btnBatal;
+    private CustomComponent.CustomButton btnBatal1;
+    private CustomComponent.CustomButton btnBatal2;
+    private CustomComponent.CustomButton btnBatal3;
+    private CustomComponent.CustomButton btnBatal4;
+    private CustomComponent.CustomButton btnBatal5;
+    private CustomComponent.CustomButton btnBatal6;
+    private CustomComponent.CustomButton btnBatal7;
+    private CustomComponent.CustomButton btnCek;
+    private javax.swing.JComboBox<String> cbBulan;
+    private javax.swing.JComboBox<String> cbTahun;
+    private javax.swing.JComboBox<String> cbTanggal;
     private CustomComponent.CustomPanel customPanel1;
     private CustomComponent.CustomPanel customPanel4;
     private CustomComponent.CustomPanel customPanel5;
@@ -440,15 +631,7 @@ public class pnKeuangan extends javax.swing.JPanel {
     private CustomComponent.CustomPanel customPanel7;
     private CustomComponent.CustomPanel customPanel8;
     private CustomComponent.CustomPanel customPanel9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -459,7 +642,6 @@ public class pnKeuangan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
@@ -467,6 +649,13 @@ public class pnKeuangan extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
+    private javax.swing.JLabel lbKeuanganBulanan;
+    private javax.swing.JLabel lbKeuanganHarian;
+    private javax.swing.JLabel lbKeuanganTahunan;
+    private javax.swing.JLabel lbLabaBersih;
+    private javax.swing.JLabel lbPengeluaranBulanan;
+    private javax.swing.JLabel lbPengeluaranHarian;
+    private javax.swing.JLabel lbPengeluaranTahunan;
     private javax.swing.JLabel lbTitle;
     // End of variables declaration//GEN-END:variables
 }
