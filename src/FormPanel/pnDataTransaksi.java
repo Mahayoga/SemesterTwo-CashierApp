@@ -4,6 +4,7 @@
  */
 package FormPanel;
 
+import Form.MenuUtama;
 import Login.login;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -16,9 +17,14 @@ import javax.swing.JOptionPane;
 import koneksi.koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -36,6 +42,26 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         initComponents();
         setColumn();
         setRow();
+    }
+    
+    public JPanel thePanel(int row) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        ResultSet rs = db.ambilData("SELECT * FROM detail_transaksi dt INNER JOIN stok_barang sb ON dt.kode_barang = sb.id_barang WHERE dt.id_transaksi = '" + tblData.getValueAt(row, 0) + "'");
+        //panel.add(new JLabel("Detail barang pada transaksi nomor '" + tblData.getValueAt(row, 0) + "', berikut:\n"));
+        panel.setBounds(0, 0, 300, 300);
+        label.setText("<html><body>");
+        label.setText(label.getText() + "Detail barang pada transaksi nomor '" + tblData.getValueAt(row, 0) + "', berikut:<br/>");
+        try {
+            while(rs.next()) {
+                label.setText(label.getText() + rs.getString("nama_barang") + " :" + rs.getString("jumlah_barang") + "<br/>");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        label.setText(label.getText() + "</body></html>");
+        panel.add(label);
+        return panel;
     }
     
     public void setRow() {
@@ -171,10 +197,28 @@ public class pnDataTransaksi extends javax.swing.JPanel {
 
     private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
         // TODO add your handling code here:
+        if(Integer.parseInt(String.valueOf(tblData.getSelectedRow())) != -1) {
+            try {
+                db.koneksi();
+                File f = new File("src/Struk/report1.jasper");
+
+                HashMap<String, Object> param = new HashMap<>();
+                param.put("nama_kasir", new String(MenuUtama.kasir));
+                param.put("no_transaksi", new String(tblData.getValueAt(Integer.parseInt(String.valueOf(tblData.getSelectedRow())), 0).toString()));
+                JasperPrint print = JasperFillManager.fillReport(f.getAbsolutePath(), param, db.con);
+
+                JasperViewer.viewReport(print, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_customButton5ActionPerformed
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
         // TODO add your handling code here:
+        if(Integer.parseInt(String.valueOf(tblData.getSelectedRow())) != -1) {
+            JOptionPane.showMessageDialog(this, thePanel(Integer.parseInt(String.valueOf(tblData.getSelectedRow()))), "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnDetailActionPerformed
 
 
