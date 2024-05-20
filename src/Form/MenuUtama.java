@@ -5,6 +5,7 @@ import FormPanel.pnDataBarang;
 import FormPanel.pnDataKadaluarsa;
 import FormPanel.pnDataKeuangan;
 import FormPanel.pnDataSupplier;
+import FormPanel.pnKeuangan;
 import Login.login;
 import PanelFormEdit.pnEditBarang;
 import PanelFormEdit.pnEditKadaluarsa;
@@ -46,6 +47,7 @@ public class MenuUtama extends javax.swing.JFrame {
     pnTambahBarang pTDB = new pnTambahBarang();
     pnTambahKadaluarsa pTDK = new pnTambahKadaluarsa();
     pnTambahKeuangan pTDKu = new pnTambahKeuangan();
+    pnKeuangan pK = new pnKeuangan();
     pnEditSupplier pEDS;
     pnEditBarang pEDB;
     pnEditKadaluarsa pEDK;
@@ -53,21 +55,27 @@ public class MenuUtama extends javax.swing.JFrame {
     boolean inForm = false;
     String idData;
     String date;
+    public static String kasir;
     /**
      * Creates new form MenuUtama
      * Panel Width: 1190
      * Panel Height: 590
      */
-    public MenuUtama(String role) {
+    public MenuUtama(String role, String kasir) {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         System.out.println(this.getWidth() + " " + this.getHeight());
         //db.koneksi();
+        this.kasir = kasir;
         this.role = role;
         if(role.equals("U")) {
             secAdmin.setVisible(false);
             lbLogin.setText("Masuk Sebagai Karyawan");
+            lbNamaKasir.setText(kasir);
+        } else {
+            lbLogin.setText("Masuk Sebagai Admin");
+            lbNamaKasir.setText(kasir);
         }
         db.koneksi();
         model.setRowCount(0);
@@ -214,7 +222,7 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         
-        // ------------------------------------------ Tambah Data Keuangan Interface Set ------------------------------------------
+        // ------------------------------------------ Keuangan Interface Set ------------------------------------------
         pnDataKeuangan1.setVariableTambah(new pnDataKeuangan.TambahData() {
             @Override
             public void tambahData() {
@@ -237,6 +245,12 @@ public class MenuUtama extends javax.swing.JFrame {
             @Override
             public void hapusData() {
                 btnHapusKeuangan(idData);
+            }
+        });
+        pnDataKeuangan1.setVariableKeuangan(new pnDataKeuangan.Keuangan() {
+            @Override
+            public void cekData() {
+                btnCekKeuangan();
             }
         });
         
@@ -313,6 +327,12 @@ public class MenuUtama extends javax.swing.JFrame {
         if(asn == JOptionPane.YES_OPTION) {
             clickBtn(1);
         }
+    }
+    public void btnCekKeuangan() {
+        container.removeAll();
+        container.repaint();
+        pK.setBounds(0, 0, 1190, 590);
+        container.add(pK);
     }
     
     // ------------------------------------------ Method Data Barang ------------------------------------------
@@ -638,6 +658,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         lbLogin = new javax.swing.JLabel();
+        lbNamaKasir = new javax.swing.JLabel();
         iconLogOut = new javax.swing.JLabel();
         pnFooter = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -758,6 +779,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Keluar");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
@@ -768,21 +790,31 @@ public class MenuUtama extends javax.swing.JFrame {
         lbLogin.setForeground(new java.awt.Color(133, 135, 150));
         lbLogin.setText("Masuk Sebagai Admin ");
 
+        lbNamaKasir.setForeground(new java.awt.Color(133, 135, 150));
+        lbNamaKasir.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lbLogin)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(lbLogin))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(lbNamaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(lbLogin)
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbNamaKasir)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
@@ -1084,7 +1116,7 @@ public class MenuUtama extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuUtama("").setVisible(true);
+                new MenuUtama("A", "Mahayoga").setVisible(true);
             }
         });
     }
@@ -1115,6 +1147,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel lbKasir;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbMenuUtama;
+    private javax.swing.JLabel lbNamaKasir;
     private javax.swing.JPanel logo;
     private javax.swing.JPanel navbar;
     private FormPanel.pnDataBarang pnDataBarang1;
