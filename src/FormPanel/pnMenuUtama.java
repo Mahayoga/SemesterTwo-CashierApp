@@ -33,39 +33,39 @@ public class pnMenuUtama extends javax.swing.JPanel {
         initComponents();
         tblData.setModel(model);
         tblData.setRowHeight(40);
-        //countTotal();
+        countTotal();
     }
     
     public void countTotal() {
         ResultSet rs1 = db.ambilData("SELECT COUNT(kode_barang) AS 'hehe' FROM stok_barang ORDER BY kode_barang DESC;");
         ResultSet rs2 = db.ambilData("SELECT COUNT(tanggal) AS 'hehe' FROM detail_transaksi GROUP BY tanggal DESC");
-        ResultSet rs3 = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.kode_barang GROUP BY dt.tanggal DESC");
+        ResultSet rs3 = db.ambilData("SELECT COUNT(*) AS jumlah_transaksi FROM transaksi");
         try {
             rs1.next();
             rs2.next();
             rs3.next();
-            if(Integer.parseInt(rs1.getString("hehe")) < 9) {
+            if(Integer.parseInt(rs1.getString("hehe")) <= 9) {
                 lbCountDataBarang.setText("00" + rs1.getString("hehe"));
-            } else if(Integer.parseInt(rs1.getString("hehe")) < 99) {
+            } else if(Integer.parseInt(rs1.getString("hehe")) <= 99) {
                 lbCountDataBarang.setText("0" + rs1.getString("hehe"));
-            } else if(Integer.parseInt(rs1.getString("hehe")) < 999) {
+            } else if(Integer.parseInt(rs1.getString("hehe")) <= 999) {
                 lbCountDataBarang.setText(rs1.getString("hehe"));
             }
             
-            if(Integer.parseInt(rs2.getString("hehe")) < 9) {
+            if(Integer.parseInt(rs2.getString("hehe")) <= 9) {
                 lbCountDataTransaksi.setText("00" + rs2.getString("hehe"));
-            } else if(Integer.parseInt(rs2.getString("hehe")) < 99) {
+            } else if(Integer.parseInt(rs2.getString("hehe")) <= 99) {
                 lbCountDataTransaksi.setText("0" + rs2.getString("hehe"));
-            } else if(Integer.parseInt(rs2.getString("hehe")) < 999) {
+            } else if(Integer.parseInt(rs2.getString("hehe")) <= 999) {
                 lbCountDataTransaksi.setText(rs2.getString("hehe"));
             }
             
-            if(Integer.parseInt(rs3.getString("kode_barang")) < 9) {
-                lbCountDataKeuangan.setText("00" + rs3.getString("kode_barang"));
-            } else if(Integer.parseInt(rs3.getString("kode_barang")) < 99) {
-                lbCountDataKeuangan.setText("0" + rs3.getString("kode_barang"));
-            } else if(Integer.parseInt(rs3.getString("kode_barang")) < 999) {
-                lbCountDataKeuangan.setText(rs3.getString("kode_barang"));
+            if(Integer.parseInt(rs3.getString("jumlah_transaksi")) <= 9) {
+                lbCountDataKeuangan.setText("00" + rs3.getString("jumlah_transaksi"));
+            } else if(Integer.parseInt(rs3.getString("jumlah_transaksi")) <= 99) {
+                lbCountDataKeuangan.setText("0" + rs3.getString("jumlah_transaksi"));
+            } else if(Integer.parseInt(rs3.getString("jumlah_transaksi")) <= 999) {
+                lbCountDataKeuangan.setText(rs3.getString("jumlah_transaksi"));
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -176,7 +176,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
                         .addGap(83, 83, 83))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(71, 71, 71))))
+                        .addGap(69, 69, 69))))
         );
         customPanel1Layout.setVerticalGroup(
             customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,6 +232,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cek Data Transaksi");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -317,6 +318,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cek Data Keuangan");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -338,7 +340,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(64, 64, 64))))
+                        .addGap(66, 66, 66))))
         );
         customPanel3Layout.setVerticalGroup(
             customPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
