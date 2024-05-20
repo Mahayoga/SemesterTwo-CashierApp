@@ -206,7 +206,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="CustomComponent.CustomButton" name="customButton6">
+    <Component class="CustomComponent.CustomButton" name="btnKeuangan">
       <Properties>
         <Property name="text" type="java.lang.String" value="customButton6"/>
         <Property name="backgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
