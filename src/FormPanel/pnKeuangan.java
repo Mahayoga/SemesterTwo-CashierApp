@@ -161,53 +161,39 @@ public class pnKeuangan extends javax.swing.JPanel {
 
         customPanel1.setBackground(new java.awt.Color(78, 115, 223));
         customPanel1.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Keuangan Harian");
+        customPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 220, 40));
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
         jPanel24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel24.setForeground(new java.awt.Color(255, 255, 255));
 
         lbKeuanganHarian.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbKeuanganHarian.setText("1234567890");
+        lbKeuanganHarian.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lbKeuanganHarian)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbKeuanganHarian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(lbKeuanganHarian)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(lbKeuanganHarian, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel1Layout = new javax.swing.GroupLayout(customPanel1);
-        customPanel1.setLayout(customPanel1Layout);
-        customPanel1Layout.setHorizontalGroup(
-            customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel19)
-                .addContainerGap(61, Short.MAX_VALUE))
-            .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        customPanel1Layout.setVerticalGroup(
-            customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel1.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, -1));
 
         add(customPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 220, 140));
 
@@ -216,325 +202,229 @@ public class pnKeuangan extends javax.swing.JPanel {
 
         customPanel4.setBackground(new java.awt.Color(78, 115, 223));
         customPanel4.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Keuangan Bulanan");
+        customPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 220, 40));
 
         jPanel27.setBackground(new java.awt.Color(255, 255, 255));
         jPanel27.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel27.setForeground(new java.awt.Color(255, 255, 255));
 
         lbKeuanganBulanan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbKeuanganBulanan.setText("1234567890");
+        lbKeuanganBulanan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lbKeuanganBulanan)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbKeuanganBulanan, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lbKeuanganBulanan)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(lbKeuanganBulanan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel4Layout = new javax.swing.GroupLayout(customPanel4);
-        customPanel4.setLayout(customPanel4Layout);
-        customPanel4Layout.setHorizontalGroup(
-            customPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel4Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(customPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        customPanel4Layout.setVerticalGroup(
-            customPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel4.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, 100));
 
         add(customPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 220, -1));
 
         customPanel5.setBackground(new java.awt.Color(78, 115, 223));
         customPanel5.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Keuangan Tahunan");
+        customPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 230, 50));
 
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
         jPanel28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel28.setForeground(new java.awt.Color(255, 255, 255));
 
         lbKeuanganTahunan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbKeuanganTahunan.setText("1234567890");
+        lbKeuanganTahunan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel28Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lbKeuanganTahunan)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbKeuanganTahunan, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel28Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(lbKeuanganTahunan)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(lbKeuanganTahunan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel5Layout = new javax.swing.GroupLayout(customPanel5);
-        customPanel5.setLayout(customPanel5Layout);
-        customPanel5Layout.setHorizontalGroup(
-            customPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(customPanel5Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel23)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        customPanel5Layout.setVerticalGroup(
-            customPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel5.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, 100));
 
         add(customPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 220, -1));
 
         customPanel7.setBackground(new java.awt.Color(78, 115, 223));
         customPanel7.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("Pengeluaran Bulanan");
+        customPanel7.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 220, 40));
 
         jPanel30.setBackground(new java.awt.Color(255, 255, 255));
         jPanel30.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel30.setForeground(new java.awt.Color(255, 255, 255));
 
         lbPengeluaranBulanan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbPengeluaranBulanan.setText("1234567890");
+        lbPengeluaranBulanan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lbPengeluaranBulanan)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbPengeluaranBulanan, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(lbPengeluaranBulanan)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(lbPengeluaranBulanan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel7Layout = new javax.swing.GroupLayout(customPanel7);
-        customPanel7.setLayout(customPanel7Layout);
-        customPanel7Layout.setHorizontalGroup(
-            customPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(customPanel7Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel25)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        customPanel7Layout.setVerticalGroup(
-            customPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel7Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel7.add(jPanel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, 98));
 
-        add(customPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 220, -1));
+        add(customPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 220, 140));
 
         customPanel6.setBackground(new java.awt.Color(78, 115, 223));
         customPanel6.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("Pengeluaran Harian");
+        customPanel6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 40));
 
         jPanel29.setBackground(new java.awt.Color(255, 255, 255));
         jPanel29.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel29.setForeground(new java.awt.Color(255, 255, 255));
 
         lbPengeluaranHarian.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbPengeluaranHarian.setText("1234567890");
+        lbPengeluaranHarian.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lbPengeluaranHarian)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbPengeluaranHarian, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lbPengeluaranHarian)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(lbPengeluaranHarian, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel6Layout = new javax.swing.GroupLayout(customPanel6);
-        customPanel6.setLayout(customPanel6Layout);
-        customPanel6Layout.setHorizontalGroup(
-            customPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(customPanel6Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel24)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        customPanel6Layout.setVerticalGroup(
-            customPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel6Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel6.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, 98));
 
-        add(customPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 220, -1));
+        add(customPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 220, 140));
 
         customPanel8.setBackground(new java.awt.Color(78, 115, 223));
         customPanel8.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("Pengeluaran Tahunan");
+        customPanel8.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 40));
 
         jPanel31.setBackground(new java.awt.Color(255, 255, 255));
         jPanel31.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel31.setForeground(new java.awt.Color(255, 255, 255));
 
         lbPengeluaranTahunan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbPengeluaranTahunan.setText("1234567890");
+        lbPengeluaranTahunan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel31Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lbPengeluaranTahunan)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbPengeluaranTahunan, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel31Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lbPengeluaranTahunan)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(lbPengeluaranTahunan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel8Layout = new javax.swing.GroupLayout(customPanel8);
-        customPanel8.setLayout(customPanel8Layout);
-        customPanel8Layout.setHorizontalGroup(
-            customPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(customPanel8Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel26)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        customPanel8Layout.setVerticalGroup(
-            customPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel8Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel26)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel8.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, 98));
 
-        add(customPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 220, -1));
+        add(customPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 220, 140));
 
         customPanel9.setBackground(new java.awt.Color(78, 115, 223));
         customPanel9.setBackgroundColor(new java.awt.Color(78, 115, 223));
+        customPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Total Laba Bersih");
+        customPanel9.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 220, 40));
 
         jPanel32.setBackground(new java.awt.Color(255, 255, 255));
         jPanel32.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel32.setForeground(new java.awt.Color(255, 255, 255));
 
         lbLabaBersih.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbLabaBersih.setText("1234567890");
+        lbLabaBersih.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
         jPanel32Layout.setHorizontalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel32Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lbLabaBersih)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbLabaBersih, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel32Layout.setVerticalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel32Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(lbLabaBersih)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(lbLabaBersih, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout customPanel9Layout = new javax.swing.GroupLayout(customPanel9);
-        customPanel9.setLayout(customPanel9Layout);
-        customPanel9Layout.setHorizontalGroup(
-            customPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(customPanel9Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel27)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        customPanel9Layout.setVerticalGroup(
-            customPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanel9Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel27)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        customPanel9.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 220, 100));
 
         add(customPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 220, -1));
 
@@ -593,6 +483,7 @@ public class pnKeuangan extends javax.swing.JPanel {
             if(pengeluaranHarian.next()) {
                 lbPengeluaranHarian.setText(pengeluaranHarian.getString("hehe"));
             } else {
+                System.out.println("Heheheehhehehehehe");
                 lbPengeluaranHarian.setText("Tidak ada Data!");
             }
             if(pengeluaranBulanan.next()) {

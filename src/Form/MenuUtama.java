@@ -788,9 +788,11 @@ public class MenuUtama extends javax.swing.JFrame {
 
         lbLogin.setBackground(new java.awt.Color(133, 135, 150));
         lbLogin.setForeground(new java.awt.Color(133, 135, 150));
+        lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbLogin.setText("Masuk Sebagai Admin ");
 
         lbNamaKasir.setForeground(new java.awt.Color(133, 135, 150));
+        lbNamaKasir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbNamaKasir.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
@@ -798,14 +800,11 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lbLogin))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(lbNamaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbNamaKasir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
