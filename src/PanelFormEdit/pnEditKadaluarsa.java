@@ -130,7 +130,7 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         }
     }
     
-    public void simpanData(String id) {
+    public void simpanData(String id, String date) {
         /*
         * kode_barang	
         * tgl_kadaluarsa	
@@ -149,9 +149,7 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         int jumlah = Integer.parseInt(tfJumlah.getText());
         
         try {
-            for(int i = 0; i < jumlah; i++) {
-                db.aksi("UPDATE detail_barang SET tgl_kadaluarsa = '" + tglJadi + "' WHERE kode_barang = '" + kd + "'");
-            }
+            db.aksi("UPDATE detail_barang SET tgl_kadaluarsa = '" + tglJadi + "' WHERE kode_barang = '" + kd + "' AND tgl_kadaluarsa = '" + date + "' LIMIT " + jumlah);
         } catch(Exception e) {
             e.printStackTrace();
         }
