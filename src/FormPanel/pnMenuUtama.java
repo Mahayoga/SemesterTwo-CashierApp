@@ -55,9 +55,14 @@ public class pnMenuUtama extends javax.swing.JPanel {
         ResultSet rs1 = db.ambilData("SELECT COUNT(kode_barang) AS 'hehe' FROM stok_barang ORDER BY kode_barang DESC;");
         ResultSet rs2 = db.ambilData("SELECT COUNT(tanggal) AS 'hehe' FROM detail_transaksi GROUP BY tanggal DESC");
         ResultSet rs3 = db.ambilData("SELECT COUNT(*) AS jumlah_transaksi FROM transaksi");
+        
+        int countTr = 0;
+        
         try {
             rs1.next();
-            rs2.next();
+            while(rs2.next()) {
+                countTr += Integer.parseInt(rs2.getString("hehe"));
+            }
             rs3.next();
             if(Integer.parseInt(rs1.getString("hehe")) <= 9) {
                 lbCountDataBarang.setText("00" + rs1.getString("hehe"));
@@ -67,20 +72,20 @@ public class pnMenuUtama extends javax.swing.JPanel {
                 lbCountDataBarang.setText(rs1.getString("hehe"));
             }
             
-            if(Integer.parseInt(rs2.getString("hehe")) <= 9) {
-                lbCountDataTransaksi.setText("00" + rs2.getString("hehe"));
-            } else if(Integer.parseInt(rs2.getString("hehe")) <= 99) {
-                lbCountDataTransaksi.setText("0" + rs2.getString("hehe"));
-            } else if(Integer.parseInt(rs2.getString("hehe")) <= 999) {
-                lbCountDataTransaksi.setText(rs2.getString("hehe"));
+            if(countTr <= 9) {
+                lbCountDataKeuangan.setText("00" + countTr);
+            } else if(countTr <= 99) {
+                lbCountDataKeuangan.setText("0" + countTr);
+            } else if(countTr <= 999) {
+                lbCountDataKeuangan.setText(String.valueOf(countTr));
             }
             
             if(Integer.parseInt(rs3.getString("jumlah_transaksi")) <= 9) {
-                lbCountDataKeuangan.setText("00" + rs3.getString("jumlah_transaksi"));
+                lbCountDataTransaksi.setText("00" + rs3.getString("jumlah_transaksi"));
             } else if(Integer.parseInt(rs3.getString("jumlah_transaksi")) <= 99) {
-                lbCountDataKeuangan.setText("0" + rs3.getString("jumlah_transaksi"));
+                lbCountDataTransaksi.setText("0" + rs3.getString("jumlah_transaksi"));
             } else if(Integer.parseInt(rs3.getString("jumlah_transaksi")) <= 999) {
-                lbCountDataKeuangan.setText(rs3.getString("jumlah_transaksi"));
+                lbCountDataTransaksi.setText(rs3.getString("jumlah_transaksi"));
             }
         } catch(Exception e) {
             e.printStackTrace();
