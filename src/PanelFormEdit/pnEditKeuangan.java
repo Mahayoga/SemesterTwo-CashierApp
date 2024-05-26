@@ -156,7 +156,7 @@ public class pnEditKeuangan extends javax.swing.JPanel {
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
-        lbTitle.setText("Tambah Data Pengeluaran");
+        lbTitle.setText("Edit Data Pengeluaran");
 
         cbJenisPengeluaran.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--", "Operasional", "Beli Barang", "Gaji Karyawan", "Lainnya" }));
 
