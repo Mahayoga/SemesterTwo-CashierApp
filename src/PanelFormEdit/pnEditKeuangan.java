@@ -83,7 +83,7 @@ public class pnEditKeuangan extends javax.swing.JPanel {
                 tfTanggalPengeluaran.setText(rs.getString("tanggal_pengeluaran"));
                 cbJenisPengeluaran.setSelectedItem(rs.getString("jenis_pengeluaran"));
                 tfHarga.setText(rs.getString("harga"));
-                taKeterangan.setText(rs.getString(rs.getString("keterangan")));
+                taKeterangan.setText(rs.getString("keterangan"));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
