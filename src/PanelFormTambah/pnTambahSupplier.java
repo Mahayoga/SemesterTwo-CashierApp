@@ -6,6 +6,7 @@ package PanelFormTambah;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import koneksi.koneksi;
 
@@ -23,6 +24,7 @@ public class pnTambahSupplier extends javax.swing.JPanel {
      */
     public pnTambahSupplier() {
         initComponents();
+        checkId();
         btnBatal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,6 +61,29 @@ public class pnTambahSupplier extends javax.swing.JPanel {
     public void theEventSimpan() {
         if(simpanSupplier != null) {
             simpanSupplier.simpanSupplier();
+        }
+    }
+    
+    public void checkId() {
+        ResultSet rs = db.ambilData("SELECT * FROM suppliers ORDER BY id_supplier DESC");
+        try {
+            if(rs.next()) {
+                int id = Integer.parseInt(rs.getString("id_supplier").substring(2, 6)); //KP0001 
+                id++;
+                if(id <= 9) {
+                    tfKodeSupplier.setText(rs.getString("id_supplier").substring(0, 2) + "000" + id);
+                } else if(id <= 99) {
+                    tfKodeSupplier.setText(rs.getString("id_supplier").substring(0, 2) + "00" + id);
+                } else if(id <= 999) {
+                    tfKodeSupplier.setText(rs.getString("id_supplier").substring(0, 2) + "0" + id);
+                } else if(id <= 9999) {
+                    tfKodeSupplier.setText(rs.getString("id_supplier").substring(0, 2) + "" + id);
+                }
+            } else {
+                tfKodeSupplier.setText(rs.getString("id_supplier").substring(0, 2) + "0001");
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -109,6 +134,7 @@ public class pnTambahSupplier extends javax.swing.JPanel {
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
         lbTitle.setText("Data Suppliers");
 
+        tfKodeSupplier.setEnabled(false);
         tfKodeSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodeSupplierActionPerformed(evt);

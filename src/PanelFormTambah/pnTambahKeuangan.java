@@ -24,6 +24,7 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
      */
     public pnTambahKeuangan() {
         initComponents();
+        checkId();
         btnSimpan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +61,29 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
     public void theEventSimpan() {
         if(simpanBarang != null) {
             simpanBarang.simpanKeuangan();
+        }
+    }
+    
+    public void checkId() {
+        ResultSet rs = db.ambilData("SELECT * FROM pengeluaran ORDER BY kode_pengeluaran DESC");
+        try {
+            if(rs.next()) {
+                int id = Integer.parseInt(rs.getString("kode_pengeluaran").substring(2, 6)); //KP0001 
+                id++;
+                if(id <= 9) {
+                    tfKodePengeluaran.setText(rs.getString("kode_pengeluaran").substring(0, 2) + "000" + id);
+                } else if(id <= 99) {
+                    tfKodePengeluaran.setText(rs.getString("kode_pengeluaran").substring(0, 2) + "00" + id);
+                } else if(id <= 999) {
+                    tfKodePengeluaran.setText(rs.getString("kode_pengeluaran").substring(0, 2) + "0" + id);
+                } else if(id <= 9999) {
+                    tfKodePengeluaran.setText(rs.getString("kode_pengeluaran").substring(0, 2) + "" + id);
+                }
+            } else {
+                tfKodePengeluaran.setText(rs.getString("kode_pengeluaran").substring(0, 2) + "0001");
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -108,6 +132,7 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Kode Pengeluaran ");
 
+        tfKodePengeluaran.setEnabled(false);
         tfKodePengeluaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodePengeluaranActionPerformed(evt);
