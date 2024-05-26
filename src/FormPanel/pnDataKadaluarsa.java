@@ -169,7 +169,7 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
     
     public void setRow() {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now()  + "' GROUP BY tgl_kadaluarsa");
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now()  + "' AND db.status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
         try {
             while(rs.next()) {
                 model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
@@ -182,7 +182,7 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
     
     public void setRow(String kategori) {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND sb.kategori_barang = '" + kategori + "' GROUP BY tgl_kadaluarsa");
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND sb.kategori_barang = '" + kategori + "' AND db.status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
         try {
             while(rs.next()) {
                 model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
@@ -199,12 +199,12 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         try {
             ResultSet rs;
             if(katt.equals("--Tidak dipilih--")) {
-                rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND sb.nama_barang LIKE '%"+ search +"%' GROUP BY tgl_kadaluarsa");
+                rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND sb.nama_barang LIKE '%"+ search +"%' AND db.status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
                 while(rs.next()) {
                     model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
                 }
             } else {
-                rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND k.nama_kategori = '" + katt + "' AND sb.nama_barang LIKE '%"+ search +"%' GROUP BY tgl_kadaluarsa");
+                rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND k.nama_kategori = '" + katt + "' AND sb.nama_barang LIKE '%"+ search +"%' AND db.status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
                 while(rs.next()) {
                     model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
                 }
@@ -219,8 +219,9 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         try {
             int asn = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data barang dengan ID: '" + id + "'?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(asn == JOptionPane.YES_NO_OPTION) {
-                db.aksi("UPDATE detail_barang SET status = 'Sudah Terbuang' WHERE id_barang = '" + id + "' AND tgl_kadaluarsa = '" + date + "'");
+                db.aksi("UPDATE detail_barang SET status = 'Sudah Terbuang' WHERE kode_barang = '" + id + "' AND tgl_kadaluarsa = '" + date + "'");
                 JOptionPane.showMessageDialog(this, "Hapus data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                setRow();
             }
         } catch(Exception e) {
             e.printStackTrace();
