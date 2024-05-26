@@ -8,6 +8,8 @@ import java.util.HashMap;
 import koneksi.koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +32,25 @@ public class pnKeuangan extends javax.swing.JPanel {
             map.put(blnArr[i], i + 1);
         }
     }
+    
+    public String changeToNum(String num) {
+        String result = "";
+        for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
+            result += num.replace('.', 'a').split("a")[i];
+        }
+        return result.split("Rp ")[1];
+    }
+    
+    public String changeToRp(String num) {
+        NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
+        try {
+            return "Rp. " + nf.format(Double.parseDouble(num));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     
     public void setCbTahun() {
         for(int i = 2024; i < 2050; i++) {
@@ -452,7 +473,7 @@ public class pnKeuangan extends javax.swing.JPanel {
     }//GEN-LAST:event_cbBulanActionPerformed
 
     private void btnCekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         String tgl = cbTanggal.getSelectedItem().toString();
         String bln = cbBulan.getSelectedItem().toString();
         String thn = cbTahun.getSelectedItem().toString();
@@ -463,36 +484,44 @@ public class pnKeuangan extends javax.swing.JPanel {
         ResultSet pengeluaranHarian = db.ambilData("SELECT SUM(harga) AS hehe FROM pengeluaran WHERE tanggal_pengeluaran = '" + thn + "-" + map.get(bln) + "-" + tgl + "'");
         ResultSet pengeluaranBulanan = db.ambilData("SELECT SUM(harga) AS hehe FROM pengeluaran WHERE tanggal_pengeluaran >= '" + thn + "-" + map.get(bln) + "-01' AND tanggal_pengeluaran <= '" + thn + "-" + map.get(bln) + "-31'");
         ResultSet pengeluaranTahunan = db.ambilData("SELECT SUM(harga) AS hehe FROM pengeluaran WHERE tanggal_pengeluaran >= '" + thn + "-01-01' AND tanggal_pengeluaran <= '" + thn + "-12-31'");
+        
+        ResultSet labaBulanBersih = db.ambilData("SELECT dt.kode_barang, SUM(dt.harga_total) - SUM((sb.harga_jual * dt.jumlah_barang)) AS hehe FROM detail_transaksi dt INNER JOIN stok_barang sb ON dt.kode_barang = sb.id_barang WHERE dt.tanggal >= '" + thn + "-" + map.get(bln) +"-01' AND dt.tanggal <= '" + thn + "-" + map.get(bln) +"-31' GROUP BY dt.kode_barang;");
+        double totalLaba = 0;
         try {
+            while(labaBulanBersih.next()) {
+                totalLaba += Double.parseDouble(labaBulanBersih.getString("hehe"));
+            }
+            lbLabaBersih.setText(changeToRp(String.valueOf(totalLaba)));
+            
             if(pemasukanHarian.next()) {
-                lbKeuanganHarian.setText(pemasukanHarian.getString("hehe"));
+                lbKeuanganHarian.setText(changeToRp(pemasukanHarian.getString("hehe")));
             } else {
                 lbKeuanganHarian.setText("Tidak ada Data!");
             }
             if(pemasukanBulanan.next()) {
-                lbKeuanganBulanan.setText(pemasukanBulanan.getString("hehe"));
+                lbKeuanganBulanan.setText(changeToRp(pemasukanBulanan.getString("hehe")));
             } else {
                 lbKeuanganBulanan.setText("Tidak ada Data!");
             }
             if(pemasukanTahunan.next()) {
-                lbKeuanganTahunan.setText(pemasukanTahunan.getString("hehe"));
+                lbKeuanganTahunan.setText(changeToRp(pemasukanTahunan.getString("hehe")));
             } else {
                 lbKeuanganTahunan.setText("Tidak ada Data!");
             }
             
             if(pengeluaranHarian.next()) {
-                lbPengeluaranHarian.setText(pengeluaranHarian.getString("hehe"));
+                lbPengeluaranHarian.setText(changeToRp(pengeluaranHarian.getString("hehe")));
             } else {
                 System.out.println("Heheheehhehehehehe");
                 lbPengeluaranHarian.setText("Tidak ada Data!");
             }
             if(pengeluaranBulanan.next()) {
-                lbPengeluaranBulanan.setText(pengeluaranBulanan.getString("hehe"));
+                lbPengeluaranBulanan.setText(changeToRp(pengeluaranBulanan.getString("hehe")));
             } else {
                 lbPengeluaranBulanan.setText("Tidak ada Data!");
             }
             if(pengeluaranTahunan.next()) {
-                lbPengeluaranTahunan.setText(pengeluaranTahunan.getString("hehe"));
+                lbPengeluaranTahunan.setText(changeToRp(pengeluaranTahunan.getString("hehe")));
             } else {
                 lbPengeluaranTahunan.setText("Tidak ada Data!");
             }
