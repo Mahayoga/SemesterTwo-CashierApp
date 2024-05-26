@@ -28,6 +28,7 @@ public class pnEditKeuangan extends javax.swing.JPanel {
      */
     public pnEditKeuangan(String id) {
         initComponents();
+        setData(id);
         btnSimpan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
