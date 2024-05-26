@@ -153,6 +153,12 @@ public class MenuUtama extends javax.swing.JFrame {
                 setDateData(date);
             }
         });
+        pnDataKadaluarsa1.setVariableHapus(new pnDataKadaluarsa.HapusData() {
+            @Override
+            public void hapusData() {
+                hapusDataKadaluarsa();
+            }
+        });
         
         // ------------------------------------------ Tambah Data Kadaluarsa Interface Set ------------------------------------------
         pTDK.setVariableBatal(new pnTambahKadaluarsa.BatalKadaluarsa() {
@@ -276,6 +282,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pTDKu.setBounds(0, 0, 1190, 590);
         container.add(pTDKu);
         inForm = true;
+        resetFooter();
     }
     public void editDataKeuangan(String id) {
         pEDKu = new pnEditKeuangan(id);
@@ -295,6 +302,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDKu.setBounds(0, 0, 1190, 590);
         container.add(pEDKu);
+        resetFooter();
         inForm = true;
     }
     public void btnSimpanKeuangan() {
@@ -333,6 +341,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pK.setBounds(0, 0, 1190, 590);
         container.add(pK);
+        resetFooter();
     }
     
     // ------------------------------------------ Method Data Barang ------------------------------------------
@@ -362,6 +371,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDB.setBounds(0, 0, 1190, 590);
         container.add(pEDB);
+        resetFooter();
         inForm = true;
     }
     public void btnHapusBarang(String id) {
@@ -400,6 +410,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDB.setBounds(0, 0, 1190, 590);
         container.add(pTDB);
+        resetFooter();
         inForm = true;
     }
     
@@ -424,7 +435,7 @@ public class MenuUtama extends javax.swing.JFrame {
         if(inForm) {
             int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if(asn == JOptionPane.YES_OPTION) {
-                pEDK.simpanData(idData);
+                pEDK.simpanData(idData, date);
                 inForm = false;
                 JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
                 pnDataKadaluarsa1.setRow();
@@ -450,6 +461,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDK.setBounds(0, 0, 1190, 590);
         container.add(pEDK);
+        resetFooter();
         inForm = true;
     }
     public void tambahDataKadaluarsa() {
@@ -459,6 +471,9 @@ public class MenuUtama extends javax.swing.JFrame {
         container.add(pTDK);
         inForm = true;
         resetFooter();
+    }
+    public void hapusDataKadaluarsa() {
+        pnDataKadaluarsa1.hapusData(idData, date);
     }
     
     // ------------------------------------------ Method Supplier ------------------------------------------
@@ -494,6 +509,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDS.setBounds(0, 0, 1190, 590);
         container.add(pTDS);
+        resetFooter();
         inForm = true;
     }
     public void editDataSupplier(String id) {
@@ -514,6 +530,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDS.setBounds(0, 0, 1190, 590);
         container.add(pEDS);
+        resetFooter();
         inForm = true;
     }
     public void hapusDataSupplier(String id) {
