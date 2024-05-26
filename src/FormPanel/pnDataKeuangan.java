@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -155,6 +157,19 @@ public class pnDataKeuangan extends javax.swing.JPanel {
         }
     }
     
+    public String changeToNum(String num) {
+        String result = "";
+        for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
+            result += num.replace('.', 'a').split("a")[i];
+        }
+        return result.split("Rp ")[1];
+    }
+    
+    public String changeToRp(String num) {
+        NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
+        return "Rp. " + nf.format(Double.parseDouble(num));
+    }
+    
     public void setColumn() {
         model.setColumnCount(0);
         model.addColumn("Kode Pengeluaran");
@@ -175,7 +190,7 @@ public class pnDataKeuangan extends javax.swing.JPanel {
 //	keterangan
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -188,7 +203,7 @@ public class pnDataKeuangan extends javax.swing.JPanel {
         ResultSet rs = db.ambilData("SELECT * FROM pengeluaran WHERE jenis_pengeluaran = '" + kategori + "'");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -204,27 +219,27 @@ public class pnDataKeuangan extends javax.swing.JPanel {
             if(katt.equals("--Tidak dipilih--")) {
                 rs = db.ambilData("SELECT * FROM pengeluaran WHERE kode_pengeluaran LIKE '%" + search + "%'");
                 if(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                    model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
                     while(rs.next()) {
-                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
                     }
                 } else {
                     rs = db.ambilData("SELECT * FROM pengeluaran WHERE keterangan LIKE '%" + search + "%'");
                     while(rs.next()) {
-                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
                     }
                 }
             } else {
                 rs = db.ambilData("SELECT * FROM pengeluaran WHERE kode_pengeluaran LIKE '%" + search + "%' AND jenis_pengeluaran LIKE '%" + katt + "%'"); // Kode, Jenis
                 if(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                    model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
                     while(rs.next()) {
-                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
                     }
                 } else {
                     rs = db.ambilData("SELECT * FROM pengeluaran WHERE keterangan LIKE '%" + search + "%' AND jenis_pengeluaran LIKE '%" + katt + "%'"); // Keterangan, Jenis
                     while(rs.next()) {
-                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), rs.getString("harga"), rs.getString("keterangan")});
+                        model.addRow(new Object[]{rs.getString("kode_pengeluaran"), rs.getString("tanggal_pengeluaran"), rs.getString("jenis_pengeluaran"), changeToRp(rs.getString("harga")), rs.getString("keterangan")});
                     }
                 }
             }

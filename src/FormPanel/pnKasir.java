@@ -9,8 +9,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -47,6 +49,20 @@ public class pnKasir extends javax.swing.JPanel {
         btnSimpan.setEnabled(false);
     }
     
+    public String changeToNum(String num) {
+        String result = "";
+        for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
+            result += num.replace('.', 'a').split("a")[i];
+        }
+        System.out.println(result);
+        return result.split("Rp ")[1];
+    }
+    
+    public String changeToRp(String num) {
+        NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
+        return "Rp. " + nf.format(Double.parseDouble(num));
+    }
+    
     public void resetAll() {
         model.setRowCount(0);
         tblData.setModel(model);
@@ -81,9 +97,9 @@ public class pnKasir extends javax.swing.JPanel {
         int sumTotal = 0;
         int row = tblData.getRowCount();
         for(int i = 0; i < row; i++) {
-            sumTotal += Integer.parseInt(String.valueOf(tblData.getValueAt(i, 6)));
+            sumTotal += Integer.parseInt(changeToNum(String.valueOf(tblData.getValueAt(i, 6))));
         }
-        tfTotal.setText(String.valueOf(sumTotal));
+        tfTotal.setText(changeToRp(String.valueOf(sumTotal)));
     }
     
     public void setColumn() {
@@ -406,7 +422,7 @@ public class pnKasir extends javax.swing.JPanel {
             if(rs.next()) {
                 tfNamaBarang.setText(rs.getString("nama_barang"));
                 tfStok.setText(rs.getString("stok_tersedia"));
-                tfHarga.setText(rs.getString("harga_jual"));
+                tfHarga.setText(changeToRp(rs.getString("harga_jual")));
                 rs = db.ambilData("SELECT * FROM detail_barang WHERE kode_barang = '" + rs.getString("id_barang") + "' AND status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
                 cbTanggalKadaluarsa.removeAllItems();
                 cbTanggalKadaluarsa.addItem("--Tidak dipilih--");
@@ -448,7 +464,7 @@ public class pnKasir extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Jumlah melebihi stok kadaluarsa!\nMasukkan jumlah yang sesuai!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             tfJumlahBeli.setText("");
         } else {
-            tfJumlahHarga.setText(String.valueOf(Integer.parseInt(tfHarga.getText()) * Integer.parseInt(tfJumlahBeli.getText())));
+            tfJumlahHarga.setText(changeToRp(String.valueOf(Integer.parseInt(changeToNum(tfHarga.getText())) * Integer.parseInt(tfJumlahBeli.getText()))));
         }
     }//GEN-LAST:event_tfJumlahBeliActionPerformed
 
@@ -487,11 +503,12 @@ public class pnKasir extends javax.swing.JPanel {
 
     private void tfBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBayarActionPerformed
         // TODO add your handling code here:
-        int result = Integer.parseInt(tfBayar.getText()) - Integer.parseInt(tfTotal.getText());
+        int result = Integer.parseInt(tfBayar.getText()) - Integer.parseInt(changeToNum(tfTotal.getText()));
         if(result < 0) {
             JOptionPane.showMessageDialog(this, "Uang anda tidak cukup!\nSilahkan masukkan jumlah yang tepat", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } else {
-            tfKembali.setText(String.valueOf(result));
+            tfBayar.setText(changeToRp(tfBayar.getText()));
+            tfKembali.setText(String.valueOf(changeToRp(String.valueOf(result))));
         }
     }//GEN-LAST:event_tfBayarActionPerformed
 
@@ -563,9 +580,9 @@ public class pnKasir extends javax.swing.JPanel {
             */
             String idTr = tfNoTransaksi.getText();
             String tgl = tfTanggal.getText();
-            String hargaTotal = tfTotal.getText();
-            String bayar = tfBayar.getText();
-            String kembali = tfKembali.getText();
+            String hargaTotal = changeToNum(tfTotal.getText());
+            String bayar = changeToNum(tfBayar.getText());
+            String kembali = changeToNum(tfKembali.getText());
             db.aksi("INSERT INTO transaksi VALUES ('" + idTr + "', '" + tgl + "', '" + totalItem + "', '" + hargaTotal + "', '" + bayar + "', '" + kembali + "')");
             System.out.println("Transaksi Berhasil!");
 
@@ -581,8 +598,8 @@ public class pnKasir extends javax.swing.JPanel {
                 totalItem = i + 1;
                 String idBr = String.valueOf(tblData.getValueAt(i, 0));
                 String jumlahBr = String.valueOf(tblData.getValueAt(i, 4));
-                String hargaBr = String.valueOf(tblData.getValueAt(i, 5));
-                String hargaTotalTabel = String.valueOf(tblData.getValueAt(i, 6));
+                String hargaBr = changeToNum(String.valueOf(tblData.getValueAt(i, 5)));
+                String hargaTotalTabel = changeToNum(String.valueOf(tblData.getValueAt(i, 6)));
                 db.aksi("INSERT INTO detail_transaksi VALUES ('" + idTr + "', '" + idBr + "', '" + tgl + "', '" + jumlahBr + "', '" + hargaBr + "', '" + hargaTotalTabel + "')");
             }
             JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
@@ -607,7 +624,7 @@ public class pnKasir extends javax.swing.JPanel {
                         int resultJumlahBeli = Integer.parseInt(tfJumlahBeli.getText()) + Integer.parseInt(String.valueOf(tblData.getValueAt(i, 4)));
                         int resultJumlahHarga = Integer.parseInt(tfJumlahHarga.getText()) + Integer.parseInt(String.valueOf(tblData.getValueAt(i, 6)));
                         tblData.setValueAt(resultJumlahBeli, i, 4);
-                        tblData.setValueAt(resultJumlahHarga, i, 6);
+                        tblData.setValueAt(changeToRp(String.valueOf(resultJumlahHarga)), i, 6);
                         i = tblData.getRowCount();
                         found = true;
                     } else {
@@ -615,7 +632,7 @@ public class pnKasir extends javax.swing.JPanel {
                     }
                 }
                 if(!found) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), tfKodeBarang.getText(), tfNamaBarang.getText(), cbTanggalKadaluarsa.getSelectedItem(), tfJumlahBeli.getText(), tfHarga.getText(), tfJumlahHarga.getText()});
+                    model.addRow(new Object[]{rs.getString("id_barang"), tfKodeBarang.getText(), tfNamaBarang.getText(), cbTanggalKadaluarsa.getSelectedItem(), tfJumlahBeli.getText(), changeToRp(changeToNum(tfHarga.getText())), changeToRp(changeToNum(tfJumlahHarga.getText()))});
                 }
                 
                 int result = Integer.parseInt(tfStok.getText()) - Integer.parseInt(tfJumlahBeli.getText());

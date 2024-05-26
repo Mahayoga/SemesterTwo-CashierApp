@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -155,6 +157,19 @@ public class pnDataBarang extends javax.swing.JPanel {
         }
     }
     
+    public String changeToNum(String num) {
+        String result = "";
+        for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
+            result += num.replace('.', 'a').split("a")[i];
+        }
+        return result.split("Rp ")[1];
+    }
+    
+    public String changeToRp(String num) {
+        NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
+        return "Rp. " + nf.format(Double.parseDouble(num));
+    }
+    
     public void setColumn() {
         model.setColumnCount(0);
         model.addColumn("Kode Barang");
@@ -171,7 +186,7 @@ public class pnDataBarang extends javax.swing.JPanel {
         ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -184,7 +199,7 @@ public class pnDataBarang extends javax.swing.JPanel {
         ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE k.nama_kategori = '" + kategori + "'");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -203,7 +218,7 @@ public class pnDataBarang extends javax.swing.JPanel {
                     rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%'");
                 }
                 while(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
                 }
             } else {
                 rs = db.ambilData("SELECT  * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.id_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
@@ -211,7 +226,7 @@ public class pnDataBarang extends javax.swing.JPanel {
                     rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
                 }
                 while(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), rs.getString("harga_beli"), rs.getString("harga_jual")});
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
                 }
             }
             tblData.setModel(model);
