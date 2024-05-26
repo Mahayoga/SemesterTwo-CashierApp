@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Bulan Mei 2024 pada 09.52
+-- Waktu pembuatan: 26 Bulan Mei 2024 pada 21.54
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -63,17 +63,35 @@ CREATE TABLE `detail_barang` (
 --
 
 INSERT INTO `detail_barang` (`kode_barang`, `tgl_kadaluarsa`, `status`) VALUES
-('MN0006', '2024-05-10', 'Belum Terbuang'),
-('MN0006', '2024-05-12', 'Belum Terbuang'),
-('MN0006', '2024-05-10', 'Belum Terbuang'),
-('KP0001', '2024-05-12', 'Belum Terbuang'),
-('KP0001', '2024-05-12', 'Belum Terbuang'),
-('KP0002', '2024-05-14', 'Belum Terbuang'),
+('MN0006', '2024-05-10', 'Sudah Terbuang'),
+('MN0006', '2024-05-12', 'Sudah Terbuang'),
+('MN0006', '2024-05-10', 'Sudah Terbuang'),
+('KP0001', '2024-05-12', 'Sudah Terbuang'),
+('KP0001', '2024-02-03', 'Sudah Terbuang'),
+('KP0002', '2024-05-14', 'Sudah Terbuang'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
-('MK0009', '2024-05-31', 'Belum Terbuang');
+('MK0009', '2024-05-31', 'Sudah Terjual'),
+('MK0009', '2027-03-04', 'Sudah Terjual'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('MK0009', '2027-03-04', 'Belum Terbuang'),
+('KP0001', '2024-02-03', 'Belum Terbuang'),
+('KP0001', '2024-02-03', 'Belum Terbuang'),
+('KP0001', '2024-02-03', 'Belum Terbuang'),
+('KP0001', '2024-02-05', 'Belum Terbuang'),
+('KP0001', '2024-02-01', 'Belum Terbuang'),
+('KP0001', '2024-02-01', 'Belum Terbuang'),
+('KP0001', '2024-02-02', 'Belum Terbuang'),
+('KP0001', '2024-02-02', 'Belum Terbuang');
 
 -- --------------------------------------------------------
 
@@ -150,7 +168,7 @@ CREATE TABLE `pengeluaran` (
 INSERT INTO `pengeluaran` (`kode_pengeluaran`, `tanggal_pengeluaran`, `jenis_pengeluaran`, `harga`, `keterangan`) VALUES
 ('KP0001', '2024-05-13', 'Operasional', 100000, 'Heheheheheheheheheheh wwkwkkwkw sanshu uhoeipe bebej,auegu ueueywiu'),
 ('KP0002', '2024-05-13', 'Beli Barang', 121200, 'Heheheh bewbieuiuwhdi beuidwiebi r ygoyo87y8  gdb iayeui'),
-('KP0003', '2024-05-13', 'Lainnya', 121333, 'Hehe');
+('KP0003', '2024-05-15', 'Beli Barang', 20000, 'Beli barang sapu');
 
 -- --------------------------------------------------------
 
@@ -179,16 +197,14 @@ INSERT INTO `stok_barang` (`id_barang`, `kode_barang`, `id_supplier`, `nama_bara
 ('KP0003', '', 2, 'Beras Kepompong 3KG', 10, 40000, 45000, 3),
 ('KP0004', '', 2, 'Beras Kepompong 5KG', 15, 65000, 70000, 3),
 ('KP0005', '', 2, 'Beras Apel Merah 5KG', 7, 70000, 72000, 3),
-('MK0009', '8993175535885', 4, 'Wafer Nabati Keju 39g', -8, 1500, 2000, 1),
+('MK0009', '8993175535885', 4, 'Wafer Nabati Keju 39g', 7, 1500, 2000, 1),
 ('MK0010', '2', 4, 'Wafer Nabati Coklat 39g', 21, 1500, 2000, 1),
-('MK0011', '3', 4, 'Wafer SIIP', 23, 500, 1000, 1),
 ('MN0006', '4', 3, 'Aqua Botol 1.5L', 30, 4500, 5000, 2),
 ('MN0007', '', 3, 'Aqua Botol 600ml', 14, 2500, 3500, 2),
 ('MN0008', '', 3, 'Teh Pucuk 350ml', 31, 2500, 3000, 2),
 ('MN0009', '8996001600399', 1, 'Le Minerale Botol 1.5L', 20, 4500, 5000, 2),
 ('MN0010', '899282206001', 6, 'Nestle Pure life', 10, 3000, 4000, 2),
-('MN0011', '8997218380135', 6, 'Ichitan Thai Milk Green Tea ', 20, 3500, 5000, 2),
-('OB0012', '909090909', 5, 'Promag Tablet', 29, 500, 1000, 5);
+('MN0011', '8997218380135', 6, 'Ichitan Thai Milk Green Tea ', 20, 3500, 5000, 2);
 
 -- --------------------------------------------------------
 
