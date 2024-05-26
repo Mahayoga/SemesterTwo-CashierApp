@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 import koneksi.koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -42,6 +44,19 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         initComponents();
         setColumn();
         setRow();
+    }
+    
+    public String changeToNum(String num) {
+        String result = "";
+        for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
+            result += num.replace('.', 'a').split("a")[i];
+        }
+        return result.split("Rp ")[1];
+    }
+    
+    public String changeToRp(String num) {
+        NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
+        return "Rp. " + nf.format(Double.parseDouble(num));
     }
     
     public JPanel thePanel(int row) {
@@ -69,7 +84,20 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         try {
             ResultSet rs = db.ambilData("SELECT * FROM transaksi");
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), changeToRp(rs.getString("harga_total"))});
+            }
+            tblData.setModel(model);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void setRow(String search) {
+        model.setRowCount(0);
+        try {
+            ResultSet rs = db.ambilData("SELECT * FROM transaksi WHERE id_transaksi LIKE '%" + search + "%' OR tanggal_transaksi LIKE '%" + search + "%'");
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), changeToRp(rs.getString("harga_total"))});
             }
             tblData.setModel(model);
         } catch(Exception e) {
@@ -96,7 +124,7 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
         lbTitle = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfCari = new javax.swing.JTextField();
         customButton1 = new CustomComponent.CustomButton();
         customButton5 = new CustomComponent.CustomButton();
         btnDetail = new CustomComponent.CustomButton();
@@ -129,12 +157,12 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         lbTitle.setText("Data Transaksi");
         add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 370, 33));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfCariActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 190, 30));
+        add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 190, 30));
 
         customButton1.setText("CARI");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
@@ -187,12 +215,14 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblDataMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCariActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        setRow(tfCari.getText());
+    }//GEN-LAST:event_tfCariActionPerformed
 
     private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
         // TODO add your handling code here:
+        setRow(tfCari.getText());
     }//GEN-LAST:event_customButton1ActionPerformed
 
     private void customButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton5ActionPerformed
@@ -227,8 +257,8 @@ public class pnDataTransaksi extends javax.swing.JPanel {
     private CustomComponent.CustomButton customButton1;
     private CustomComponent.CustomButton customButton5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbTitle;
     private CustomComponent.CustomTable tblData;
+    private javax.swing.JTextField tfCari;
     // End of variables declaration//GEN-END:variables
 }
