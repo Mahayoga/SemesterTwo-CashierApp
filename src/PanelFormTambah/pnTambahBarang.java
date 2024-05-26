@@ -114,6 +114,27 @@ public class pnTambahBarang extends javax.swing.JPanel {
                     } else if(id <= 9999) {
                         tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "" + id);
                     }
+                } else {
+                    switch(String.valueOf(cbKategori.getSelectedItem())) {
+                        case "Makanan" -> {
+                            tfIdBarang.setText("MK0001");
+                        }
+                        case "Minuman" -> {
+                            tfIdBarang.setText("MN0001");
+                        }
+                        case "Kebutuhan Pokok" -> {
+                            tfIdBarang.setText("KP0001");
+                        }
+                        case "ATK" -> {
+                            tfIdBarang.setText("AK0001");
+                        }
+                        case "Obat" -> {
+                            tfIdBarang.setText("OB0001");
+                        }
+                        case "Aksesoris" -> {
+                            tfIdBarang.setText("AS0001");
+                        }
+                    }
                 }
             } catch(Exception e) {
                 e.printStackTrace();

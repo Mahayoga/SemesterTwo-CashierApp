@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Bulan Mei 2024 pada 10.52
+-- Waktu pembuatan: 20 Bulan Mei 2024 pada 09.52
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -40,11 +40,11 @@ CREATE TABLE `data_pengguna` (
 --
 
 INSERT INTO `data_pengguna` (`id_pengguna`, `kode_pengguna`, `username`, `password`, `role`) VALUES
-(1, '0957754092', 'Mahayoga', 'mahayoga', 'A'),
-(2, '', 'Rangga', 'rangga', 'U'),
-(3, '', 'Pingki', 'pingki', 'A'),
-(4, '', 'Nisa', 'nisa', 'U'),
-(5, '', 'Nayla', 'nayla', 'U');
+(1, '0073370706', 'Mahayoga', 'mahayoga', 'A'),
+(2, '0070683730', 'Rangga', 'rangga', 'U'),
+(3, '1384856580', 'Pingki', 'pingki', 'A'),
+(4, '1384805636', 'Nisa', 'nisa', 'U'),
+(5, '1398715908', 'Nayla', 'nayla', 'U');
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ INSERT INTO `detail_barang` (`kode_barang`, `tgl_kadaluarsa`, `status`) VALUES
 ('KP0001', '2024-05-12', 'Belum Terbuang'),
 ('KP0001', '2024-05-12', 'Belum Terbuang'),
 ('KP0002', '2024-05-14', 'Belum Terbuang'),
-('MK0009', '2024-05-31', 'Belum Terbuang'),
+('MK0009', '2024-05-31', 'Sudah Terjual'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
 ('MK0009', '2024-05-31', 'Sudah Terjual'),
@@ -98,7 +98,13 @@ INSERT INTO `detail_transaksi` (`id_transaksi`, `kode_barang`, `tanggal`, `jumla
 ('TR0006', 'MK0009', '2024-05-15', 1, '2000', '2000'),
 ('TR0006', 'KP0003', '2024-05-16', 2, '3000', '6000'),
 ('TR0006', 'KP0003', '2024-05-16', 4, '100000', '400000'),
-('TR0006', 'KP0002', '2024-05-16', 1, '22222', '11111');
+('TR0006', 'KP0002', '2024-05-16', 1, '22222', '11111'),
+('TR0019', 'MK0009', '2024-05-19', 1, '2000', '2000'),
+('TR0020', 'MK0009', '2024-05-19', 1, '2000', '2000'),
+('TR0021', 'MK0009', '2024-05-19', 1, '2000', '2000'),
+('TR0022', 'MK0009', '2024-05-19', 1, '2000', '2000'),
+('TR0023', 'MK0009', '2024-05-19', 1, '2000', '2000'),
+('TR0024', 'MK0009', '2024-05-19', 1, '2000', '2000');
 
 -- --------------------------------------------------------
 
@@ -173,12 +179,15 @@ INSERT INTO `stok_barang` (`id_barang`, `kode_barang`, `id_supplier`, `nama_bara
 ('KP0003', '', 2, 'Beras Kepompong 3KG', 10, 40000, 45000, 3),
 ('KP0004', '', 2, 'Beras Kepompong 5KG', 15, 65000, 70000, 3),
 ('KP0005', '', 2, 'Beras Apel Merah 5KG', 7, 70000, 72000, 3),
-('MK0009', '1', 4, 'Wafer Nabati Keju 39g', 8, 1500, 2000, 1),
+('MK0009', '8993175535885', 4, 'Wafer Nabati Keju 39g', -8, 1500, 2000, 1),
 ('MK0010', '2', 4, 'Wafer Nabati Coklat 39g', 21, 1500, 2000, 1),
 ('MK0011', '3', 4, 'Wafer SIIP', 23, 500, 1000, 1),
 ('MN0006', '4', 3, 'Aqua Botol 1.5L', 30, 4500, 5000, 2),
 ('MN0007', '', 3, 'Aqua Botol 600ml', 14, 2500, 3500, 2),
 ('MN0008', '', 3, 'Teh Pucuk 350ml', 31, 2500, 3000, 2),
+('MN0009', '8996001600399', 1, 'Le Minerale Botol 1.5L', 20, 4500, 5000, 2),
+('MN0010', '899282206001', 6, 'Nestle Pure life', 10, 3000, 4000, 2),
+('MN0011', '8997218380135', 6, 'Ichitan Thai Milk Green Tea ', 20, 3500, 5000, 2),
 ('OB0012', '909090909', 5, 'Promag Tablet', 29, 500, 1000, 5);
 
 -- --------------------------------------------------------
@@ -202,7 +211,7 @@ CREATE TABLE `suppliers` (
 
 INSERT INTO `suppliers` (`id_supplier`, `nama_supplier`, `no_telp`, `alamat_supplier`, `email_supplier`, `asal_perusahaan`) VALUES
 (1, 'Mahayoga', '082336374821', 'Probolinggo', 'myoga@gmail.com', 'Perusahaan ABC'),
-(2, 'Rangga', '082336374821', 'Gersik', 'ranggak@gmail.com', 'Perusahaan DEF'),
+(2, 'Rangga', '082336374821', 'Gresik', 'ranggak@gmail.com', 'Perusahaan DEF'),
 (3, 'Adam', '082336374821', 'Jember', 'adam@gmail.com', 'Perusahaan AH'),
 (4, 'Irsyad', '082336374821', 'Gersik', 'irsyad@gmail.com', 'Perusahaan II'),
 (5, 'Tegar', '082336374821', 'Jember', 'wahyu@gmail.com', 'Perusahaan WI'),
@@ -217,20 +226,41 @@ INSERT INTO `suppliers` (`id_supplier`, `nama_supplier`, `no_telp`, `alamat_supp
 CREATE TABLE `transaksi` (
   `id_transaksi` char(10) NOT NULL,
   `tanggal_transaksi` date NOT NULL,
-  `harga_total` varchar(25) NOT NULL
+  `total_item` int(11) NOT NULL,
+  `harga_total` varchar(25) NOT NULL,
+  `bayar` char(10) NOT NULL,
+  `kembali` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `tanggal_transaksi`, `harga_total`) VALUES
-('TR0001', '2024-05-06', '20000'),
-('TR0002', '2024-05-06', '32000'),
-('TR0003', '2024-05-07', '45000'),
-('TR0004', '2024-05-08', '50000'),
-('TR0005', '2024-05-08', '24000'),
-('TR0006', '2024-05-15', '2000');
+INSERT INTO `transaksi` (`id_transaksi`, `tanggal_transaksi`, `total_item`, `harga_total`, `bayar`, `kembali`) VALUES
+('TR0001', '2024-05-06', 0, '20000', '', ''),
+('TR0002', '2024-05-06', 0, '32000', '', ''),
+('TR0003', '2024-05-07', 0, '45000', '', ''),
+('TR0004', '2024-05-08', 0, '50000', '', ''),
+('TR0005', '2024-05-08', 0, '24000', '', ''),
+('TR0006', '2024-05-15', 4, '2170000', '3000000', '1000000'),
+('TR0007', '2024-05-17', 0, '2000', '', ''),
+('TR0008', '2024-05-18', 0, '2000', '', ''),
+('TR0009', '2024-05-18', 0, '2000', '', ''),
+('TR0010', '2024-05-18', 0, '2000', '', ''),
+('TR0011', '2024-05-18', 0, '2000', '', ''),
+('TR0012', '2024-05-18', 0, '2000', '', ''),
+('TR0013', '2024-05-18', 0, '2000', '', ''),
+('TR0014', '2024-05-18', 0, '2000', '', ''),
+('TR0015', '2024-05-18', 0, '2000', '', ''),
+('TR0016', '2024-05-18', 0, '2000', '', ''),
+('TR0017', '2024-05-18', 0, '2000', '', ''),
+('TR0018', '2024-05-18', 0, '2000', '', ''),
+('TR0019', '2024-05-19', 1, '2000', '', ''),
+('TR0020', '2024-05-19', 2, '2000', '4000', '2000'),
+('TR0021', '2024-05-19', 1, '2000', '60000', '58000'),
+('TR0022', '2024-05-19', 1, '2000', '40000', '38000'),
+('TR0023', '2024-05-19', 1, '2000', '2888', '888'),
+('TR0024', '2024-05-19', 1, '2000', '2324', '324');
 
 -- --------------------------------------------------------
 
