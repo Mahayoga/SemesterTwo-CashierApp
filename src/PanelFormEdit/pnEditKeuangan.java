@@ -9,7 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import koneksi.koneksi;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -61,6 +64,28 @@ public class pnEditKeuangan extends javax.swing.JPanel {
     public void theEventSimpan() {
         if(simpanBarang != null) {
             simpanBarang.simpanBarang();
+        }
+    }
+    
+    public void setData(String id) {
+        ResultSet rs = db.ambilData("SELECT * FROM pengeluaran WHERE kode_pengeluaran = '" + id + "'");
+        try {
+            /*
+            1	kode_pengeluaran Utama	char(7)	utf8mb4_general_ci		Tidak	Tidak ada			Ubah Ubah	Hapus Hapus
+            2	tanggal_pengeluaran	date			Tidak	Tidak ada			Ubah Ubah	Hapus Hapus
+            3	jenis_pengeluaran	char(30)	utf8mb4_general_ci		Tidak	Tidak ada			Ubah Ubah	Hapus Hapus
+            4	harga	int(11)			Tidak	Tidak ada			Ubah Ubah	Hapus Hapus
+            5	keterangan
+            */
+            if(rs.next()) {
+                tfKodePengeluaran.setText(rs.getString("kode_pengeluaran"));
+                tfTanggalPengeluaran.setText(rs.getString("tanggal_pengeluaran"));
+                cbJenisPengeluaran.setSelectedItem(rs.getString("jenis_pengeluaran"));
+                tfHarga.setText(rs.getString("harga"));
+                taKeterangan.setText(rs.getString(rs.getString("keterangan")));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
     
@@ -137,6 +162,7 @@ public class pnEditKeuangan extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Kode Pengeluaran ");
 
+        tfKodePengeluaran.setEnabled(false);
         tfKodePengeluaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodePengeluaranActionPerformed(evt);
@@ -146,6 +172,7 @@ public class pnEditKeuangan extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Jenis Pengeluaran");
 
+        tfTanggalPengeluaran.setEnabled(false);
         tfTanggalPengeluaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTanggalPengeluaranActionPerformed(evt);
