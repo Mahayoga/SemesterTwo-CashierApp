@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
 import java.sql.ResultSet;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -34,6 +36,19 @@ public class pnMenuUtama extends javax.swing.JPanel {
         tblData.setModel(model);
         tblData.setRowHeight(40);
         countTotal();
+    }
+    
+    public String changeToNum(String num) {
+        String result = "";
+        for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
+            result += num.replace('.', 'a').split("a")[i];
+        }
+        return result;
+    }
+    
+    public String changeToRp(String num) {
+        NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
+        return "Rp. " + nf.format(Double.parseDouble(num));
     }
     
     public void countTotal() {
@@ -409,7 +424,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         try {
             ResultSet rs = db.ambilData("SELECT * FROM transaksi");
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), rs.getString("harga_total")});
+                model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), changeToRp(rs.getString("harga_total"))});
             }
             tblData.setModel(model);
         } catch(Exception e) {
@@ -426,14 +441,15 @@ public class pnMenuUtama extends javax.swing.JPanel {
         model.addColumn("Total barang yang terjual");
         model.addColumn("Total pendapatan");
         try {
-            ResultSet rs = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.kode_barang GROUP BY dt.tanggal;");
+            ResultSet rs = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.id_barang GROUP BY dt.tanggal;");
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("tanggal"), rs.getString("jumlah_barang"), rs.getString("total_harga")});
+                model.addRow(new Object[]{rs.getString("tanggal"), rs.getString("jumlah_barang"), changeToRp(rs.getString("total_harga"))});
             }
             tblData.setModel(model);
         } catch(Exception e) {
             e.printStackTrace();
         }
+        pnNoData.setVisible(false);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -455,7 +471,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         try {
             ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), rs.getString("harga_jual")});
+                model.addRow(new Object[]{rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_jual"))});
             }
             tblData.setModel(model);
         } catch(Exception e) {

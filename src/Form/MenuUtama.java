@@ -325,7 +325,7 @@ public class MenuUtama extends javax.swing.JFrame {
     public void btnBatalKeuangan() {
         int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Keuangan?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if(asn == JOptionPane.YES_OPTION) {
-            clickBtn(1);
+            clickBtn(5);
         }
     }
     public void btnCekKeuangan() {
