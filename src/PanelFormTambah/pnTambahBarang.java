@@ -161,7 +161,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
         6 Aksesoris
         */
         HashMap<String, Integer> kategoriMap = new HashMap<>();
-        HashMap<String, Integer> supplierMap = new HashMap<>();
+        HashMap<String, String> supplierMap = new HashMap<>();
         ResultSet rs1 = db.ambilData("SELECT * FROM kategori");
         ResultSet rs2 = db.ambilData("SELECT * FROM suppliers");
         try {
@@ -169,7 +169,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
                 kategoriMap.put(rs1.getString("nama_kategori"), i);
             }
             for(int i = 1; rs2.next(); i++) {
-                supplierMap.put(rs2.getString("nama_supplier"), i);
+                supplierMap.put(rs2.getString("nama_supplier"), rs2.getString("id_supplier"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,35 +184,65 @@ public class pnTambahBarang extends javax.swing.JPanel {
         String a = String.valueOf(cbKategori.getSelectedItem());
         ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE kategori_barang = '" + kategoriMap.get(a) + "' ORDER BY id_barang DESC");
         try {
-            rs.next();
-            String id;
-            System.out.println(rs.getString("id_barang").substring(0, 2));
-            switch(rs.getString("id_barang").substring(0, 2)) {
-                case "MK" -> {
-                    id = "MK";
-                    insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+            if(rs.next()) {
+                String id;
+                System.out.println(rs.getString("id_barang").substring(0, 2));
+                switch(rs.getString("id_barang").substring(0, 2)) {
+                    case "MK" -> {
+                        id = "MK";
+                        insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+                    }
+                    case "MN" -> {
+                        id = "MN";
+                        insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+                    }
+                    case "KP" -> {
+                        id = "KP";
+                        insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+                    }
+                    case "AK" -> {
+                        id = "AK";
+                        insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+                    }
+                    case "OB" -> {
+                        id = "OB";
+                        insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+                    }
+                    case "AS" -> {
+                        id = "AS";
+                        insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+                    }
                 }
-                case "MN" -> {
-                    id = "MN";
-                    insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
-                }
-                case "KP" -> {
-                    id = "KP";
-                    insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
-                }
-                case "AK" -> {
-                    id = "AK";
-                    insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
-                }
-                case "OB" -> {
-                    id = "OB";
-                    insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
-                }
-                case "AS" -> {
-                    id = "AS";
-                    insertDataToTable(addIdPlusOne(rs, id), kategoriMap, supplierMap);
+            } else {
+                String id;
+                switch(cbKategori.getSelectedItem().toString()) {
+                    case "Makanan" -> {
+                        id = "MK";
+                        insertDataToTable(id + "0001", kategoriMap, supplierMap);
+                    }
+                    case "Minuman" -> {
+                        id = "MN";
+                        insertDataToTable(id + "0001", kategoriMap, supplierMap);
+                    }
+                    case "Kebutuhan Pokok" -> {
+                        id = "KP";
+                        insertDataToTable(id + "0001", kategoriMap, supplierMap);
+                    }
+                    case "ATK" -> {
+                        id = "AK";
+                        insertDataToTable(id + "0001", kategoriMap, supplierMap);
+                    }
+                    case "Obat" -> {
+                        id = "OB";
+                        insertDataToTable(id + "0001", kategoriMap, supplierMap);
+                    }
+                    case "Aksesoris" -> {
+                        id = "AS";
+                        insertDataToTable(id + "0001", kategoriMap, supplierMap);
+                    }
                 }
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -238,7 +268,7 @@ public class pnTambahBarang extends javax.swing.JPanel {
         }
     }
     
-    public void insertDataToTable(String id, HashMap<String, Integer> kat, HashMap<String, Integer> sup) {
+    public void insertDataToTable(String id, HashMap<String, Integer> kat, HashMap<String, String> sup) {
         /*id_barang	
         kode_barang	
         id_supplier	

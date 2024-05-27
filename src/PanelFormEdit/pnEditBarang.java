@@ -154,7 +154,7 @@ public class pnEditBarang extends javax.swing.JPanel {
             e.printStackTrace();
         }
         HashMap<String, Integer> kategoriMap = new HashMap<>();
-        HashMap<String, Integer> supplierMap = new HashMap<>();
+        HashMap<String, String> supplierMap = new HashMap<>();
         ResultSet rs3 = db.ambilData("SELECT * FROM kategori");
         ResultSet rs4 = db.ambilData("SELECT * FROM suppliers");
         try {
@@ -162,7 +162,7 @@ public class pnEditBarang extends javax.swing.JPanel {
                 kategoriMap.put(rs3.getString("nama_kategori"), i);
             }
             for(int i = 1; rs4.next(); i++) {
-                supplierMap.put(rs4.getString("nama_supplier"), i);
+                supplierMap.put(rs4.getString("nama_supplier"), rs4.getString("id_supplier"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,7 +175,7 @@ public class pnEditBarang extends javax.swing.JPanel {
         String hargaJual = tfHargaJual.getText();
         String kate = String.valueOf(kategoriMap.get(String.valueOf(cbKategori.getSelectedItem())));
         
-        db.aksi("UPDATE stok_barang SET kode_barang = '" + kd + "', id_supplier = '" + supp + "', nama_barang = '" + nama + "', stok_tersedia = '" + stok + "', harga_beli = '" + hargaBeli + "', harga_jual = '" + hargaJual + "', kategori_barang = '" + kate + "' WHERE id_barang = '" + id + "'");
+        db.aksi("UPDATE stok_barang SET kode_barang = '" + kd + "', id_supplier = '" + supp + "', nama_barang = '" + nama + "', stok_tersedia = '" + stok + "', harga_beli = '" + hargaBeli + "', harga_jual = '" + hargaJual + "', kategori_barang = '" + kate + "', id_barang = '" + tfIdBarang.getText() + "' WHERE id_barang = '" + id + "'");
     }
 
     /**
@@ -399,7 +399,7 @@ public class pnEditBarang extends javax.swing.JPanel {
 
     private void cbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKategoriActionPerformed
         // TODO add your handling code here:
-        //checkCategori();
+        checkCategori();
     }//GEN-LAST:event_cbKategoriActionPerformed
 
 

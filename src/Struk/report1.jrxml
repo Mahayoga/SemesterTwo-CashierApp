@@ -31,7 +31,7 @@
 		<field name="id_barang" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="id_supplier" class="java.lang.Integer">
+		<field name="id_supplier" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="nama_barang" class="java.lang.String">
@@ -78,7 +78,7 @@
 		<field name="id_barang" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="id_supplier" class="java.lang.Integer">
+		<field name="id_supplier" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="nama_barang" class="java.lang.String">

@@ -134,6 +134,8 @@ public class pnKasir extends javax.swing.JPanel {
                 } else if(id <= 9999) {
                     tfNoTransaksi.setText(rs.getString("id_transaksi").substring(0, 2) + "" + id);
                 }
+            } else {
+                tfNoTransaksi.setText("TR0001");
             }
         } catch(Exception e) {
             e.printStackTrace();
