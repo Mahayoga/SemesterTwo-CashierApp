@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
 import java.sql.ResultSet;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -53,8 +54,8 @@ public class pnMenuUtama extends javax.swing.JPanel {
     
     public void countTotal() {
         ResultSet rs1 = db.ambilData("SELECT COUNT(kode_barang) AS 'hehe' FROM stok_barang ORDER BY kode_barang DESC;");
-        ResultSet rs2 = db.ambilData("SELECT COUNT(tanggal) AS 'hehe' FROM detail_transaksi GROUP BY tanggal DESC");
-        ResultSet rs3 = db.ambilData("SELECT COUNT(*) AS jumlah_transaksi FROM transaksi");
+        ResultSet rs2 = db.ambilData("SELECT COUNT(tanggal) AS 'hehe' FROM detail_transaksi WHERE tanggal = '" + LocalDate.now() + "' GROUP BY tanggal DESC");
+        ResultSet rs3 = db.ambilData("SELECT COUNT(*) AS jumlah_transaksi FROM transaksi WHERE tanggal_transaksi = '" + LocalDate.now() + "'");
         
         int countTr = 0;
         
@@ -113,6 +114,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         jPanel26 = new javax.swing.JPanel();
         lbCountDataTransaksi = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         customPanel3 = new CustomComponent.CustomPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -120,6 +122,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         lbCountDataKeuangan = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         pnNoData = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -229,15 +232,20 @@ public class pnMenuUtama extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Total Transaksi");
 
+        jLabel1.setText("* Per hari ini");
+
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(lbCountDataTransaksi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(lbCountDataTransaksi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
@@ -247,7 +255,9 @@ public class pnMenuUtama extends javax.swing.JPanel {
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCountDataTransaksi)
                     .addComponent(jLabel10))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -310,17 +320,22 @@ public class pnMenuUtama extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Terjual");
 
+        jLabel2.setText("* Per hari ini");
+
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(lbCountDataKeuangan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(lbCountDataKeuangan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel12))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel27Layout.setVerticalGroup(
@@ -333,7 +348,9 @@ public class pnMenuUtama extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addComponent(jLabel12))
                     .addComponent(lbCountDataKeuangan))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -427,7 +444,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         model.addColumn("Tanggal Transaksi");
         model.addColumn("Harga Total");
         try {
-            ResultSet rs = db.ambilData("SELECT * FROM transaksi");
+            ResultSet rs = db.ambilData("SELECT * FROM transaksi WHERE tanggal_transaksi = '" + LocalDate.now() + "'");
             while(rs.next()) {
                 model.addRow(new Object[]{rs.getString("id_transaksi"), rs.getString("tanggal_transaksi"), changeToRp(rs.getString("harga_total"))});
             }
@@ -446,7 +463,7 @@ public class pnMenuUtama extends javax.swing.JPanel {
         model.addColumn("Total barang yang terjual");
         model.addColumn("Total pendapatan");
         try {
-            ResultSet rs = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.id_barang GROUP BY dt.tanggal;");
+            ResultSet rs = db.ambilData("SELECT dt.id_transaksi, dt.tanggal, dt.kode_barang AS \"kode_barang\", COUNT(dt.kode_barang) AS \"jumlah_barang\", SUM(dt.harga_barang * dt.jumlah_barang) AS \"total_harga\" FROM detail_transaksi dt JOIN stok_barang sb ON dt.kode_barang = sb.id_barang WHERE dt.tanggal = '" + LocalDate.now() + "' GROUP BY dt.tanggal;");
             while(rs.next()) {
                 model.addRow(new Object[]{rs.getString("tanggal"), rs.getString("jumlah_barang"), changeToRp(rs.getString("total_harga"))});
             }
@@ -490,11 +507,13 @@ public class pnMenuUtama extends javax.swing.JPanel {
     private CustomComponent.CustomPanel customPanel1;
     private CustomComponent.CustomPanel customPanel2;
     private CustomComponent.CustomPanel customPanel3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
