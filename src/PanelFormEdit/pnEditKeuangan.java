@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import koneksi.koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +67,14 @@ public class pnEditKeuangan extends javax.swing.JPanel {
         if(simpanBarang != null) {
             simpanBarang.simpanBarang();
         }
+    }
+    
+    public void resetAll() {
+        tfKodePengeluaran.setText("");
+        tfTanggalPengeluaran.setText("");
+        cbJenisPengeluaran.setSelectedIndex(0);
+        tfHarga.setText("");
+        taKeterangan.setText("");
     }
     
     public void setData(String id) {
