@@ -33,6 +33,19 @@ public class pnKeuangan extends javax.swing.JPanel {
         }
     }
     
+    public void resetAllForm() {
+        cbTahun.setSelectedIndex(0);
+        cbBulan.setSelectedIndex(0);
+        cbTanggal.setSelectedIndex(0);
+        lbKeuanganHarian.setText("");
+        lbKeuanganBulanan.setText("");
+        lbKeuanganTahunan.setText("");
+        lbPengeluaranHarian.setText("");
+        lbPengeluaranBulanan.setText("");
+        lbPengeluaranTahunan.setText("");
+        lbLabaBersih.setText("");
+    }
+    
     public String changeToNum(String num) {
         String result = "";
         for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
