@@ -49,6 +49,23 @@ public class pnKasir extends javax.swing.JPanel {
         btnSimpan.setEnabled(false);
     }
     
+    public void resetAllForm() {
+        autoNumber();
+        autoTgl();
+        tfKodeBarang.setText("");
+        tfNamaBarang.setText("");
+        tfStok.setText("");
+        tfHarga.setText("");
+        cbTanggalKadaluarsa.setSelectedIndex(0);
+        tfJumlahBeli.setText("");
+        tfJumlahHarga.setText("");
+        tfTotal.setText("");
+        tfBayar.setText("");
+        tfKembali.setText("");
+        checkItemInTable();
+        btnCetak.setEnabled(false);
+    }
+    
     public String changeToNum(String num) {
         String result = "";
         for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
