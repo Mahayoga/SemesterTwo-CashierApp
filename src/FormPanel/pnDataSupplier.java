@@ -133,6 +133,12 @@ public class pnDataSupplier extends javax.swing.JPanel {
         }
     }
     
+    public void resetAllForm() {
+        tfCari.setText("");
+        btnEdit.setEnabled(false);
+        btnHapus.setEnabled(false);
+    }
+    
     public void setColumn() {
         model.setColumnCount(0);
         model.addColumn("ID Supplier");
