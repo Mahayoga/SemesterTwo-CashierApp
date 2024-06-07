@@ -157,6 +157,13 @@ public class pnDataBarang extends javax.swing.JPanel {
         }
     }
     
+    public void resetAllForm() {
+        cbKategori.setSelectedItem("--Tidak dipilih--");
+        tfCari.setText("");
+        btnHapus.setEnabled(false);
+        btnEdit.setEnabled(false);
+    }
+    
     public String changeToNum(String num) {
         String result = "";
         for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
