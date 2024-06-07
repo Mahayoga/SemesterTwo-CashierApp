@@ -46,6 +46,10 @@ public class pnDataTransaksi extends javax.swing.JPanel {
         setRow();
     }
     
+    public void resetAllForm() {
+        tfCari.setText("");
+    }
+    
     public String changeToNum(String num) {
         String result = "";
         for(int i = 0; i < num.replace('.', 'a').split("a").length; i++) {
