@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import koneksi.koneksi;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -25,6 +26,7 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
     public pnTambahKeuangan() {
         initComponents();
         checkId();
+        getTheDate();
         btnSimpan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,6 +64,17 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
         if(simpanBarang != null) {
             simpanBarang.simpanKeuangan();
         }
+    }
+    
+    public void resetAll() {
+        getTheDate();
+        cbJenisPengeluaran.setSelectedIndex(0);
+        tfHarga.setText("");
+        taKeterangan.setText("");
+    }
+    
+    public void getTheDate() {
+        tfTanggalPengeluaran.setText(LocalDate.now().toString());
     }
     
     public void checkId() {
@@ -142,6 +155,7 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Jenis Pengeluaran");
 
+        tfTanggalPengeluaran.setEnabled(false);
         tfTanggalPengeluaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTanggalPengeluaranActionPerformed(evt);
