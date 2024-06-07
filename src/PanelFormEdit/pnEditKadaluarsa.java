@@ -30,8 +30,8 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         try {
             ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + id + "'");
             if(rs.next()) {
-                cbKodeBarang.addItem(rs.getString("id_barang"));
-                cbKodeBarang.setSelectedItem(rs.getString("id_barang"));
+                cbNamaBarang.addItem(rs.getString("nama_barang"));
+                cbNamaBarang.setSelectedItem(rs.getString("nama_barang"));
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -79,6 +79,17 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         if(editBarang != null) {
             editBarang.editKadaluarsa();
         }
+    }
+    
+    public void resetAll() {
+        cbNamaBarang.removeAllItems();
+        cbNamaBarang.addItem("Tidak ada data yang dipilih!");
+        cbNamaBarang.setSelectedItem("Tidak ada data yang dipilih!");
+        tfKodeBarang.setText("");
+        cbTahun.setSelectedItem("--Tidak dipilih--");
+        cbBulan.setSelectedItem("--Tidak dipilih--");
+        cbTanggal.setSelectedItem("--Tidak dipilih--");
+        tfJumlah.setText("");
     }
     
     public void setCbTahun() {
@@ -141,7 +152,7 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         for(int i = 0; i < blnArr.length; i++) {
             map.put(blnArr[i], i + 1);
         }
-        String kd = String.valueOf(cbKodeBarang.getSelectedItem());
+        String kd = String.valueOf(tfKodeBarang.getText());
         String tgl = String.valueOf(cbTanggal.getSelectedItem());
         String bln = String.valueOf(cbBulan.getSelectedItem());
         String thn = String.valueOf(cbTahun.getSelectedItem());
@@ -155,11 +166,11 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         }
     }
     
-    public void ambilDataNamaBarang() {
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + String.valueOf(cbKodeBarang.getSelectedItem()) + "'");
+    public void ambilDataKodeBarang() {
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE nama_barang = '" + String.valueOf(cbNamaBarang.getSelectedItem()) + "'");
         try {
             if(rs.next()) {
-                tfNamaBarang.setText(rs.getString("nama_barang"));
+                tfKodeBarang.setText(rs.getString("id_barang"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,9 +187,9 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        cbKodeBarang = new javax.swing.JComboBox<>();
+        cbNamaBarang = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        tfNamaBarang = new javax.swing.JTextField();
+        tfKodeBarang = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         tfJumlah = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -192,23 +203,23 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         btnSimpan = new CustomComponent.CustomButton();
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Kode Barang");
+        jLabel6.setText("Nama Barang");
 
-        cbKodeBarang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih" }));
-        cbKodeBarang.setEnabled(false);
-        cbKodeBarang.addActionListener(new java.awt.event.ActionListener() {
+        cbNamaBarang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih" }));
+        cbNamaBarang.setEnabled(false);
+        cbNamaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbKodeBarangActionPerformed(evt);
+                cbNamaBarangActionPerformed(evt);
             }
         });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("Nama Barang ");
+        jLabel9.setText("Kode Barang ");
 
-        tfNamaBarang.setEnabled(false);
-        tfNamaBarang.addActionListener(new java.awt.event.ActionListener() {
+        tfKodeBarang.setEnabled(false);
+        tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNamaBarangActionPerformed(evt);
+                tfKodeBarangActionPerformed(evt);
             }
         });
 
@@ -272,7 +283,7 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,13 +297,13 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(cbKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(tfNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tfKodeBarang)))
                     .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,15 +322,13 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -346,9 +355,9 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarangActionPerformed
+    private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNamaBarangActionPerformed
+    }//GEN-LAST:event_tfKodeBarangActionPerformed
 
     private void tfJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahActionPerformed
         // TODO add your handling code here:
@@ -368,17 +377,17 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         setCbTgl();
     }//GEN-LAST:event_cbBulanActionPerformed
 
-    private void cbKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKodeBarangActionPerformed
+    private void cbNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaBarangActionPerformed
         // TODO add your handling code here:
-        ambilDataNamaBarang();
-    }//GEN-LAST:event_cbKodeBarangActionPerformed
+        ambilDataKodeBarang();
+    }//GEN-LAST:event_cbNamaBarangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnBatal;
     private CustomComponent.CustomButton btnSimpan;
     private javax.swing.JComboBox<String> cbBulan;
-    private javax.swing.JComboBox<String> cbKodeBarang;
+    private javax.swing.JComboBox<String> cbNamaBarang;
     private javax.swing.JComboBox<String> cbTahun;
     private javax.swing.JComboBox<String> cbTanggal;
     private javax.swing.JLabel jLabel10;
@@ -389,6 +398,6 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfJumlah;
-    private javax.swing.JTextField tfNamaBarang;
+    private javax.swing.JTextField tfKodeBarang;
     // End of variables declaration//GEN-END:variables
 }
