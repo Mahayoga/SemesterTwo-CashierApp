@@ -32,20 +32,9 @@ public class pnEditBarang extends javax.swing.JPanel {
      */
     public pnEditBarang(String id) {
         initComponents();
-        ResultSet rs1 = db.ambilData("SELECT * FROM kategori");
-        ResultSet rs2 = db.ambilData("SELECT * FROM suppliers");
-        try {
-            for(int i = 1; rs1.next(); i++) {
-                cbKategori.addItem(rs1.getString("nama_kategori"));
-            }
-            for(int i = 1; rs2.next(); i++) {
-                cbNamaSupplier.addItem(rs2.getString("nama_supplier"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         setData(id);
         setBarcodeImage(180, 60, lbBarcode, tfNamaBarang.getText() + ".png");
+        addItemToComboBox();
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,6 +71,37 @@ public class pnEditBarang extends javax.swing.JPanel {
     public void theEventEdit() {
         if(editBarang != null) {
             editBarang.editBarang();
+        }
+    }
+    
+    public void resetAll() {
+        addItemToComboBox();
+        checkCategori();
+        tfKodeBarang.setText("");
+        tfNamaBarang.setText("");
+        tfNamaPerushaan.setText("");
+        tfStok.setText("");
+        tfHargaBeli.setText("");
+        tfHargaJual.setText("");
+    }
+    
+    public void addItemToComboBox() {
+        cbKategori.removeAllItems();
+        cbNamaSupplier.removeAllItems();
+        cbKategori.addItem("--Tidak dipilih--");
+        cbNamaSupplier.addItem("--Tidak dipilih--");
+        
+        ResultSet rs1 = db.ambilData("SELECT * FROM kategori");
+        ResultSet rs2 = db.ambilData("SELECT * FROM suppliers");
+        try {
+            for(int i = 1; rs1.next(); i++) {
+                cbKategori.addItem(rs1.getString("nama_kategori"));
+            }
+            for(int i = 1; rs2.next(); i++) {
+                cbNamaSupplier.addItem(rs2.getString("nama_supplier"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -383,7 +403,7 @@ public class pnEditBarang extends javax.swing.JPanel {
 
     private void cbNamaSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaSupplierActionPerformed
         // TODO add your handling code here:
-        if(!cbNamaSupplier.getSelectedItem().toString().equals("--Tidak dipilih--")) {
+        if(cbNamaSupplier.getSelectedItem() != null && !cbNamaSupplier.getSelectedItem().toString().equals("--Tidak dipilih--")) {
             ResultSet rs = db.ambilData("SELECT * FROM suppliers WHERE nama_supplier = '" + cbNamaSupplier.getSelectedItem().toString() + "'");
             try {
                 if(rs.next()) {
