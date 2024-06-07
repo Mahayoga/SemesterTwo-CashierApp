@@ -157,6 +157,13 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         }
     }
     
+    public void resetAllForm() {
+        cbKategori.setSelectedItem("--Tidak dipilih--");
+        tfCari.setText("");
+        btnHapus.setEnabled(false);
+        btnEdit.setEnabled(false);
+    }
+    
     public void setColumn() {
         model.setColumnCount(0);
         model.addColumn("Kode Barang");
