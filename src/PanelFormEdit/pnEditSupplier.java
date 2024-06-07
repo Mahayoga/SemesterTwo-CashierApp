@@ -65,6 +65,15 @@ public class pnEditSupplier extends javax.swing.JPanel {
         }
     }
     
+    public void resetAll() {
+        tfKodeSupplier.setText("");
+        tfNamaSupplier.setText("");
+        tfNoTelp.setText("");
+        tfAlamat.setText("");
+        tfNamaPerusahaan.setText("");
+        tfEmail.setText("");
+    }
+    
     public void setData(String id) {
         ResultSet rs = db.ambilData("SELECT * FROM suppliers WHERE id_supplier = '" + id + "'");
         try {

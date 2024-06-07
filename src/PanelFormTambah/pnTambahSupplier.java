@@ -64,6 +64,15 @@ public class pnTambahSupplier extends javax.swing.JPanel {
         }
     }
     
+    public void resetAll() {
+        checkId();
+        tfNamaSupplier.setText("");
+        tfNoTelp.setText("");
+        tfAlamat.setText("");
+        tfNamaPerusahaan.setText("");
+        tfEmail.setText("");
+    }
+    
     public void checkId() {
         ResultSet rs = db.ambilData("SELECT * FROM suppliers ORDER BY id_supplier DESC");
         try {
