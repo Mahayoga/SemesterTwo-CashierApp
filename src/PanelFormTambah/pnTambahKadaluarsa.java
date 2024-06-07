@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import koneksi.koneksi;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -26,14 +27,7 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
     public pnTambahKadaluarsa() {
         initComponents();
         // ComboBox set
-        try {
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
-            while(rs.next()) {
-                cbKodeBarang.addItem(rs.getString("id_barang"));
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        addItemToComboBox();
         setCbBulan();
         setCbTahun();
         btnBatal.addActionListener(new ActionListener() {
@@ -75,16 +69,40 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         }
     }
     
+    public void resetAll() {
+        addItemToComboBox();
+        tfKodeBarang.setText("");
+        cbTahun.setSelectedItem("--Tidak dipilih--");
+        cbBulan.setSelectedItem("--Tidak dipilih--");
+        cbTanggal.setSelectedItem("--Tidak dipilih--");
+        tfJumlah.setText("");
+    }
+    
+    public void addItemToComboBox() {
+        cbNamaBarang.removeAllItems();
+        cbNamaBarang.addItem("Pilih");
+        try {
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
+            while(rs.next()) {
+                cbNamaBarang.addItem(rs.getString("nama_barang"));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void setCbTahun() {
-        for(int i = 2024; i < 2050; i++) {
+        int tahun = Integer.parseInt(LocalDate.now().toString().split("-")[0]);
+        for(int i = tahun; i < (tahun + 15); i++) {
             cbTahun.addItem(String.valueOf(i));
         }
     }
     
     public void setCbBulan() {
+        int bulan = Integer.parseInt(LocalDate.now().toString().split("-")[1]);
         String[] bln = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
-        for (String bln1 : bln) {
-            cbBulan.addItem(bln1);
+        for (int i = bulan - 1; i < bln.length; i++) {
+            cbBulan.addItem(bln[i]);
         }
     }
     
@@ -135,7 +153,7 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         for(int i = 0; i < blnArr.length; i++) {
             map.put(blnArr[i], i + 1);
         }
-        String kd = String.valueOf(cbKodeBarang.getSelectedItem());
+        String kd = String.valueOf(tfKodeBarang.getText());
         String tgl = String.valueOf(cbTanggal.getSelectedItem());
         String bln = String.valueOf(cbBulan.getSelectedItem());
         String thn = String.valueOf(cbTahun.getSelectedItem());
@@ -162,11 +180,11 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         }
     }
     
-    public void ambilDataNamaBarang() {
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE id_barang = '" + String.valueOf(cbKodeBarang.getSelectedItem()) + "'");
+    public void ambilDataKodeBarang() {
         try {
+            ResultSet rs = db.ambilData("SELECT * FROM stok_barang WHERE nama_barang = '" + String.valueOf(cbNamaBarang.getSelectedItem()) + "'");
             if(rs.next()) {
-                tfNamaBarang.setText(rs.getString("nama_barang"));
+                tfKodeBarang.setText(rs.getString("id_barang"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,9 +201,9 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        cbKodeBarang = new javax.swing.JComboBox<>();
+        cbNamaBarang = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        tfNamaBarang = new javax.swing.JTextField();
+        tfKodeBarang = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         tfJumlah = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -199,22 +217,22 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         btnSimpan = new CustomComponent.CustomButton();
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Kode Barang");
+        jLabel6.setText("Nama Barang");
 
-        cbKodeBarang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih" }));
-        cbKodeBarang.addActionListener(new java.awt.event.ActionListener() {
+        cbNamaBarang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih" }));
+        cbNamaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbKodeBarangActionPerformed(evt);
+                cbNamaBarangActionPerformed(evt);
             }
         });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("Nama Barang ");
+        jLabel9.setText("Kode Barang ");
 
-        tfNamaBarang.setEnabled(false);
-        tfNamaBarang.addActionListener(new java.awt.event.ActionListener() {
+        tfKodeBarang.setEnabled(false);
+        tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNamaBarangActionPerformed(evt);
+                tfKodeBarangActionPerformed(evt);
             }
         });
 
@@ -278,7 +296,7 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,21 +310,21 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(cbKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(tfNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(tfJumlah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(cbNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(tfKodeBarang))))
                 .addContainerGap(755, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -321,11 +339,12 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cbNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfKodeBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(42, 42, 42)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -352,9 +371,9 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaBarangActionPerformed
+    private void tfKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodeBarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNamaBarangActionPerformed
+    }//GEN-LAST:event_tfKodeBarangActionPerformed
 
     private void tfJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahActionPerformed
         // TODO add your handling code here:
@@ -374,17 +393,17 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         setCbTgl();
     }//GEN-LAST:event_cbBulanActionPerformed
 
-    private void cbKodeBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKodeBarangActionPerformed
+    private void cbNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaBarangActionPerformed
         // TODO add your handling code here:
-        ambilDataNamaBarang();
-    }//GEN-LAST:event_cbKodeBarangActionPerformed
+        ambilDataKodeBarang();
+    }//GEN-LAST:event_cbNamaBarangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnBatal;
     private CustomComponent.CustomButton btnSimpan;
     private javax.swing.JComboBox<String> cbBulan;
-    private javax.swing.JComboBox<String> cbKodeBarang;
+    private javax.swing.JComboBox<String> cbNamaBarang;
     private javax.swing.JComboBox<String> cbTahun;
     private javax.swing.JComboBox<String> cbTanggal;
     private javax.swing.JLabel jLabel10;
@@ -395,6 +414,6 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField tfJumlah;
-    private javax.swing.JTextField tfNamaBarang;
+    private javax.swing.JTextField tfKodeBarang;
     // End of variables declaration//GEN-END:variables
 }
