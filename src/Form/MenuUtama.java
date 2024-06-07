@@ -334,6 +334,7 @@ public class MenuUtama extends javax.swing.JFrame {
         int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Keuangan?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if(asn == JOptionPane.YES_OPTION) {
             clickBtn(5);
+            inForm = false;
         }
     }
     public void btnCekKeuangan() {
@@ -403,6 +404,7 @@ public class MenuUtama extends javax.swing.JFrame {
         int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Barang?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if(asn == JOptionPane.YES_OPTION) {
             clickBtn(1);
+            inForm = false;
         }
     }
     public void dataKadaluarsa() {
@@ -411,7 +413,6 @@ public class MenuUtama extends javax.swing.JFrame {
         pTDB.setBounds(0, 0, 1190, 590);
         container.add(pTDB);
         resetFooter();
-        inForm = true;
     }
     
     // ------------------------------------------ Method Kadaluarsa ------------------------------------------
@@ -422,6 +423,7 @@ public class MenuUtama extends javax.swing.JFrame {
         int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Kadaluarsa?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if(asn == JOptionPane.YES_OPTION) {
             clickBtn(10);
+            inForm = false;
         }
     }
     public void btnSimpanKadaluarsa() {
@@ -502,6 +504,7 @@ public class MenuUtama extends javax.swing.JFrame {
         int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Supplier?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if(asn == JOptionPane.YES_OPTION) {
             clickBtn(2);
+            inForm = false;
         }
     }
     public void tambahDataSupplier() {
@@ -572,6 +575,52 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }
     
+    public void refreshAllTheDatabase() {
+        // Form
+        pnMenuUtama1.countTotal();
+        pnDataBarang1.setRow();
+        pnDataKadaluarsa1.setRow();
+        pnDataKeuangan1.setRow();
+        pnDataSupplier1.setRow();
+        pnDataTransaksi1.setRow();
+        
+        pnDataKadaluarsa1.resetAllForm();
+        pnDataBarang1.resetAllForm();
+        pnDataKeuangan1.resetAllForm();
+        pK.resetAllForm();
+        pnDataSupplier1.resetAllForm();
+        pnDataTransaksi1.resetAllForm();
+        pnKasir1.resetAllForm();
+        
+        //Input Tambah
+        pTDB.resetAll();
+        pTDK.resetAll();
+        pTDKu.resetAll();
+        pTDS.resetAll();
+        
+        // Input Edit
+        try {
+            pEDB.resetAll();
+        } catch (Exception e) {
+            System.err.println("Masih belum kebuka yang Edit Barang!");
+        }
+        try {
+            pEDK.resetAll();
+        } catch (Exception e) {
+            System.err.println("Masih belum kebuka yang Edit Kadaluarsa!");
+        }
+        try {
+            pEDKu.resetAll();
+        } catch (Exception e) {
+            System.err.println("Masih belum kebuka yang Edit Keuangan!");
+        }
+        try {
+            pEDS.resetAll();
+        } catch (Exception e) {
+            System.err.println("Masih belum kebuka yang Edit Supplier!");
+        }
+    }
+    
     
     // Button / Label Method
     public void clickBtn(int pn) {
@@ -583,24 +632,12 @@ public class MenuUtama extends javax.swing.JFrame {
                 container.add(pnMenuUtama1);
                 resetFooter();
             }
-            case 1 -> { 
-                sidebar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                navbar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                logo.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                pnFooter.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                sidebar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                container.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            case 1 -> {
                 container.removeAll();
                 container.repaint();
                 pnDataBarang1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataBarang1);
                 resetFooter();
-                sidebar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                navbar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                logo.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                pnFooter.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                sidebar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                container.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
             case 2 -> {
                 container.removeAll();
@@ -693,6 +730,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         customTimeLabel1 = new CustomComponent.CustomTimeLabel();
         iconTime = new javax.swing.JLabel();
+        customButton1 = new CustomComponent.CustomButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -966,6 +1004,18 @@ public class MenuUtama extends javax.swing.JFrame {
 
         customTimeLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        customButton1.setText("customButton1");
+        customButton1.setBackgroundColor(new java.awt.Color(0, 153, 255));
+        customButton1.setFontSize(12);
+        customButton1.setTextBold(1);
+        customButton1.setTextColor(java.awt.Color.white);
+        customButton1.setTheText("REFRESH");
+        customButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout navbarLayout = new javax.swing.GroupLayout(navbar);
         navbar.setLayout(navbarLayout);
         navbarLayout.setHorizontalGroup(
@@ -973,22 +1023,29 @@ public class MenuUtama extends javax.swing.JFrame {
             .addGroup(navbarLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 702, Short.MAX_VALUE)
+                .addGap(620, 620, 620)
+                .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(iconTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(6, 6, 6)
+                .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         navbarLayout.setVerticalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(iconTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(navbarLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(navbarLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(iconTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(navbarLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addComponent(customTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         jPanel1.add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1190, 80));
@@ -1102,6 +1159,11 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbDataSupplier1MouseClicked
 
+    private void customButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customButton1ActionPerformed
+        // TODO add your handling code here:
+        refreshAllTheDatabase();
+    }//GEN-LAST:event_customButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1139,6 +1201,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel container;
+    private CustomComponent.CustomButton customButton1;
     private CustomComponent.CustomTimeLabel customTimeLabel1;
     private javax.swing.JLabel iconDataBarang;
     private javax.swing.JLabel iconDataKeuangan;
