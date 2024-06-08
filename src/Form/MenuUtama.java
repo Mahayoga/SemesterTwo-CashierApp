@@ -664,13 +664,6 @@ public class MenuUtama extends javax.swing.JFrame {
     
     public void refreshAllTheDatabase() {
         // Form
-        pnMenuUtama1.countTotal();
-        pnDataBarang1.setRow();
-        pnDataKadaluarsa1.setRow();
-        pnDataKeuangan1.setRow();
-        pnDataSupplier1.setRow();
-        pnDataTransaksi1.setRow();
-        
         pnDataKadaluarsa1.resetAllForm();
         pnDataBarang1.resetAllForm();
         pnDataKeuangan1.resetAllForm();
@@ -678,6 +671,13 @@ public class MenuUtama extends javax.swing.JFrame {
         pnDataSupplier1.resetAllForm();
         pnDataTransaksi1.resetAllForm();
         pnKasir1.resetAllForm();
+        
+        pnMenuUtama1.countTotal();
+        pnDataBarang1.setRow();
+        pnDataKadaluarsa1.setRow();
+        pnDataKeuangan1.setRow();
+        pnDataSupplier1.setRow();
+        pnDataTransaksi1.setRow();
         
         //Input Tambah
         pTDB.resetAll();
