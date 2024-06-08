@@ -306,24 +306,42 @@ public class MenuUtama extends javax.swing.JFrame {
         inForm = true;
     }
     public void btnSimpanKeuangan() {
-        if(inForm) {
-            pTDKu.simpanData();
+        if(!inForm) {
+            return;
+        }
+        if(pTDKu.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pTDKu.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        pTDKu.simpanData();
+        inForm = false;
+        JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+        pnDataKeuangan1.setRow();
+        clickBtn(5);
+    }
+    public void btnEditKeuangan() {
+        if(!inForm) {
+            return;
+        }
+        if(pEDKu.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pEDKu.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            pEDKu.simpanData(idData);
             inForm = false;
             JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
             pnDataKeuangan1.setRow();
             clickBtn(5);
-        }
-    }
-    public void btnEditKeuangan() {
-        if(inForm) {
-            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if(asn == JOptionPane.YES_OPTION) {
-                pEDKu.simpanData(idData);
-                inForm = false;
-                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                pnDataKeuangan1.setRow();
-                clickBtn(5);
-            }
         }
     }
     public void btnHapusKeuangan(String id) {
@@ -450,22 +468,42 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }
     public void btnSimpanKadaluarsa() {
-        if(!pTDK.simpanData() && inForm) {
+        if(!inForm) {
+            return;
+        }
+        if(pTDK.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pTDK.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!pTDK.simpanData()) {
             inForm = false;
             pnDataKadaluarsa1.setRow();
             clickBtn(10);
         }
     }
     public void btnEditKadaluarsa() {
-        if(inForm) {
-            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if(asn == JOptionPane.YES_OPTION) {
-                pEDK.simpanData(idData, date);
-                inForm = false;
-                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                pnDataKadaluarsa1.setRow();
-                clickBtn(10);
-            }
+        if(!inForm) {
+            return;
+        }
+        if(pEDK.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pEDK.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            pEDK.simpanData(idData, date);
+            inForm = false;
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            pnDataKadaluarsa1.setRow();
+            clickBtn(10);
         }
     }
     public void editDataKadaluarsa(String id, String date) {
@@ -503,25 +541,51 @@ public class MenuUtama extends javax.swing.JFrame {
     
     // ------------------------------------------ Method Supplier ------------------------------------------
     public void btnEditSupplier() {
-        if(inForm) {
-            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if(asn == JOptionPane.YES_OPTION) {
-                pEDS.simpanData();
-                inForm = false;
-                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                pnDataSupplier1.setRow();
-                clickBtn(2);
-            }
+        if(!inForm) {
+            return;
         }
-    }
-    public void btnSimpanSupplier() {
-        if(inForm) {
-            pTDS.simpanData();
+        if(pEDS.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pEDS.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pEDS.checkIfIsAlreadyAvailable()) {
+            JOptionPane.showMessageDialog(this, "Data sudah terdaftar dalam database!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            pEDS.simpanData();
             inForm = false;
             JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
             pnDataSupplier1.setRow();
             clickBtn(2);
         }
+    }
+    public void btnSimpanSupplier() {
+        if(!inForm) {
+            return;
+        }
+        if(pTDS.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pTDS.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pTDS.checkIfIsAlreadyAvailable()) {
+            JOptionPane.showMessageDialog(this, "Data sudah terdaftar dalam database!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        pTDS.simpanData();
+        inForm = false;
+        JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+        pnDataSupplier1.setRow();
+        clickBtn(2);
     }
     public void btnBatalSupplier() {
         int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan membatalkan input dan kembali ke Menu Data Supplier?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
