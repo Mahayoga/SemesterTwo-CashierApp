@@ -64,6 +64,39 @@ public class pnTambahSupplier extends javax.swing.JPanel {
         }
     }
     
+    public boolean checkAllForm() {
+        if(tfNamaSupplier.getText().equals("") || tfNoTelp.getText().equals("") || tfNamaSupplier.getText().equals("") || tfAlamat.getText().equals("") || tfNamaPerusahaan.getText().equals("") || tfEmail.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkIfIsAlreadyAvailable() {
+        ResultSet rs = db.ambilData("SELECT * FROM suppliers");
+        try {
+            while(rs.next()) {
+                if(tfNamaSupplier.getText().toLowerCase().equals(rs.getString("nama_supplier").toLowerCase())) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean checkTheInputIsValid() {
+        try {
+            Long.parseLong(tfNoTelp.getText());
+            if(tfEmail.getText().indexOf("@") == -1) {
+                return true;
+            }
+            return false;
+        } catch(Exception e) {
+            return true;
+        }
+    }
+    
     public void resetAll() {
         checkId();
         tfNamaSupplier.setText("");

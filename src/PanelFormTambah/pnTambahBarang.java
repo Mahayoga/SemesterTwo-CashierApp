@@ -12,7 +12,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import koneksi.koneksi;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -70,6 +73,38 @@ public class pnTambahBarang extends javax.swing.JPanel {
     public void theEventSimpan() {
         if(simpanBarang != null) {
             simpanBarang.simpanBarang();
+        }
+    }
+    
+    public boolean checkAllForm() {
+        if(tfIdBarang.getText().equals("Pilih kategori dahulu!") || tfKodeBarang.getText().equals("") || tfNamaBarang.getText().equals("") || cbNamaSupplier.getSelectedItem().toString().equals("--Tidak dipili--") || tfNamaPerushaan.getText().equals("") || tfStok.getText().equals("") || cbKategori.getSelectedItem().toString().equals("--Tidak dipili--") || tfHargaBeli.getText().equals("") || tfHargaJual.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkIfIsAlreadyAvailable() {
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang");
+        try {
+            while(rs.next()) {
+                if(tfNamaBarang.getText().toLowerCase().equals(rs.getString("nama_barang").toLowerCase()) || tfKodeBarang.getText().toLowerCase().equals(rs.getString("kode_barang").toLowerCase())) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean checkTheInputIsValid() {
+        try {
+            Integer.parseInt(tfStok.getText());
+            Integer.parseInt(tfHargaBeli.getText());
+            Integer.parseInt(tfHargaJual.getText());
+            return false;
+        } catch(Exception e) {
+            return true;
         }
     }
     
