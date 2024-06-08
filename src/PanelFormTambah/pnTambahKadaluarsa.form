@@ -41,10 +41,8 @@
                       <Component id="btnSimpan" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
                   <Component id="lbTitle" min="-2" pref="370" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="tfJumlah" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="tfJumlah" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -83,7 +81,6 @@
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
