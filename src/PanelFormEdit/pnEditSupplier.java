@@ -15,6 +15,7 @@ import java.sql.ResultSet;
  */
 public class pnEditSupplier extends javax.swing.JPanel {
     koneksi db = new koneksi();
+    String oldNama;
     private BatalSupplier batalSupplier;
     private EditSupplier editSupplier;
     
@@ -23,7 +24,6 @@ public class pnEditSupplier extends javax.swing.JPanel {
      */
     public pnEditSupplier(String id) {
         initComponents();
-        System.out.println(id);
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,6 +65,41 @@ public class pnEditSupplier extends javax.swing.JPanel {
         }
     }
     
+    public boolean checkAllForm() {
+        if(tfNamaSupplier.getText().equals("") || tfNoTelp.getText().equals("") || tfNamaSupplier.getText().equals("") || tfAlamat.getText().equals("") || tfNamaPerusahaan.getText().equals("") || tfEmail.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkIfIsAlreadyAvailable() {
+        if(!tfNamaSupplier.getText().toLowerCase().equals(oldNama)) {
+            ResultSet rs = db.ambilData("SELECT * FROM suppliers");
+            try {
+                while(rs.next()) {
+                    if(tfNamaSupplier.getText().toLowerCase().equals(rs.getString("nama_supplier").toLowerCase())) {
+                        return true;
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+    public boolean checkTheInputIsValid() {
+        try {
+            Long.parseLong(tfNoTelp.getText());
+            if(tfEmail.getText().indexOf("@") == -1) {
+                return true;
+            }
+            return false;
+        } catch(Exception e) {
+            return true;
+        }
+    }
+    
     public void resetAll() {
         tfKodeSupplier.setText("");
         tfNamaSupplier.setText("");
@@ -78,6 +113,7 @@ public class pnEditSupplier extends javax.swing.JPanel {
         ResultSet rs = db.ambilData("SELECT * FROM suppliers WHERE id_supplier = '" + id + "'");
         try {
             if(rs.next()) {
+                this.oldNama = rs.getString("nama_supplier").toLowerCase();
                 tfKodeSupplier.setText(rs.getString("id_supplier"));
                 tfNamaSupplier.setText(rs.getString("nama_supplier"));
                 tfNoTelp.setText(rs.getString("no_telp"));
@@ -137,6 +173,7 @@ public class pnEditSupplier extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Kode Supplier");
 
+        tfKodeSupplier.setEnabled(false);
         tfKodeSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodeSupplierActionPerformed(evt);
