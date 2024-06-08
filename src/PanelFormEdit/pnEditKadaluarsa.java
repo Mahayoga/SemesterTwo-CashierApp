@@ -81,6 +81,22 @@ public class pnEditKadaluarsa extends javax.swing.JPanel {
         }
     }
     
+    public boolean checkAllForm() {
+        if(cbNamaBarang.getSelectedItem().toString().equals("Pilih") || tfKodeBarang.getText().equals("") || cbTahun.getSelectedItem().toString().equals("--Tidak dipilih--") || cbBulan.getSelectedItem().toString().equals("--Tidak dipilih--") || cbTanggal.getSelectedItem().toString().equals("--Tidak dipilih--") || tfJumlah.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkTheInputIsValid() {
+        try {
+            Integer.parseInt(tfJumlah.getText());
+            return false;
+        } catch(Exception e) {
+            return true;
+        }
+    }
+    
     public void resetAll() {
         cbNamaBarang.removeAllItems();
         cbNamaBarang.addItem("Tidak ada data yang dipilih!");
