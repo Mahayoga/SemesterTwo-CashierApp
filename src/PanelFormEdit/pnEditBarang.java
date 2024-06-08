@@ -24,6 +24,9 @@ import koneksi.koneksi;
  */
 public class pnEditBarang extends javax.swing.JPanel {
     koneksi db = new koneksi();
+    String oldNamaBarang;
+    String oldKodeBarang;
+    String oldKategori;
     private BatalBarang batalBarang;
     private EditBarang editBarang;
 
@@ -32,9 +35,13 @@ public class pnEditBarang extends javax.swing.JPanel {
      */
     public pnEditBarang(String id) {
         initComponents();
+        addItemToComboBox();
         setData(id);
         setBarcodeImage(180, 60, lbBarcode, tfNamaBarang.getText() + ".png");
-        addItemToComboBox();
+        this.oldNamaBarang = tfNamaBarang.getText();
+        this.oldKodeBarang = id;
+        this.oldKategori = cbKategori.getSelectedItem().toString();
+        tfIdBarang.setText(id);
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +81,41 @@ public class pnEditBarang extends javax.swing.JPanel {
         }
     }
     
+    public boolean checkAllForm() {
+        if(tfIdBarang.getText().equals("Pilih kategori dahulu!") || tfKodeBarang.getText().equals("") || tfNamaBarang.getText().equals("") || cbNamaSupplier.getSelectedItem().toString().equals("--Tidak dipili--") || tfNamaPerushaan.getText().equals("") || tfStok.getText().equals("") || cbKategori.getSelectedItem().toString().equals("--Tidak dipili--") || tfHargaBeli.getText().equals("") || tfHargaJual.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkIfIsAlreadyAvailable() {
+        if(tfNamaBarang.getText().equals(oldNamaBarang)) {
+            return false;
+        }
+        ResultSet rs2 = db.ambilData("SELECT * FROM stok_barang");
+        try {
+            while(rs2.next()) {
+                if(tfNamaBarang.getText().toLowerCase().equals(rs2.getString("nama_barang").toLowerCase()) || tfKodeBarang.getText().toLowerCase().equals(rs2.getString("kode_barang").toLowerCase())) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean checkTheInputIsValid() {
+        try {
+            Integer.parseInt(tfStok.getText());
+            Integer.parseInt(tfHargaBeli.getText());
+            Integer.parseInt(tfHargaJual.getText());
+            return false;
+        } catch(Exception e) {
+            return true;
+        }
+    }
+    
     public void resetAll() {
         addItemToComboBox();
         checkCategori();
@@ -108,25 +150,29 @@ public class pnEditBarang extends javax.swing.JPanel {
     public void checkCategori() {
         if(String.valueOf(cbKategori.getSelectedItem()).equals("--Tidak dipilih--")) {
             tfIdBarang.setText("Pilih kategori dahulu!");
-        } else {
-            ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE k.nama_kategori = '" + String.valueOf(cbKategori.getSelectedItem()) + "' ORDER BY sb.id_barang DESC");
-            try {
-                if(rs.next()) {
-                    int id = Integer.parseInt(rs.getString("id_barang").substring(2, 6)); //KP0001 
-                    id++;
-                    if(id <= 9) {
-                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "000" + id);
-                    } else if(id <= 99) {
-                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "00" + id);
-                    } else if(id <= 999) {
-                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "0" + id);
-                    } else if(id <= 9999) {
-                        tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "" + id);
-                    }
+            return;
+        }
+        if(String.valueOf(cbKategori.getSelectedItem()).equals(oldKategori)) {
+            tfIdBarang.setText(oldKodeBarang);
+            return;
+        }
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE k.nama_kategori = '" + String.valueOf(cbKategori.getSelectedItem()) + "' ORDER BY sb.id_barang DESC");
+        try {
+            if(rs.next()) {
+                int id = Integer.parseInt(rs.getString("id_barang").substring(2, 6)); //KP0001 
+                id++;
+                if(id <= 9) {
+                    tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "000" + id);
+                } else if(id <= 99) {
+                    tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "00" + id);
+                } else if(id <= 999) {
+                    tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "0" + id);
+                } else if(id <= 9999) {
+                    tfIdBarang.setText(rs.getString("id_barang").substring(0, 2) + "" + id);
                 }
-            } catch(Exception e) {
-                e.printStackTrace();
             }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
     
