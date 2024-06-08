@@ -66,6 +66,22 @@ public class pnTambahKeuangan extends javax.swing.JPanel {
         }
     }
     
+    public boolean checkAllForm() {
+        if(tfKodePengeluaran.getText().equals("") || tfTanggalPengeluaran.getText().equals("") || cbJenisPengeluaran.getSelectedItem().toString().equals("--Tidak dipilih--") || tfHarga.getText().equals("") || taKeterangan.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkTheInputIsValid() {
+        try {
+            Integer.parseInt(tfHarga.getText());
+            return false;
+        } catch(Exception e) {
+            return true;
+        }
+    }
+    
     public void resetAll() {
         getTheDate();
         cbJenisPengeluaran.setSelectedIndex(0);
