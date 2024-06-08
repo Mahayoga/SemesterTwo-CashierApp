@@ -380,24 +380,47 @@ public class MenuUtama extends javax.swing.JFrame {
         pnDataBarang1.setRow();
     }
     public void btnSimpanBarang() {
-        if(inForm) {
-            pTDB.simpanData();
+        if(!inForm) {
+            return;
+        }
+        if(pTDB.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pTDB.checkIfIsAlreadyAvailable()) {
+            JOptionPane.showMessageDialog(this, "Data sudah terdaftar dalam database!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pTDB.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        pTDB.simpanData();
+        inForm = false;
+        JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+        pnDataBarang1.setRow();
+        clickBtn(1);
+    }
+    public void btnEditBarang() {
+        if(!inForm) {
+            return;
+        }
+        if(pEDB.checkAllForm()) {
+            JOptionPane.showMessageDialog(this, "Mohon lengkapi data terlebih dahulu!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(pEDB.checkTheInputIsValid()) {
+            JOptionPane.showMessageDialog(this, "Masukkan data yang valid!", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(asn == JOptionPane.YES_OPTION) {
+            pEDB.simpanData(idData);
             inForm = false;
             JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
             pnDataBarang1.setRow();
             clickBtn(1);
-        }
-    }
-    public void btnEditBarang() {
-        if(inForm) {
-            int asn = JOptionPane.showConfirmDialog(this, "Apakah anda akan mengedit data ini?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if(asn == JOptionPane.YES_OPTION) {
-                pEDB.simpanData(idData);
-                inForm = false;
-                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                pnDataBarang1.setRow();
-                clickBtn(1);
-            }
         }
     }
     public void btnBatalBarang() {
