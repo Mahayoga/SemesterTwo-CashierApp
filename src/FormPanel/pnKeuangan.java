@@ -501,39 +501,45 @@ public class pnKeuangan extends javax.swing.JPanel {
         ResultSet labaBulanBersih = db.ambilData("SELECT dt.kode_barang, SUM(dt.harga_total) - SUM((sb.harga_jual * dt.jumlah_barang)) AS hehe FROM detail_transaksi dt INNER JOIN stok_barang sb ON dt.kode_barang = sb.id_barang WHERE dt.tanggal >= '" + thn + "-" + map.get(bln) +"-01' AND dt.tanggal <= '" + thn + "-" + map.get(bln) +"-31' GROUP BY dt.kode_barang;");
         double totalLaba = 0;
         try {
+            pemasukanHarian.next();
+            pemasukanBulanan.next();
+            pemasukanTahunan.next();
+            pengeluaranHarian.next();
+            pengeluaranBulanan.next();
+            pengeluaranTahunan.next();
             while(labaBulanBersih.next()) {
                 totalLaba += Double.parseDouble(labaBulanBersih.getString("hehe"));
             }
             lbLabaBersih.setText(changeToRp(String.valueOf(totalLaba)));
             
-            if(pemasukanHarian.next()) {
+            if(pemasukanHarian.getString("hehe") != null) {
                 lbKeuanganHarian.setText(changeToRp(pemasukanHarian.getString("hehe")));
             } else {
                 lbKeuanganHarian.setText("Tidak ada Data!");
             }
-            if(pemasukanBulanan.next()) {
+            if(pemasukanBulanan.getString("hehe") != null) {
                 lbKeuanganBulanan.setText(changeToRp(pemasukanBulanan.getString("hehe")));
             } else {
                 lbKeuanganBulanan.setText("Tidak ada Data!");
             }
-            if(pemasukanTahunan.next()) {
+            if(pemasukanTahunan.getString("hehe") != null) {
                 lbKeuanganTahunan.setText(changeToRp(pemasukanTahunan.getString("hehe")));
             } else {
                 lbKeuanganTahunan.setText("Tidak ada Data!");
             }
             
-            if(pengeluaranHarian.next()) {
+            if(pengeluaranHarian.getString("hehe") != null) {
                 lbPengeluaranHarian.setText(changeToRp(pengeluaranHarian.getString("hehe")));
             } else {
                 System.out.println("Heheheehhehehehehe");
                 lbPengeluaranHarian.setText("Tidak ada Data!");
             }
-            if(pengeluaranBulanan.next()) {
+            if(pengeluaranBulanan.getString("hehe") != null) {
                 lbPengeluaranBulanan.setText(changeToRp(pengeluaranBulanan.getString("hehe")));
             } else {
                 lbPengeluaranBulanan.setText("Tidak ada Data!");
             }
-            if(pengeluaranTahunan.next()) {
+            if(pengeluaranTahunan.getString("hehe") != null) {
                 lbPengeluaranTahunan.setText(changeToRp(pengeluaranTahunan.getString("hehe")));
             } else {
                 lbPengeluaranTahunan.setText("Tidak ada Data!");
