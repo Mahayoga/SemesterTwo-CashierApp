@@ -187,6 +187,19 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         }
     }
     
+    public void setRowNotExpired() {
+        model.setRowCount(0);
+        ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa >= '" + LocalDate.now()  + "' AND db.status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
+        try {
+            while(rs.next()) {
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("jumlah_kadaluarsa"), rs.getString("tgl_kadaluarsa")});
+            }
+            tblData.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void setRow(String kategori) {
         model.setRowCount(0);
         ResultSet rs = db.ambilData("SELECT *, COUNT(tgl_kadaluarsa) AS jumlah_kadaluarsa FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN detail_barang db ON sb.id_barang = db.kode_barang WHERE tgl_kadaluarsa <= '" + LocalDate.now() + "' AND sb.kategori_barang = '" + kategori + "' AND db.status = 'Belum Terbuang' GROUP BY tgl_kadaluarsa");
@@ -255,14 +268,12 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         cbKategori = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         btnKembali = new CustomComponent.CustomButton();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        cbxShowNoExpired = new javax.swing.JCheckBox();
 
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
         lbTitle.setText("Data Barang Kadaluarsa");
-        add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 370, 33));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -282,8 +293,6 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblData);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 1060, 350));
-
         tfCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCariActionPerformed(evt);
@@ -294,7 +303,6 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 tfCariKeyReleased(evt);
             }
         });
-        add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 190, 30));
 
         btnHapus.setText("customButton6");
         btnHapus.setBackgroundColor(new java.awt.Color(247, 64, 64));
@@ -302,7 +310,6 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         btnHapus.setTextBold(1);
         btnHapus.setTextColor(java.awt.Color.white);
         btnHapus.setTheText("Hapus");
-        add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 90, 40));
 
         btnEdit.setText("customButton4");
         btnEdit.setBackgroundColor(new java.awt.Color(0, 51, 255));
@@ -315,7 +322,6 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
-        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 90, 40));
 
         btnTambah.setText("customButton4");
         btnTambah.setBackgroundColor(new java.awt.Color(0, 51, 255));
@@ -328,7 +334,6 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 btnTambahActionPerformed(evt);
             }
         });
-        add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 90, 40));
 
         customButton1.setText("CARI");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
@@ -339,7 +344,6 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 customButton1ActionPerformed(evt);
             }
         });
-        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 90, 70, 30));
 
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--", "Makanan", "Minuman", "Kebutuhan Pokok", "ATK", "Obat" }));
         cbKategori.addActionListener(new java.awt.event.ActionListener() {
@@ -347,10 +351,8 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 cbKategoriActionPerformed(evt);
             }
         });
-        add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 160, 30));
 
         jLabel1.setText("*Urutkan berdasarkan Kategori*");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 30));
 
         btnKembali.setText("customButton4");
         btnKembali.setBackgroundColor(new java.awt.Color(0, 51, 255));
@@ -363,7 +365,71 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
                 btnKembaliActionPerformed(evt);
             }
         });
-        add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 90, 40));
+
+        cbxShowNoExpired.setText("*Tampilkan belum kadaluarsa");
+        cbxShowNoExpired.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxShowNoExpiredActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel1)
+                        .addGap(14, 14, 14)
+                        .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxShowNoExpired)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxShowNoExpired))
+                    .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -412,6 +478,15 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnKembaliActionPerformed
 
+    private void cbxShowNoExpiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxShowNoExpiredActionPerformed
+        // TODO add your handling code here:
+        if(cbxShowNoExpired.isSelected()) {
+            setRowNotExpired();
+        } else {
+            setRow();
+        }
+    }//GEN-LAST:event_cbxShowNoExpiredActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CustomComponent.CustomButton btnEdit;
@@ -419,6 +494,7 @@ public class pnDataKadaluarsa extends javax.swing.JPanel {
     private CustomComponent.CustomButton btnKembali;
     private CustomComponent.CustomButton btnTambah;
     private javax.swing.JComboBox<String> cbKategori;
+    private javax.swing.JCheckBox cbxShowNoExpired;
     private CustomComponent.CustomButton customButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;

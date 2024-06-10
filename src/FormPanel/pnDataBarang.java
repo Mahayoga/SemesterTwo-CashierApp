@@ -183,17 +183,17 @@ public class pnDataBarang extends javax.swing.JPanel {
         model.addColumn("Nama Barang");
         model.addColumn("Kategori Barang");
         model.addColumn("Stok Tersedia");
-        model.addColumn("Harga Beli");
         model.addColumn("Harga Jual");
+        model.addColumn("Nama Supplier");
         tblData.setModel(model);
     }
     
     public void setRow() {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori");
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_jual")), rs.getString("nama_supplier")});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -203,10 +203,10 @@ public class pnDataBarang extends javax.swing.JPanel {
     
     public void setRow(String kategori) {
         model.setRowCount(0);
-        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE k.nama_kategori = '" + kategori + "'");
+        ResultSet rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier WHERE k.nama_kategori = '" + kategori + "'");
         try {
             while(rs.next()) {
-                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
+                model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_jual")), rs.getString("nama_supplier")});
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -220,21 +220,21 @@ public class pnDataBarang extends javax.swing.JPanel {
         try {
             ResultSet rs;
             if(katt.equals("--Tidak dipilih--")) {
-                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE id_barang LIKE '%" + search + "%'");
+                rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier WHERE id_barang LIKE '%" + search + "%'");
                 if(!rs.next()) {
-                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE nama_barang LIKE '%" + search + "%'");
+                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier WHERE nama_barang LIKE '%" + search + "%'");
                 }
-                while(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
-                }
+                do {
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_jual")), rs.getString("nama_supplier")});
+                } while(rs.next());
             } else {
-                rs = db.ambilData("SELECT  * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.id_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
+                rs = db.ambilData("SELECT  * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier WHERE sb.id_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
                 if(!rs.next()) {
-                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori WHERE sb.nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
+                    rs = db.ambilData("SELECT * FROM stok_barang sb INNER JOIN kategori k ON sb.kategori_barang = k.id_kategori INNER JOIN suppliers s ON sb.id_supplier = s.id_supplier WHERE sb.nama_barang LIKE '%" + search + "%' AND k.nama_kategori = '" + katt + "'");
                 }
-                while(rs.next()) {
-                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_beli")), changeToRp(rs.getString("harga_jual"))});
-                }
+                do {
+                    model.addRow(new Object[]{rs.getString("id_barang"), rs.getString("nama_barang"), rs.getString("nama_kategori"), rs.getString("stok_tersedia"), changeToRp(rs.getString("harga_jual")), rs.getString("nama_supplier")});
+                } while(rs.next());
             }
             tblData.setModel(model);
         } catch (Exception e) {
@@ -393,7 +393,7 @@ public class pnDataBarang extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -403,7 +403,7 @@ public class pnDataBarang extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -412,14 +412,14 @@ public class pnDataBarang extends javax.swing.JPanel {
                     .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKadaluarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
