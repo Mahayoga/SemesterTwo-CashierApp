@@ -307,7 +307,7 @@ public class pnEditBarang extends javax.swing.JPanel {
                 tfNamaBarangActionPerformed(evt);
             }
         });
-        add(tfNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 203, 310, 30));
+        add(tfNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 310, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Stok Tersedia");
@@ -368,7 +368,7 @@ public class pnEditBarang extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Nama Barang ");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 163, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Barcode");
@@ -383,14 +383,14 @@ public class pnEditBarang extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("Kode Barang ");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         tfKodeBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKodeBarangActionPerformed(evt);
             }
         });
-        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 140, 30));
+        add(tfKodeBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 320, 30));
 
         tfNamaPerushaan.setEnabled(false);
         tfNamaPerushaan.addActionListener(new java.awt.event.ActionListener() {
