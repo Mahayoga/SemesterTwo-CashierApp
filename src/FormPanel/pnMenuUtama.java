@@ -129,19 +129,17 @@ public class pnMenuUtama extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new CustomComponent.CustomTable();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel15.setBackground(new java.awt.Color(133, 135, 149));
         jLabel15.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(133, 135, 149));
         jLabel15.setText("Dashboard");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 140, 33));
 
         customPanel1.setBackground(new java.awt.Color(78, 115, 223));
         customPanel1.setBackgroundColor(new java.awt.Color(78, 115, 223));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Tabel Barang");
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,13 +191,12 @@ public class pnMenuUtama extends javax.swing.JPanel {
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(69, 69, 69))))
+                .addComponent(jLabel3)
+                .addGap(69, 69, 69))
+            .addGroup(customPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         customPanel1Layout.setVerticalGroup(
             customPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,8 +209,6 @@ public class pnMenuUtama extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
-
-        add(customPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         customPanel2.setBackground(new java.awt.Color(78, 115, 223));
         customPanel2.setBackgroundColor(new java.awt.Color(78, 115, 223));
@@ -297,8 +292,6 @@ public class pnMenuUtama extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
-
-        add(customPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
 
         customPanel3.setBackground(new java.awt.Color(78, 115, 223));
         customPanel3.setBackgroundColor(new java.awt.Color(78, 115, 223));
@@ -391,8 +384,6 @@ public class pnMenuUtama extends javax.swing.JPanel {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        add(customPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, -1));
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Tidak ada data yang akan ditampilkan");
 
@@ -401,19 +392,17 @@ public class pnMenuUtama extends javax.swing.JPanel {
         pnNoDataLayout.setHorizontalGroup(
             pnNoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnNoDataLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnNoDataLayout.setVerticalGroup(
             pnNoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnNoDataLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
-
-        add(pnNoData, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 390, -1));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -433,7 +422,48 @@ public class pnMenuUtama extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblData);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 1150, 290));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(170, Short.MAX_VALUE)
+                .addComponent(customPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 98, Short.MAX_VALUE)
+                .addComponent(customPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 83, Short.MAX_VALUE)
+                .addComponent(customPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(169, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(pnNoData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(pnNoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
