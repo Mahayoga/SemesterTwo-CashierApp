@@ -284,6 +284,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDKu.setBounds(0, 0, 1190, 590);
         container.add(pTDKu);
+        setBoundForPanel();
         inForm = true;
         resetFooter();
     }
@@ -305,6 +306,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDKu.setBounds(0, 0, 1190, 590);
         container.add(pEDKu);
+        setBoundForPanel();
         resetFooter();
         inForm = true;
     }
@@ -363,6 +365,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pK.setBounds(0, 0, 1190, 590);
         container.add(pK);
+        setBoundForPanel();
         resetFooter();
     }
     
@@ -372,6 +375,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDB.setBounds(0, 0, 1190, 590);
         container.add(pTDB);
+        setBoundForPanel();
         inForm = true;
         resetFooter();
     }
@@ -393,6 +397,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDB.setBounds(0, 0, 1190, 590);
         container.add(pEDB);
+        setBoundForPanel();
         resetFooter();
         inForm = true;
     }
@@ -456,6 +461,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDB.setBounds(0, 0, 1190, 590);
         container.add(pTDB);
+        setBoundForPanel();
         resetFooter();
     }
     
@@ -527,6 +533,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDK.setBounds(0, 0, 1190, 590);
         container.add(pEDK);
+        setBoundForPanel();
         resetFooter();
         inForm = true;
     }
@@ -535,6 +542,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDK.setBounds(0, 0, 1190, 590);
         container.add(pTDK);
+        setBoundForPanel();
         inForm = true;
         resetFooter();
     }
@@ -602,6 +610,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pTDS.setBounds(0, 0, 1190, 590);
         container.add(pTDS);
+        setBoundForPanel();
         resetFooter();
         inForm = true;
     }
@@ -623,6 +632,7 @@ public class MenuUtama extends javax.swing.JFrame {
         container.repaint();
         pEDS.setBounds(0, 0, 1190, 590);
         container.add(pEDS);
+        setBoundForPanel();
         resetFooter();
         inForm = true;
     }
@@ -744,7 +754,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 container.repaint();
                 pnKasir1.setBounds(0, 0, 1190, 670);
                 container.add(pnKasir1);
-                pnFooter.setVisible(false);
+                resetFooter();
+                setBoundForPanel();
             }
             case 4 -> {
                 container.removeAll();
