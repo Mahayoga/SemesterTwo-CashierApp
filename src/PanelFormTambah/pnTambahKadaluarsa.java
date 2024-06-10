@@ -179,8 +179,8 @@ public class pnTambahKadaluarsa extends javax.swing.JPanel {
         try {
             for(int i = 0; i < jumlah; i++) {
                 db.aksi("INSERT INTO detail_barang VALUES ('" + kd + "', '" + tglJadi + "', 'Belum Terbuang')");
-                JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
             }
+            JOptionPane.showMessageDialog(this, "Simpan data berhasil!", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
         } catch(Exception e) {
             e.printStackTrace();
         }

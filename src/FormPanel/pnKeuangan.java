@@ -431,7 +431,7 @@ public class pnKeuangan extends javax.swing.JPanel {
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setText("Total Laba Bersih");
+        jLabel27.setText("Total Laba Bersih (per bulan)");
         customPanel9.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 220, 40));
 
         jPanel32.setBackground(new java.awt.Color(255, 255, 255));
@@ -507,42 +507,44 @@ public class pnKeuangan extends javax.swing.JPanel {
             pengeluaranHarian.next();
             pengeluaranBulanan.next();
             pengeluaranTahunan.next();
-            while(labaBulanBersih.next()) {
-                totalLaba += Double.parseDouble(labaBulanBersih.getString("hehe"));
+            
+            if(pemasukanBulanan.getString("hehe") != null && pengeluaranBulanan.getString("hehe") != null) {
+                totalLaba = Double.parseDouble(pemasukanBulanan.getString("hehe")) - Double.parseDouble(pengeluaranBulanan.getString("hehe"));
+                lbLabaBersih.setText(changeToRp(String.valueOf(totalLaba)));
+            } else {
+                lbLabaBersih.setText(changeToRp("0"));
             }
-            lbLabaBersih.setText(changeToRp(String.valueOf(totalLaba)));
             
             if(pemasukanHarian.getString("hehe") != null) {
                 lbKeuanganHarian.setText(changeToRp(pemasukanHarian.getString("hehe")));
             } else {
-                lbKeuanganHarian.setText("Tidak ada Data!");
+                lbKeuanganHarian.setText(changeToRp("0"));
             }
             if(pemasukanBulanan.getString("hehe") != null) {
                 lbKeuanganBulanan.setText(changeToRp(pemasukanBulanan.getString("hehe")));
             } else {
-                lbKeuanganBulanan.setText("Tidak ada Data!");
+                lbKeuanganBulanan.setText(changeToRp("0"));
             }
             if(pemasukanTahunan.getString("hehe") != null) {
                 lbKeuanganTahunan.setText(changeToRp(pemasukanTahunan.getString("hehe")));
             } else {
-                lbKeuanganTahunan.setText("Tidak ada Data!");
+                lbKeuanganTahunan.setText(changeToRp("0"));
             }
             
             if(pengeluaranHarian.getString("hehe") != null) {
                 lbPengeluaranHarian.setText(changeToRp(pengeluaranHarian.getString("hehe")));
             } else {
-                System.out.println("Heheheehhehehehehe");
-                lbPengeluaranHarian.setText("Tidak ada Data!");
+                lbPengeluaranHarian.setText(changeToRp("0"));
             }
             if(pengeluaranBulanan.getString("hehe") != null) {
                 lbPengeluaranBulanan.setText(changeToRp(pengeluaranBulanan.getString("hehe")));
             } else {
-                lbPengeluaranBulanan.setText("Tidak ada Data!");
+                lbPengeluaranBulanan.setText(changeToRp("0"));
             }
             if(pengeluaranTahunan.getString("hehe") != null) {
                 lbPengeluaranTahunan.setText(changeToRp(pengeluaranTahunan.getString("hehe")));
             } else {
-                lbPengeluaranTahunan.setText("Tidak ada Data!");
+                lbPengeluaranTahunan.setText(changeToRp("0"));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
