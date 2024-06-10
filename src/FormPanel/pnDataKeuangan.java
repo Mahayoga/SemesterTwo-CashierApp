@@ -289,13 +289,10 @@ public class pnDataKeuangan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnKeuangan = new CustomComponent.CustomButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         lbTitle.setBackground(new java.awt.Color(133, 135, 150));
         lbTitle.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(133, 135, 150));
         lbTitle.setText("Data Keuangan");
-        add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 370, 33));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -308,14 +305,13 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblData.setPreferredSize(new java.awt.Dimension(60, 160));
         tblData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDataMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblData);
-
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 1060, 350));
 
         tfCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,7 +323,6 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 tfCariKeyReleased(evt);
             }
         });
-        add(tfCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 190, 30));
 
         btnHapus.setText("customButton6");
         btnHapus.setBackgroundColor(new java.awt.Color(247, 64, 64));
@@ -335,7 +330,6 @@ public class pnDataKeuangan extends javax.swing.JPanel {
         btnHapus.setTextBold(1);
         btnHapus.setTextColor(java.awt.Color.white);
         btnHapus.setTheText("Hapus");
-        add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 490, 90, 40));
 
         btnEdit.setText("customButton4");
         btnEdit.setBackgroundColor(new java.awt.Color(0, 51, 255));
@@ -348,7 +342,6 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
-        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 90, 40));
 
         btnTambah.setText("customButton4");
         btnTambah.setBackgroundColor(new java.awt.Color(0, 51, 255));
@@ -361,7 +354,6 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 btnTambahActionPerformed(evt);
             }
         });
-        add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, 90, 40));
 
         customButton1.setText("CARI");
         customButton1.setBackgroundColor(new java.awt.Color(204, 204, 204));
@@ -372,7 +364,6 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 customButton1ActionPerformed(evt);
             }
         });
-        add(customButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 90, 70, 30));
 
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tidak dipilih--", "Operasional", "Beli Barang", "Gaji Karyawan", "Lainnya" }));
         cbKategori.addActionListener(new java.awt.event.ActionListener() {
@@ -380,10 +371,8 @@ public class pnDataKeuangan extends javax.swing.JPanel {
                 cbKategoriActionPerformed(evt);
             }
         });
-        add(cbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 160, 30));
 
         jLabel1.setText("*Pilih berdasarkan Jenis Pengeluaran*");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 30));
 
         btnKeuangan.setText("customButton6");
         btnKeuangan.setBackgroundColor(new java.awt.Color(247, 64, 64));
@@ -391,7 +380,60 @@ public class pnDataKeuangan extends javax.swing.JPanel {
         btnKeuangan.setTextBold(1);
         btnKeuangan.setTextColor(java.awt.Color.white);
         btnKeuangan.setTheText("Cek Keuangan");
-        add(btnKeuangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 140, 40));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel1)
+                        .addGap(13, 13, 13)
+                        .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnKeuangan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(44, 44, 44))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnKeuangan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked

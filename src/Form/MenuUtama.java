@@ -721,6 +721,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnMenuUtama1.setBounds(0, 0, 1190, 590);
                 container.add(pnMenuUtama1);
                 resetFooter();
+                setBoundForPanel();
             }
             case 1 -> {
                 container.removeAll();
@@ -728,6 +729,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnDataBarang1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataBarang1);
                 resetFooter();
+                setBoundForPanel();
             }
             case 2 -> {
                 container.removeAll();
@@ -735,6 +737,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnDataSupplier1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataSupplier1);
                 resetFooter();
+                setBoundForPanel();
             }
             case 3 -> {
                 container.removeAll();
@@ -749,6 +752,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnDataTransaksi1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataTransaksi1);
                 resetFooter();
+                setBoundForPanel();
             }
             case 5 -> {
                 container.removeAll();
@@ -756,6 +760,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnDataKeuangan1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataKeuangan1);
                 resetFooter();
+                setBoundForPanel();
             }
             case 10 -> {
                 container.removeAll();
@@ -763,6 +768,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnDataKadaluarsa1.setBounds(0, 0, 1190, 590);
                 container.add(pnDataKadaluarsa1);
                 resetFooter();
+                setBoundForPanel();
             }
         }
     }
