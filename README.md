@@ -1,5 +1,7 @@
 # SemesterTwo-CashierApp
 
+Test commit pake hp Redmi Note 9
+
 ## <a name="bagian-form"></a>Bagian Form Yang Sudah / Belum Jadi
 1. Login <a name="login"></a>
     - `Login` (Selesai)
